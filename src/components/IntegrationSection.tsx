@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar, MessageSquare, Users, Database, Settings, Mail, Check } from "lucide-react";
@@ -8,6 +7,8 @@ import IntegrationCard from "./IntegrationCard";
 import IntegrationFlowchart from "./IntegrationFlowchart";
 import WorkflowCards from "./WorkflowCards";
 import { getIndustryIntegrations } from "./demo/industryData";
+import AnalysisSummaryCard from "./AnalysisSummaryCard";
+import AgentTaskFlow from "./AgentTaskFlow";
 
 type Industry = "restaurant" | "car" | "medical";
 
@@ -51,15 +52,15 @@ const IntegrationSection = () => {
 
   return (
     <section className="py-24 bg-voice-dark border-t border-voice-purple/10">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-2 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl font-bold mb-6 text-gradient">
+          <h2 className="text-4xl font-bold mb-2 text-gradient">
             Beyond The Call: Turning Conversations Into Actionable Intelligence
           </h2>
           <p className="text-lg text-voice-cream/80 max-w-2xl mx-auto">
@@ -67,102 +68,57 @@ const IntegrationSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold mb-4">Call Analysis Dashboard</h3>
-            <div className="rounded-lg border border-voice-purple/20 p-6 bg-voice-dark/50 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-purple-900/10 backdrop-blur-sm"></div>
-              <div className="relative z-10">
-                <DashboardMockup />
-              </div>
-            </div>
-          </div>
+        {/* 1. Call analysis summary, stats and AI breakdown */}
+        <AnalysisSummaryCard />
 
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold mb-4">Integration Ecosystem</h3>
-            <div className="bg-voice-dark/50 rounded-lg border border-voice-purple/20 p-6 h-full">
-              <Tabs 
-                defaultValue="restaurant" 
-                value={activeIndustry}
-                onValueChange={(value) => setActiveIndustry(value as Industry)}
-                className="w-full"
+        {/* 2. Show agent task flow with animation */}
+        <AgentTaskFlow />
+
+        {/* 3. Animated flowchart shows journey */}
+        <div className="flex flex-col items-center">
+          <h3 className="text-2xl font-bold mb-3">Customer Journey Visualization</h3>
+          <div className="w-full flex justify-center mb-10">
+            <IntegrationFlowchart className="w-full max-w-4xl" />
+          </div>
+        </div>
+
+        {/* 4. Integration Ecosystem - tabs with fewer visual controls */}
+        <div className="rounded-xl border border-voice-purple/20 bg-voice-dark/70 p-8 mt-2 max-w-5xl mx-auto">
+          <Tabs 
+            defaultValue="restaurant" 
+            value={activeIndustry}
+            onValueChange={(value) => setActiveIndustry(value as Industry)}
+          >
+            <TabsList className="grid grid-cols-3 w-full mb-5 bg-voice-dark/50 border border-voice-purple/20">
+              <TabsTrigger 
+                value="restaurant"
+                className={cn("flex items-center justify-center py-2 data-[state=active]:text-white data-[state=active]:bg-[#F97316]/90")}
               >
-                <TabsList className="grid grid-cols-3 max-w-md mb-8 bg-voice-dark/50 border border-voice-purple/20">
-                  <TabsTrigger 
-                    value="restaurant"
-                    className={cn(
-                      "flex items-center justify-center py-2 data-[state=active]:text-white", 
-                      activeIndustry === 'restaurant' ? 'data-[state=active]:bg-[#F97316]/90' : ''
-                    )}
-                  >
-                    Restaurant
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="car"
-                    className={cn(
-                      "flex items-center justify-center py-2 data-[state=active]:text-white", 
-                      activeIndustry === 'car' ? 'data-[state=active]:bg-[#F97316]/90' : ''
-                    )}
-                  >
-                    Automotive
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="medical"
-                    className={cn(
-                      "flex items-center justify-center py-2 data-[state=active]:text-white", 
-                      activeIndustry === 'medical' ? 'data-[state=active]:bg-[#0EA5E9]/90' : ''
-                    )}
-                  >
-                    Medical
-                  </TabsTrigger>
-                </TabsList>
-
-                <div className="space-y-6">
-                  <div className="text-lg font-medium">
-                    {integrationData.title}
-                  </div>
-                  <div className="text-voice-cream/80">
-                    {integrationData.description}
-                  </div>
-                  
-                  {/* Industry-specific integrations */}
-                  <WorkflowCards workflows={integrationData.workflows} industry={activeIndustry} />
-                </div>
-              </Tabs>
+                Restaurant
+              </TabsTrigger>
+              <TabsTrigger 
+                value="car"
+                className={cn("flex items-center justify-center py-2 data-[state=active]:text-white data-[state=active]:bg-[#F97316]/90")}
+              >
+                Automotive
+              </TabsTrigger>
+              <TabsTrigger 
+                value="medical"
+                className={cn("flex items-center justify-center py-2 data-[state=active]:text-white data-[state=active]:bg-[#0EA5E9]/90")}
+              >
+                Medical
+              </TabsTrigger>
+            </TabsList>
+            <div className="grid md:grid-cols-2 gap-8 items-start w-full">
+              <div>
+                <div className="text-lg font-semibold mb-1">{integrationData.title}</div>
+                <div className="text-voice-cream/80 mb-6">{integrationData.description}</div>
+                {/* Animated broad workflow cards */}
+                <WorkflowCards workflows={integrationData.workflows} industry={activeIndustry} wide />
+              </div>
+              {/* (Optional: Additional panel or quick process info could go here) */}
             </div>
-          </div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10"
-        >
-          <h3 className="text-2xl font-bold mb-4">Seamless Integration Flow</h3>
-          <p className="text-voice-cream/80 max-w-2xl mx-auto">
-            Watch how your customer calls automatically trigger actions across your tech stack
-          </p>
-        </motion.div>
-
-        <IntegrationFlowchart className="mb-20" />
-
-        <div className="text-center mb-10">
-          <h3 className="text-2xl font-bold mb-4">Automated Workflow Features</h3>
-          <p className="text-voice-cream/80 max-w-2xl mx-auto">
-            Your business processes automate themselves after every call
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
-            <IntegrationCard
-              key={feature.title}
-              feature={feature}
-              index={index}
-            />
-          ))}
+          </Tabs>
         </div>
       </div>
     </section>
