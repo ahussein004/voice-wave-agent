@@ -111,3 +111,40 @@
   background-color: theme('colors.voice.purple.light');
   opacity: 0;
 }
+
+/* Add NEW ANIMATION styles for the interactive demo section */
+
+@keyframes wave {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(0.5); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes typing {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Thought bubble animation */
+.thought-bubble {
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Progress ring animation */
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
