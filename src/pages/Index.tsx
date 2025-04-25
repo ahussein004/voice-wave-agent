@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import InteractiveDemoSection from "@/components/InteractiveDemoSection";
+import IntegrationSection from "@/components/IntegrationSection";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <HeroSection />
       <StatsSection />
       <InteractiveDemoSection />
+      <IntegrationSection />
     </div>
   );
 };
