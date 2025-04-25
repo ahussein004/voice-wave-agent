@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
-import { Car, Restaurant, Stethoscope, Play, Pause, ChevronDown, ChevronUp } from "lucide-react";
+import { Utensils, Car, Stethoscope, Play, Pause, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import AudioVisualization from "@/components/AudioVisualization";
@@ -55,7 +54,7 @@ const InteractiveDemoSection = () => {
     switch (activeIndustry) {
       case "restaurant":
         return {
-          icon: <Restaurant className={cn("mr-2", getIndustryTextColor())} />,
+          icon: <Utensils className={cn("mr-2", getIndustryTextColor())} />,
           title: "Increase Reservations: 24/7 AI Restaurant Assistant",
           audioTitle: "Handling Multiple Reservations During Rush Hour",
           scenario: "A hungry customer calls during the dinner rush to book a table for four. The AI handles the reservation, upsells a special event, and confirms details - all while your staff focuses on in-restaurant service.",
@@ -112,7 +111,7 @@ const InteractiveDemoSection = () => {
         };
       default:
         return {
-          icon: <Restaurant className="mr-2 text-voice-purple" />,
+          icon: <Utensils className="mr-2 text-voice-purple" />,
           title: "Increase Reservations",
           audioTitle: "Sample Audio",
           scenario: "Default scenario description",
@@ -145,7 +144,7 @@ const InteractiveDemoSection = () => {
                 activeIndustry === 'restaurant' ? 'data-[state=active]:bg-[#F97316]/90' : ''
               )}
             >
-              <Restaurant className="w-5 h-5 mr-2" /> Restaurant
+              <Utensils className="w-5 h-5 mr-2" /> Restaurant
             </TabsTrigger>
             <TabsTrigger 
               value="car"
