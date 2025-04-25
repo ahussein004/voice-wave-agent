@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import InteractiveDemoSection from "@/components/InteractiveDemoSection";
 import IntegrationSection from "@/components/IntegrationSection";
+import CTASection from "@/components/CTASection";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <StatsSection />
       <InteractiveDemoSection />
       <IntegrationSection />
+      <CTASection />
     </div>
   );
 };
