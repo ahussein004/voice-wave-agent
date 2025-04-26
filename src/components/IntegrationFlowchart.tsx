@@ -9,12 +9,12 @@ interface FlowchartProps {
 
 const Flowchart = ({ className }: FlowchartProps) => {
   const nodes = [
-    { icon: Phone, label: "Call Ends", color: "bg-orange-500" },
-    { icon: MessageSquare, label: "AI Analysis", color: "bg-voice-purple" },
-    { icon: Calendar, label: "Schedule Updated", color: "bg-purple-500" },
-    { icon: Mail, label: "Follow-up Sent", color: "bg-blue-500" },
-    { icon: Users, label: "Team Notified", color: "bg-green-500" },
-    { icon: Database, label: "CRM Updated", color: "bg-pink-500" },
+    { icon: Phone, label: "Call Ends", subLabel: "AI conversation complete", color: "bg-orange-500" },
+    { icon: MessageSquare, label: "AI Analysis", subLabel: "Conversation processed", color: "bg-voice-purple" },
+    { icon: FileText, label: "Data Extraction", subLabel: "Key info captured", color: "bg-blue-500" },
+    { icon: Calendar, label: "Scheduling", subLabel: "Appointments & tasks", color: "bg-purple-500" },
+    { icon: Mail, label: "Communications", subLabel: "Auto-responses sent", color: "bg-green-500" },
+    { icon: Database, label: "Systems Updated", subLabel: "CRM & integrations", color: "bg-pink-500" },
   ];
 
   return (
@@ -32,8 +32,6 @@ const Flowchart = ({ className }: FlowchartProps) => {
               >
                 <div className={`p-4 rounded-full ${node.color} shadow-lg shadow-voice-purple/10 relative`}>
                   <node.icon className="w-6 h-6 text-white" />
-                  
-                  {/* Animated pulse effect */}
                   <motion.div 
                     className="absolute inset-0 rounded-full"
                     initial={{ opacity: 0.7, scale: 1 }}
@@ -47,7 +45,10 @@ const Flowchart = ({ className }: FlowchartProps) => {
                     style={{ background: node.color }}
                   />
                 </div>
-                <span className="text-sm text-voice-cream/80">{node.label}</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-sm font-medium text-voice-cream">{node.label}</span>
+                  <span className="text-xs text-voice-cream/60">{node.subLabel}</span>
+                </div>
               </motion.div>
               
               {index < nodes.length - 1 && (
@@ -64,43 +65,6 @@ const Flowchart = ({ className }: FlowchartProps) => {
             </React.Fragment>
           ))}
         </div>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 w-full"
-        >
-          {[
-            {
-              title: "Real-time Data Processing",
-              description: "Conversations are analyzed instantly to extract key information",
-              icon: FileText,
-              color: "bg-blue-500/20"
-            },
-            {
-              title: "Intelligent Workflow Triggers",
-              description: "Automated actions based on conversation context and intent",
-              icon: Calendar,
-              color: "bg-purple-500/20"
-            },
-            {
-              title: "Seamless System Integration",
-              description: "Works with your existing tech stack without complex setup",
-              icon: Database,
-              color: "bg-green-500/20"
-            },
-          ].map((item, index) => (
-            <div key={item.title} className="bg-voice-dark/50 border border-voice-purple/20 rounded-lg p-6">
-              <div className={`w-12 h-12 ${item.color} rounded-full flex items-center justify-center mb-4`}>
-                <item.icon className="w-6 h-6 text-white" />
-              </div>
-              <h4 className="text-lg font-medium mb-2">{item.title}</h4>
-              <p className="text-sm text-voice-cream/70">{item.description}</p>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </div>
   );
