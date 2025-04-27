@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { ChartBar, Clock, DollarSign, MessageSquare, Percent, TrendingUp, Users } from "lucide-react";
@@ -81,66 +80,83 @@ const StatsSection = () => {
         <div className="text-center mb-16 max-w-xl mx-auto">
           <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm border border-voice-purple/30">
             <span className="h-2 w-2 rounded-full bg-voice-purple-light animate-pulse mr-2" />
-            <span className="text-sm font-medium text-voice-cream/90">Data-Driven Excellence</span>
+            <span className="text-sm font-medium text-voice-cream/90">Industry Growth</span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">AI Voice Agents by the Numbers</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">The Future of Customer Service</h2>
           <p className="text-voice-cream/70 max-w-lg mx-auto">
-            Our AI voice solutions are transforming businesses with proven results and measurable outcomes.
+            AI voice agents are revolutionizing business communications with proven results and measurable outcomes.
           </p>
         </div>
         
-        <div className="max-w-4xl mx-auto space-y-12 text-lg leading-relaxed">
-          <p className="flex items-baseline flex-wrap gap-x-3">
-            The global AI voice agent industry is growing at an unprecedented rate, projected to reach
-            <StatItem 
-              number="47.5" 
-              prefix="$" 
-              suffix="B"
-              description="by 2034"
-            />
-            with a staggering annual growth rate of 34.8%.
-          </p>
-          
-          <p className="flex items-baseline flex-wrap gap-x-3">
-            Our AI agents process customer inquiries
-            <StatItem 
-              number="500" 
-              suffix="%"
-              description="faster than traditional systems"
-            />
-            while maintaining exceptional quality. This translates to
-            <StatItem 
-              number="73" 
-              suffix="%"
-              description="of inquiries being resolved instantly"
-            />.
-          </p>
-          
-          <p className="flex items-baseline flex-wrap gap-x-3">
-            Businesses implementing our solution see an average
-            <StatItem 
-              number="30" 
-              suffix="%"
-              description="reduction in operational costs"
-            />
-            by 2029, while meeting modern customer expectations—where
-            <StatItem 
-              number="82" 
-              suffix="%"
-              description="expect immediate responses"
-            />.
-          </p>
-          
-          <p className="flex items-baseline flex-wrap gap-x-3">
-            Speed is crucial in today's market, with
-            <StatItem 
-              number="98" 
-              suffix="%"
-              description="conversion rate when responding within 3 minutes"
-            />
-            —our AI agents ensure you never miss these critical opportunities.
-          </p>
+        <div className="max-w-4xl mx-auto space-y-16">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Market Growth & Potential</h3>
+            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
+              The global AI voice agent market is projected to reach
+              <StatItem 
+                number="47.5" 
+                prefix="$" 
+                suffix="B"
+                description="by 2034"
+              />
+              with a remarkable annual growth rate of
+              <StatItem 
+                number="34.8" 
+                suffix="%"
+                description="year over year"
+              />.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Performance & Efficiency</h3>
+            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
+              Our AI agents process inquiries
+              <StatItem 
+                number="500" 
+                suffix="%"
+                description="faster than traditional systems"
+              />
+              achieving an impressive
+              <StatItem 
+                number="73" 
+                suffix="%"
+                description="instant resolution rate"
+              />.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Business Impact</h3>
+            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
+              Businesses implementing our solution see an average
+              <StatItem 
+                number="30" 
+                suffix="%"
+                description="reduction in operational costs"
+              />
+              while meeting modern customer expectations—where
+              <StatItem 
+                number="82" 
+                suffix="%"
+                description="expect immediate responses"
+              />.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Response Time Impact</h3>
+            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
+              Quick response is crucial, with
+              <StatItem 
+                number="98" 
+                suffix="%"
+                description="conversion rate for 3-minute responses"
+              />
+              —our AI agents ensure you never miss these opportunities.
+            </p>
+          </div>
         </div>
         
         <blockquote className="max-w-2xl mx-auto text-center mt-16 p-6 border-l-4 border-voice-purple bg-voice-purple/5 rounded-r-lg">
