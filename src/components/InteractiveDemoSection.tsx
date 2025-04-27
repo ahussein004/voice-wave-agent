@@ -14,7 +14,6 @@ type Industry = "restaurant" | "car" | "medical";
 const InteractiveDemoSection = () => {
   const [activeIndustry, setActiveIndustry] = useState<Industry>("restaurant");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const isMobile = useIsMobile();
 
   const industries: Industry[] = ["restaurant", "car", "medical"];
@@ -79,46 +78,53 @@ const InteractiveDemoSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">
             Experience Your AI Voice Agent In Action
           </h2>
-          <p className="text-lg text-voice-cream/80">
+          <p className="text-lg text-voice-cream/80 mb-4">
             See how our AI handles real-world scenarios, converts inquiries into bookings, and delivers exceptional customer service.
           </p>
+          <div className="flex items-center justify-center gap-2 text-sm text-voice-cream/60">
+            <ChevronLeft className="w-4 h-4" />
+            <span>Scroll through industries</span>
+            <ChevronRight className="w-4 h-4" />
+          </div>
         </motion.div>
 
-        <div className="relative">
+        <div className="relative max-w-7xl mx-auto">
           <button 
             onClick={handlePrevIndustry}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors"
+            className="absolute left-4 lg:-left-4 top-1/2 -translate-y-1/2 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
           >
-            <ChevronLeft className="w-6 h-6 text-voice-cream" />
+            <ChevronLeft className="w-8 h-8 text-voice-cream group-hover:text-voice-purple transition-colors" />
           </button>
 
           <button 
             onClick={handleNextIndustry}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors"
+            className="absolute right-4 lg:-right-4 top-1/2 -translate-y-1/2 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
           >
-            <ChevronRight className="w-6 h-6 text-voice-cream" />
+            <ChevronRight className="w-8 h-8 text-voice-cream group-hover:text-voice-purple transition-colors" />
           </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start px-12">
-            <div className="order-2 lg:order-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start px-8">
+            <div>
+              <div className="sticky top-8">
+                <PhoneInterface 
+                  isPlaying={isPlaying}
+                  togglePlay={togglePlay}
+                  activeIndustry={activeIndustry}
+                  getIndustryColor={getIndustryColor}
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-8">
               <IndustryAnalysis 
                 industryData={industryData}
-                isScenarioOpen={isScenarioOpen}
-                setIsScenarioOpen={setIsScenarioOpen}
+                isScenarioOpen={true}
+                setIsScenarioOpen={() => {}}
                 getIndustryColor={getIndustryColor}
                 getIndustryTextColor={getIndustryTextColor}
                 activeIndustry={activeIndustry}
               />
               <AnalysisSummaryCard />
-            </div>
-            
-            <div className="order-1 lg:order-2">
-              <PhoneInterface 
-                isPlaying={isPlaying}
-                togglePlay={togglePlay}
-                activeIndustry={activeIndustry}
-                getIndustryColor={getIndustryColor}
-              />
             </div>
           </div>
         </div>
