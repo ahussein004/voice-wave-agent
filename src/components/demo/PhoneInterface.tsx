@@ -3,6 +3,7 @@ import React from "react";
 import { Play, Pause } from "lucide-react";
 import { cn } from "@/lib/utils";
 import AudioVisualization from "@/components/AudioVisualization";
+import { motion } from "framer-motion";
 
 interface PhoneInterfaceProps {
   isPlaying: boolean;
@@ -18,34 +19,63 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   getIndustryColor,
 }) => {
   return (
-    <div className="relative">
-      <div className="aspect-[9/16] max-w-xs mx-auto bg-gray-900/50 rounded-3xl border-8 border-gray-800 shadow-lg overflow-hidden relative">
-        <div className="absolute inset-0 phone-glow opacity-50"></div>
+    <motion.div 
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.2 }}
+      className="relative"
+    >
+      <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/20 to-transparent blur-3xl" />
+      <div className="aspect-[9/16] max-w-xs mx-auto bg-gray-900/50 rounded-3xl border-8 border-gray-800 shadow-2xl overflow-hidden relative backdrop-blur-xl">
+        <div className="absolute inset-0 phone-glow opacity-50" />
         
-        {/* Phone Mockup Content */}
         <div className="p-4 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-sm opacity-70">AI Voice Agent</div>
+            <div className="text-sm font-medium opacity-90">AI Voice Agent</div>
             <div className="text-sm opacity-70">2:13</div>
           </div>
 
-          {/* Call Transcript */}
-          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm">
-            <div className="mb-3 ml-2 p-2 bg-gray-800/50 rounded-lg rounded-tl-none max-w-[80%]">
+          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="ml-2 p-3 bg-gray-800/50 rounded-lg rounded-tl-none max-w-[80%] backdrop-blur-sm"
+            >
               Hello, this is VoiceWave AI, how can I assist you today?
-            </div>
-            <div className="mb-3 mr-2 p-2 bg-voice-purple/30 rounded-lg rounded-tr-none max-w-[80%] ml-auto">
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="mr-2 p-3 bg-voice-purple/30 rounded-lg rounded-tr-none max-w-[80%] ml-auto backdrop-blur-sm"
+            >
               Hi, I'd like to know if you have any availability for dinner tonight for 4 people?
-            </div>
-            <div className="mb-3 ml-2 p-2 bg-gray-800/50 rounded-lg rounded-tl-none max-w-[80%]">
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              className="ml-2 p-3 bg-gray-800/50 rounded-lg rounded-tl-none max-w-[80%] backdrop-blur-sm"
+            >
               Absolutely! Let me check our availability for tonight. What time were you looking for?
-            </div>
-            <div className="mb-6 opacity-70 text-xs text-center">
-              <div className="text-center my-2">• AI is checking availability •</div>
-            </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="text-center my-4 text-xs text-voice-cream/60"
+            >
+              <div className="inline-block px-3 py-1 rounded-full bg-voice-purple/10 border border-voice-purple/20">
+                AI is checking availability...
+              </div>
+            </motion.div>
           </div>
 
-          {/* Audio Visualization */}
           <div className="h-24 relative flex items-center justify-center">
             <AudioVisualization 
               isPlaying={isPlaying} 
@@ -55,12 +85,12 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
                      '#9b87f5'} 
             />
             
-            {/* Play/Pause Button with Progress Ring */}
             <button 
               onClick={togglePlay}
               className={cn(
-                "absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10",
-                getIndustryColor()
+                "absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10 transition-transform hover:scale-105",
+                getIndustryColor(),
+                "shadow-lg shadow-voice-purple/20"
               )}
             >
               {isPlaying ? 
@@ -71,7 +101,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
