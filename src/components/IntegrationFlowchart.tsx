@@ -9,18 +9,16 @@ interface FlowchartProps {
 
 const Flowchart = ({ className }: FlowchartProps) => {
   const nodes = [
-    { icon: Phone, label: "Call Ends", subLabel: "AI conversation complete", color: "bg-orange-500" },
-    { icon: MessageSquare, label: "AI Analysis", subLabel: "Conversation processed", color: "bg-voice-purple" },
-    { icon: FileText, label: "Data Extraction", subLabel: "Key info captured", color: "bg-blue-500" },
-    { icon: Calendar, label: "Scheduling", subLabel: "Appointments & tasks", color: "bg-purple-500" },
-    { icon: Mail, label: "Communications", subLabel: "Auto-responses sent", color: "bg-green-500" },
-    { icon: Database, label: "Systems Updated", subLabel: "CRM & integrations", color: "bg-pink-500" },
+    { icon: Phone, label: "Call Completed", subLabel: "AI conversation done", color: "bg-orange-500" },
+    { icon: MessageSquare, label: "AI Analysis", subLabel: "Call processed", color: "bg-voice-purple" },
+    { icon: FileText, label: "Data Extracted", subLabel: "Key info captured", color: "bg-blue-500" },
+    { icon: Database, label: "Systems Updated", subLabel: "Data synced", color: "bg-pink-500" },
   ];
 
   return (
     <div className={className}>
       <div className="flex flex-col items-center">
-        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
           {nodes.map((node, index) => (
             <React.Fragment key={node.label}>
               <motion.div
@@ -28,9 +26,9 @@ const Flowchart = ({ className }: FlowchartProps) => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="flex flex-col items-center gap-2 relative"
+                className="flex flex-col items-center gap-3 relative"
               >
-                <div className={`p-4 rounded-full ${node.color} shadow-lg shadow-voice-purple/10 relative`}>
+                <div className={`p-4 rounded-full ${node.color} shadow-lg relative group`}>
                   <node.icon className="w-6 h-6 text-white" />
                   <motion.div 
                     className="absolute inset-0 rounded-full"
@@ -45,7 +43,7 @@ const Flowchart = ({ className }: FlowchartProps) => {
                     style={{ background: node.color }}
                   />
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center text-center">
                   <span className="text-sm font-medium text-voice-cream">{node.label}</span>
                   <span className="text-xs text-voice-cream/60">{node.subLabel}</span>
                 </div>
@@ -53,10 +51,10 @@ const Flowchart = ({ className }: FlowchartProps) => {
               
               {index < nodes.length - 1 && (
                 <motion.div
-                  initial={{ opacity: 0, scaleX: 0 }}
-                  whileInView={{ opacity: 1, scaleX: 1 }}
+                  initial={{ opacity: 0, width: 0 }}
+                  whileInView={{ opacity: 1, width: "auto" }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 + 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="hidden md:flex items-center"
                 >
                   <ArrowRight className="w-6 h-6 text-voice-purple/40" />

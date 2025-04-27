@@ -1,6 +1,6 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, MessageSquare, Users, Database, Settings, Mail, Check } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import IntegrationCard from "./IntegrationCard";
@@ -14,7 +14,6 @@ type Industry = "restaurant" | "car" | "medical";
 
 const IntegrationSection = () => {
   const [activeIndustry, setActiveIndustry] = useState<Industry>("restaurant");
-
   const integrationData = getIndustryIntegrations(activeIndustry);
 
   return (
@@ -25,61 +24,69 @@ const IntegrationSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-2 text-gradient">
-            Beyond The Call: Turning Conversations Into Actionable Intelligence
+          <h2 className="text-4xl font-bold mb-4 text-gradient">
+            From Conversation to Action
           </h2>
           <p className="text-lg text-voice-cream/80 max-w-2xl mx-auto">
-            Your AI agents don't just handle calls—they deliver insights and trigger automated workflows
+            Watch how our AI agents transform conversations into actionable workflows
           </p>
         </motion.div>
 
-        {/* 1. Call analysis summary, stats and AI breakdown */}
-        <AnalysisSummaryCard />
+        {/* 1. Live Call Analysis Card - Shows example conversation */}
+        <div className="mb-16">
+          <h3 className="text-xl font-semibold mb-4 text-center">Live Call Analysis</h3>
+          <AnalysisSummaryCard />
+        </div>
 
-        {/* 2. Show agent task flow with animation */}
-        <AgentTaskFlow />
+        {/* 2. Agent Task Flow with animations */}
+        <div className="mb-16">
+          <h3 className="text-xl font-semibold mb-4 text-center">Automated Workflow</h3>
+          <AgentTaskFlow />
+        </div>
 
-        {/* 3. Animated flowchart shows journey */}
-        <div className="flex flex-col items-center">
-          <h3 className="text-2xl font-bold mb-3">Complete Integration Flow</h3>
-          <div className="w-full flex justify-center mb-10">
+        {/* 3. Integration Flow Visualization */}
+        <div className="mb-16">
+          <h3 className="text-xl font-semibold mb-4 text-center">Complete Integration Flow</h3>
+          <div className="w-full flex justify-center">
             <IntegrationFlowchart className="w-full max-w-4xl" />
           </div>
         </div>
 
-        {/* 4. Industry-specific workflows */}
-        <div className="rounded-xl border border-voice-purple/20 bg-voice-dark/70 p-8 mt-2 max-w-5xl mx-auto">
+        {/* 4. Industry-specific examples in cards */}
+        <div className="rounded-xl border border-voice-purple/20 bg-voice-dark/70 p-8 mt-8">
+          <h3 className="text-xl font-semibold mb-6 text-center">Industry Solutions</h3>
           <Tabs 
             defaultValue="restaurant" 
             value={activeIndustry}
             onValueChange={(value) => setActiveIndustry(value as Industry)}
+            className="w-full"
           >
-            <TabsList className="grid grid-cols-3 w-full mb-5 bg-voice-dark/50 border border-voice-purple/20">
+            <TabsList className="grid w-full grid-cols-3 mb-8 bg-voice-dark/50 border border-voice-purple/20">
               <TabsTrigger 
                 value="restaurant"
-                className={cn("flex items-center justify-center py-2 data-[state=active]:text-white data-[state=active]:bg-[#F97316]/90")}
+                className={cn("flex items-center justify-center py-3 data-[state=active]:text-white data-[state=active]:bg-[#F97316]/90")}
               >
                 Restaurant
               </TabsTrigger>
               <TabsTrigger 
                 value="car"
-                className={cn("flex items-center justify-center py-2 data-[state=active]:text-white data-[state=active]:bg-[#F97316]/90")}
+                className={cn("flex items-center justify-center py-3 data-[state=active]:text-white data-[state=active]:bg-[#F97316]/90")}
               >
                 Automotive
               </TabsTrigger>
               <TabsTrigger 
                 value="medical"
-                className={cn("flex items-center justify-center py-2 data-[state=active]:text-white data-[state=active]:bg-[#0EA5E9]/90")}
+                className={cn("flex items-center justify-center py-3 data-[state=active]:text-white data-[state=active]:bg-[#0EA5E9]/90")}
               >
                 Medical
               </TabsTrigger>
             </TabsList>
-            <div className="grid md:grid-cols-2 gap-8 items-start w-full">
+            <div className="grid md:grid-cols-2 gap-8 items-start">
               <div>
-                <div className="text-lg font-semibold mb-1">{integrationData.title}</div>
-                <div className="text-voice-cream/80 mb-6">{integrationData.description}</div>
+                <h4 className="text-lg font-semibold mb-2">{integrationData.title}</h4>
+                <p className="text-voice-cream/80 mb-6">{integrationData.description}</p>
                 <WorkflowCards workflows={integrationData.workflows} industry={activeIndustry} wide />
               </div>
             </div>
