@@ -80,9 +80,9 @@ const IndustryAnalysis: React.FC<IndustryAnalysisProps> = ({
       <div className="space-y-6">
         <h4 className="text-lg font-medium flex items-center gap-2">
           <GripVertical className="w-5 h-5 text-voice-purple" />
-          Key Capabilities
+          Key AI Capabilities
         </h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {industryData.keyFeatures.map((feature, index) => (
             <motion.div
               key={index}

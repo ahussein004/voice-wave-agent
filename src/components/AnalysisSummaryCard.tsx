@@ -25,10 +25,10 @@ const AnalysisSummaryCard = () => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.6 }}
-    className="w-full max-w-3xl bg-voice-dark/80 rounded-2xl border border-voice-purple/30 shadow-xl mx-auto p-8 mb-8"
+    className="mt-8 w-full bg-voice-dark/80 rounded-2xl border border-voice-purple/30 shadow-xl p-8"
   >
     <div className="mb-2 text-xs text-voice-purple uppercase font-semibold tracking-wider">
-      AI Call Analysis Example
+      Live Call Analysis Example
     </div>
     <div className="text-base font-medium mb-3 text-balance">{analysis.summary}</div>
     <div className="flex flex-wrap gap-4 mb-4">

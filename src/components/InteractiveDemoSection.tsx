@@ -1,13 +1,13 @@
 
 import React, { useState } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Utensils, Car, Stethoscope } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PhoneInterface from "./demo/PhoneInterface";
 import IndustryAnalysis from "./demo/IndustryAnalysis";
 import { getIndustryData } from "./demo/industryData";
 import { motion } from "framer-motion";
+import AnalysisSummaryCard from "./AnalysisSummaryCard";
 
 type Industry = "restaurant" | "car" | "medical";
 
@@ -17,8 +17,19 @@ const InteractiveDemoSection = () => {
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const isMobile = useIsMobile();
 
-  const handleTabChange = (value: string) => {
-    setActiveIndustry(value as Industry);
+  const industries: Industry[] = ["restaurant", "car", "medical"];
+
+  const handleNextIndustry = () => {
+    const currentIndex = industries.indexOf(activeIndustry);
+    const nextIndex = (currentIndex + 1) % industries.length;
+    setActiveIndustry(industries[nextIndex]);
+    setIsPlaying(false);
+  };
+
+  const handlePrevIndustry = () => {
+    const currentIndex = industries.indexOf(activeIndustry);
+    const prevIndex = currentIndex === 0 ? industries.length - 1 : currentIndex - 1;
+    setActiveIndustry(industries[prevIndex]);
     setIsPlaying(false);
   };
 
@@ -69,49 +80,26 @@ const InteractiveDemoSection = () => {
             Experience Your AI Voice Agent In Action
           </h2>
           <p className="text-lg text-voice-cream/80">
-            Select an industry to see how our AI handles real-world scenarios, converts inquiries into bookings, and delivers exceptional customer service.
+            See how our AI handles real-world scenarios, converts inquiries into bookings, and delivers exceptional customer service.
           </p>
         </motion.div>
 
-        <Tabs 
-          defaultValue="restaurant" 
-          onValueChange={handleTabChange}
-          className="w-full"
-        >
-          <TabsList className="grid grid-cols-3 max-w-lg mx-auto mb-12 bg-voice-dark/50 border border-voice-purple/20">
-            <TabsTrigger 
-              value="restaurant"
-              className={cn(
-                "flex items-center justify-center gap-2 py-3 data-[state=active]:text-white transition-colors", 
-                activeIndustry === 'restaurant' ? 'data-[state=active]:bg-[#F97316]/90' : ''
-              )}
-            >
-              <Utensils className="w-5 h-5" /> 
-              <span className="hidden sm:inline">Restaurant</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="car"
-              className={cn(
-                "flex items-center justify-center gap-2 py-3 data-[state=active]:text-white transition-colors", 
-                activeIndustry === 'car' ? 'data-[state=active]:bg-[#F97316]/90' : ''
-              )}
-            >
-              <Car className="w-5 h-5" />
-              <span className="hidden sm:inline">Dealership</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="medical"
-              className={cn(
-                "flex items-center justify-center gap-2 py-3 data-[state=active]:text-white transition-colors", 
-                activeIndustry === 'medical' ? 'data-[state=active]:bg-[#0EA5E9]/90' : ''
-              )}
-            >
-              <Stethoscope className="w-5 h-5" />
-              <span className="hidden sm:inline">Medical</span>
-            </TabsTrigger>
-          </TabsList>
+        <div className="relative">
+          <button 
+            onClick={handlePrevIndustry}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6 text-voice-cream" />
+          </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <button 
+            onClick={handleNextIndustry}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors"
+          >
+            <ChevronRight className="w-6 h-6 text-voice-cream" />
+          </button>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start px-12">
             <div className="order-2 lg:order-1">
               <IndustryAnalysis 
                 industryData={industryData}
@@ -121,6 +109,7 @@ const InteractiveDemoSection = () => {
                 getIndustryTextColor={getIndustryTextColor}
                 activeIndustry={activeIndustry}
               />
+              <AnalysisSummaryCard />
             </div>
             
             <div className="order-1 lg:order-2">
@@ -132,7 +121,7 @@ const InteractiveDemoSection = () => {
               />
             </div>
           </div>
-        </Tabs>
+        </div>
       </div>
     </section>
   );
