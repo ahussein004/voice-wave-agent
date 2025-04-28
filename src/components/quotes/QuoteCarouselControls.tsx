@@ -1,17 +1,16 @@
 
 import React from "react";
-import type { UseEmblaCarouselType } from 'embla-carousel-react';
 
 interface QuoteCarouselControlsProps {
   quotes: any[];
   activeQuote: number;
-  emblaApi: UseEmblaCarouselType[1] | undefined;
+  onQuoteChange: (index: number) => void;
 }
 
 export const QuoteCarouselControls: React.FC<QuoteCarouselControlsProps> = ({ 
   quotes, 
   activeQuote, 
-  emblaApi 
+  onQuoteChange 
 }) => {
   return (
     <>
@@ -19,7 +18,7 @@ export const QuoteCarouselControls: React.FC<QuoteCarouselControlsProps> = ({
         {quotes.map((_, index) => (
           <button
             key={index}
-            onClick={() => emblaApi && emblaApi.scrollTo(index)}
+            onClick={() => onQuoteChange(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               activeQuote === index
                 ? "w-8 bg-voice-purple-light"
@@ -32,7 +31,10 @@ export const QuoteCarouselControls: React.FC<QuoteCarouselControlsProps> = ({
 
       <button 
         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 hidden md:block bg-voice-purple/20 hover:bg-voice-purple/30 p-2 rounded-full backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
-        onClick={() => emblaApi && emblaApi.scrollPrev()}
+        onClick={() => {
+          const prevIndex = activeQuote === 0 ? quotes.length - 1 : activeQuote - 1;
+          onQuoteChange(prevIndex);
+        }}
         aria-label="Previous quote"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -41,7 +43,10 @@ export const QuoteCarouselControls: React.FC<QuoteCarouselControlsProps> = ({
       </button>
       <button 
         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 hidden md:block bg-voice-purple/20 hover:bg-voice-purple/30 p-2 rounded-full backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
-        onClick={() => emblaApi && emblaApi.scrollNext()}
+        onClick={() => {
+          const nextIndex = activeQuote === quotes.length - 1 ? 0 : activeQuote + 1;
+          onQuoteChange(nextIndex);
+        }}
         aria-label="Next quote"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

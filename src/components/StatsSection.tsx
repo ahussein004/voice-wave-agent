@@ -1,31 +1,22 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 import { QuoteCard } from "./quotes/QuoteCard";
-import { QuoteCarouselControls } from "./quotes/QuoteCarouselControls";
 import { quotes } from "@/data/quotes";
 
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
-  
-  // Create carousel with autoplay plugin
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true }, 
-    [Autoplay()]
-  );
-  
-  useEffect(() => {
-    if (emblaApi) {
-      emblaApi.on('select', () => {
-        setActiveQuote(emblaApi.selectedScrollSnap());
-      });
-    }
-    return () => {
-      if (emblaApi) emblaApi.destroy();
-    };
-  }, [emblaApi]);
+
+  const handleCarouselChange = (index: number) => {
+    setActiveQuote(index);
+  };
 
   return (
     <section className="relative py-24 px-4 overflow-hidden">
@@ -50,24 +41,43 @@ const StatsSection = () => {
         </motion.div>
 
         <div className="max-w-3xl mx-auto relative">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {quotes.map((quote) => (
-                <div 
-                  key={quote.author} 
-                  className="flex-[0_0_100%] min-w-0"
-                >
+          <Carousel 
+            opts={{ loop: true, align: "center" }}
+            className="w-full"
+            onSelect={(api) => {
+              setActiveQuote(api.selectedScrollSnap());
+            }}
+          >
+            <CarouselContent>
+              {quotes.map((quote, index) => (
+                <CarouselItem key={quote.author} className="flex-[0_0_100%] min-w-0">
                   <QuoteCard quote={quote} />
-                </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            <div className="flex justify-center mt-8 gap-2">
+              {quotes.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleCarouselChange(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    activeQuote === index
+                      ? "w-8 bg-voice-purple-light"
+                      : "bg-voice-purple/30 hover:bg-voice-purple/50"
+                  }`}
+                  aria-label={`Go to quote ${index + 1}`}
+                />
               ))}
             </div>
-          </div>
-
-          <QuoteCarouselControls 
-            quotes={quotes}
-            activeQuote={activeQuote}
-            emblaApi={emblaApi}
-          />
+            
+            <CarouselPrevious 
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 hidden md:flex bg-voice-purple/20 hover:bg-voice-purple/30 backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
+            />
+            <CarouselNext 
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 hidden md:flex bg-voice-purple/20 hover:bg-voice-purple/30 backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
+            />
+          </Carousel>
         </div>
       </div>
     </section>
