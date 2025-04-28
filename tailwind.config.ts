@@ -112,6 +112,11 @@ export default {
 					'50%': { opacity: '0.8' },
 					'100%': { transform: 'translateY(-100px) translateX(20px)', opacity: '0' }
 				},
+				'phone-pulse': {
+					'0%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0.7)' },
+					'70%': { boxShadow: '0 0 0 10px rgba(126, 105, 171, 0)' },
+					'100%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -121,6 +126,7 @@ export default {
 				'wave': 'wave 1.5s infinite ease-in-out',
 				'gradient-x': 'gradient-x 15s ease infinite',
 				'particle-flow': 'particle-flow 8s ease-in-out infinite',
+				'phone-pulse': 'phone-pulse 2s infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
