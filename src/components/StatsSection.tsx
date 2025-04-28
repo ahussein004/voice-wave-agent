@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { MessageSquareQuote } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,17 +9,14 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import AutoplayPlugin from "embla-carousel-autoplay";
+import Autoplay from "embla-carousel-autoplay";
 
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
   
-  // Fix: Create autoplay plugin instance separately
-  const autoplayPlugin = AutoplayPlugin({ delay: 6000, stopOnInteraction: false });
-  
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true }, 
-    [autoplayPlugin]
+    [Autoplay({ delay: 6000, stopOnInteraction: false })]
   );
   
   const quotes = [
@@ -157,7 +153,6 @@ const StatsSection = () => {
             </div>
           </div>
 
-          {/* Navigation dots */}
           <div className="flex justify-center mt-8 gap-2">
             {quotes.map((_, index) => (
               <button
@@ -173,7 +168,6 @@ const StatsSection = () => {
             ))}
           </div>
 
-          {/* Navigation arrows */}
           <button 
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 hidden md:block bg-voice-purple/20 hover:bg-voice-purple/30 p-2 rounded-full backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
             onClick={() => emblaApi && emblaApi.scrollPrev()}
