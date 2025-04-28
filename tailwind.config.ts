@@ -63,6 +63,19 @@ export default {
 					cream: '#f8f0e5',
 					dark: '#1A1F2C',
 				},
+				// Real World theme colors
+				orange: {
+					50: '#FFF7ED', 
+					100: '#FFEDD5',
+					200: '#FED7AA', 
+					300: '#FDBA74', 
+					400: '#FB923C', // Primary orange
+					500: '#F97316', // Accent orange
+					600: '#EA580C',
+					700: '#C2410C', 
+					800: '#9A3412',
+					900: '#7C2D12',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
