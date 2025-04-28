@@ -10,13 +10,18 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import AutoplayPlugin from "embla-carousel-autoplay";
 
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 6000, stopOnInteraction: false }),
-  ]);
+  
+  // Fix: Create autoplay plugin instance separately
+  const autoplayPlugin = AutoplayPlugin({ delay: 6000, stopOnInteraction: false });
+  
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true }, 
+    [autoplayPlugin]
+  );
   
   const quotes = [
     {
