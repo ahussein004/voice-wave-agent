@@ -19,29 +19,11 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   getIndustryColor,
 }) => {
   const getPhoneGlowColor = () => {
-    switch (activeIndustry) {
-      case "restaurant":
-        return "from-[#F97316]/30 via-transparent to-transparent";
-      case "car":
-        return "from-[#84cc16]/30 via-transparent to-transparent";
-      case "medical":
-        return "from-[#0EA5E9]/30 via-transparent to-transparent";
-      default:
-        return "from-voice-purple/20 via-transparent to-transparent";
-    }
+    return "from-voice-purple/30 via-transparent to-transparent";
   };
   
   const getBorderColor = () => {
-    switch (activeIndustry) {
-      case "restaurant":
-        return "border-[#F97316]/30";
-      case "car":
-        return "border-[#84cc16]/30";
-      case "medical":
-        return "border-[#0EA5E9]/30";
-      default:
-        return "border-gray-800";
-    }
+    return "border-voice-purple/30";
   };
 
   const getIndustryHeadlineText = () => {
@@ -118,10 +100,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
           <div className="h-24 relative flex items-center justify-center">
             <AudioVisualization 
               isPlaying={isPlaying} 
-              color={activeIndustry === 'restaurant' ? '#F97316' : 
-                     activeIndustry === 'car' ? '#84cc16' : 
-                     activeIndustry === 'medical' ? '#0EA5E9' : 
-                     '#9b87f5'} 
+              color="#9b87f5"
             />
             
             <button 
