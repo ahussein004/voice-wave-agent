@@ -62,7 +62,7 @@ const HeroSection = () => {
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-balance text-black">
-            The <span className="text-orange-500">Real</span> World Portal
+            Never Miss Another Call With <span className="text-orange-500">Industry-Leading</span> AI Voice Agents
           </h1>
           
           <p className="text-lg text-gray-700 mb-8 max-w-xl">
@@ -86,7 +86,7 @@ const HeroSection = () => {
                 </div>
               ))}
             </div>
-            <p><span className="text-orange-500 font-semibold">278,254+</span> have already taken advantage of this opportunity.</p>
+            <p><span className="text-orange-500 font-semibold">278,254+</span> companies have already taken advantage of this opportunity.</p>
           </div>
         </div>
         
