@@ -74,11 +74,37 @@ const InteractiveDemoSection = () => {
         return "Voice Agent";
     }
   };
+  
+  const getSectionBackgroundColor = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "bg-gradient-to-b from-[#1A1F2C] to-[#221A14]";
+      case "car":
+        return "bg-gradient-to-b from-[#1A1F2C] to-[#212818]";
+      case "medical":
+        return "bg-gradient-to-b from-[#1A1F2C] to-[#0F2233]";
+      default:
+        return "bg-voice-dark";
+    }
+  };
+
+  const getHeadlineGradient = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "bg-gradient-to-r from-[#F97316] to-[#FDBA74] bg-clip-text text-transparent";
+      case "car":
+        return "bg-gradient-to-r from-[#84cc16] to-[#bef264] bg-clip-text text-transparent";
+      case "medical":
+        return "bg-gradient-to-r from-[#0EA5E9] to-[#7dd3fc] bg-clip-text text-transparent";
+      default:
+        return "text-gradient";
+    }
+  };
 
   const industryData = getIndustryData(activeIndustry);
 
   return (
-    <section className="py-24 bg-voice-dark relative overflow-hidden">
+    <section className={`py-24 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`}>
       <div className="absolute inset-0 bg-gradient-radial from-voice-purple/5 via-transparent to-transparent opacity-30" />
       
       <div className="container mx-auto px-4">
@@ -88,7 +114,7 @@ const InteractiveDemoSection = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${getHeadlineGradient()}`}>
             Experience Your AI Voice Agent In Action
           </h2>
           <p className="text-lg text-voice-cream/80 mb-4">

@@ -18,6 +18,32 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   activeIndustry,
   getIndustryColor,
 }) => {
+  const getPhoneGlowColor = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "from-[#F97316]/30 via-transparent to-transparent";
+      case "car":
+        return "from-[#84cc16]/30 via-transparent to-transparent";
+      case "medical":
+        return "from-[#0EA5E9]/30 via-transparent to-transparent";
+      default:
+        return "from-voice-purple/20 via-transparent to-transparent";
+    }
+  };
+  
+  const getBorderColor = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "border-[#F97316]/30";
+      case "car":
+        return "border-[#84cc16]/30";
+      case "medical":
+        return "border-[#0EA5E9]/30";
+      default:
+        return "border-gray-800";
+    }
+  };
+  
   return (
     <motion.div 
       initial={{ opacity: 0, x: 20 }}
@@ -26,8 +52,8 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
       transition={{ delay: 0.2 }}
       className="relative"
     >
-      <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/20 to-transparent blur-3xl" />
-      <div className="aspect-[9/16] max-w-xs mx-auto bg-gray-900/50 rounded-3xl border-8 border-gray-800 shadow-2xl overflow-hidden relative backdrop-blur-xl">
+      <div className={`absolute -inset-4 bg-gradient-to-r ${getPhoneGlowColor()} blur-3xl`} />
+      <div className={`aspect-[9/16] max-w-xs mx-auto bg-gray-900/50 rounded-3xl border-8 ${getBorderColor()} shadow-2xl overflow-hidden relative backdrop-blur-xl`}>
         <div className="absolute inset-0 phone-glow opacity-50" />
         
         <div className="p-4 h-full flex flex-col">
@@ -80,7 +106,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             <AudioVisualization 
               isPlaying={isPlaying} 
               color={activeIndustry === 'restaurant' ? '#F97316' : 
-                     activeIndustry === 'car' ? '#F97316' : 
+                     activeIndustry === 'car' ? '#84cc16' : 
                      activeIndustry === 'medical' ? '#0EA5E9' : 
                      '#9b87f5'} 
             />
