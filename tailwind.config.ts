@@ -113,8 +113,8 @@ export default {
 					'100%': { transform: 'translateY(-100px) translateX(20px)', opacity: '0' }
 				},
 				'phone-pulse': {
-					'0%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0.4)' },
-					'70%': { boxShadow: '0 0 0 15px rgba(126, 105, 171, 0)' },
+					'0%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0.7)' },
+					'70%': { boxShadow: '0 0 0 10px rgba(126, 105, 171, 0)' },
 					'100%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0)' }
 				},
 			},
