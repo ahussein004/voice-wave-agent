@@ -38,7 +38,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="relative py-24 px-4 overflow-hidden">
+    <section className="relative py-12 px-4 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-voice-dark via-voice-purple/5 to-gray-900" />
       
       <div className="container relative z-10 mx-auto">
@@ -46,50 +46,50 @@ const StatsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10"
         >
-          <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm border border-voice-purple/30">
+          <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-4 backdrop-blur-sm border border-voice-purple/30">
             <span className="h-2 w-2 rounded-full bg-voice-purple-light animate-pulse mr-2" />
             <span className="text-sm font-medium text-voice-cream/90">Industry Leaders' Vision</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">The Future of AI Voice Agents</h2>
-          <p className="text-voice-cream/70 max-w-lg mx-auto text-lg">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gradient">The Future of AI Voice Agents</h2>
+          <p className="text-voice-cream/70 max-w-lg mx-auto">
             Leading tech visionaries share their insights on the transformative power of AI voice technology
           </p>
         </motion.div>
 
-        <div className="space-y-24 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {quotes.map((quote, index) => (
             <motion.div
               key={quote.author}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-voice-purple/5 rounded-3xl blur-3xl group-hover:bg-voice-purple/10 transition-colors duration-500" />
-              <div className="relative flex flex-col md:flex-row items-start gap-8 p-6">
-                <div className="flex-shrink-0 p-3 bg-voice-purple/10 rounded-xl">
-                  <MessageSquareQuote className="w-8 h-8 text-voice-purple-light" />
+              <div className="absolute inset-0 bg-voice-purple/5 rounded-xl blur-2xl group-hover:bg-voice-purple/10 transition-colors duration-500" />
+              <div className="relative flex items-start gap-4 p-4">
+                <div className="flex-shrink-0 p-2 bg-voice-purple/10 rounded-lg">
+                  <MessageSquareQuote className="w-6 h-6 text-voice-purple-light" />
                 </div>
-                <div className="space-y-6">
-                  <blockquote className="text-xl md:text-2xl text-voice-cream leading-relaxed font-light">
+                <div className="space-y-3">
+                  <blockquote className="text-lg text-voice-cream leading-relaxed font-light">
                     "{quote.quote}"
                   </blockquote>
                   <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                    className="flex items-center gap-4 pt-4 border-t border-voice-purple/10"
+                    transition={{ delay: 0.3 }}
+                    className="flex items-center gap-2 pt-2 border-t border-voice-purple/10"
                   >
                     <div>
-                      <div className="font-medium text-voice-purple-light text-lg">
+                      <div className="font-medium text-voice-purple-light">
                         {quote.author}
                       </div>
-                      <div className="text-voice-cream/70">
+                      <div className="text-sm text-voice-cream/70">
                         {quote.role}, {quote.company}
                       </div>
                     </div>
