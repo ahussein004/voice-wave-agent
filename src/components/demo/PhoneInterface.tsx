@@ -43,6 +43,19 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
         return "border-gray-800";
     }
   };
+
+  const getIndustryHeadlineText = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "bg-gradient-to-r from-[#F97316] to-[#FDBA74] bg-clip-text text-transparent";
+      case "car":
+        return "bg-gradient-to-r from-[#84cc16] to-[#bef264] bg-clip-text text-transparent";
+      case "medical":
+        return "bg-gradient-to-r from-[#0EA5E9] to-[#7dd3fc] bg-clip-text text-transparent";
+      default:
+        return "";
+    }
+  };
   
   return (
     <motion.div 
@@ -58,7 +71,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
         
         <div className="p-4 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-sm font-medium opacity-90">AI Voice Agent</div>
+            <div className={`text-sm font-medium ${getIndustryHeadlineText()}`}>AI Voice Agent</div>
             <div className="text-sm opacity-70">2:13</div>
           </div>
 

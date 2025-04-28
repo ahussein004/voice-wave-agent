@@ -41,7 +41,7 @@ const InteractiveDemoSection = () => {
       case "restaurant":
         return "bg-[#F97316]";
       case "car":
-        return "bg-[#F97316]";
+        return "bg-[#84cc16]";
       case "medical":
         return "bg-[#0EA5E9]";
       default:
@@ -54,7 +54,7 @@ const InteractiveDemoSection = () => {
       case "restaurant":
         return "text-[#F97316]";
       case "car":
-        return "text-[#F97316]";
+        return "text-[#84cc16]";
       case "medical":
         return "text-[#0EA5E9]";
       default:
@@ -78,13 +78,13 @@ const InteractiveDemoSection = () => {
   const getSectionBackgroundColor = () => {
     switch (activeIndustry) {
       case "restaurant":
-        return "bg-gradient-to-b from-[#1A1F2C] to-[#221A14]";
+        return "bg-gradient-to-b from-[#FDF4EE] to-[#FFECD9]";
       case "car":
-        return "bg-gradient-to-b from-[#1A1F2C] to-[#212818]";
+        return "bg-gradient-to-b from-[#F4FFEA] to-[#E8F6D9]";
       case "medical":
-        return "bg-gradient-to-b from-[#1A1F2C] to-[#0F2233]";
+        return "bg-gradient-to-b from-[#EEF8FF] to-[#E0F2FF]";
       default:
-        return "bg-voice-dark";
+        return "bg-[#F1F0FB]";
     }
   };
 
@@ -114,13 +114,13 @@ const InteractiveDemoSection = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${getHeadlineGradient()}`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">
             Experience Your AI Voice Agent In Action
           </h2>
-          <p className="text-lg text-voice-cream/80 mb-4">
+          <p className="text-lg text-gray-700 mb-4">
             See how our AI handles real-world scenarios, converts inquiries into bookings, and delivers exceptional customer service.
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-voice-cream/60">
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
             <ChevronLeft className="w-4 h-4" />
             <span>Scroll through industries</span>
             <ChevronRight className="w-4 h-4" />
@@ -130,16 +130,16 @@ const InteractiveDemoSection = () => {
         <div className="relative max-w-3xl mx-auto">
           <button 
             onClick={handlePrevIndustry}
-            className="absolute left-0 lg:-left-16 top-32 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
+            className="absolute left-0 lg:-left-16 top-32 z-10 p-4 rounded-full bg-white/80 border border-voice-purple/20 hover:bg-white/90 transition-colors hover:scale-110 group shadow-md"
           >
-            <ChevronLeft className="w-8 h-8 text-voice-cream group-hover:text-voice-purple transition-colors" />
+            <ChevronLeft className="w-8 h-8 text-gray-700 group-hover:text-voice-purple transition-colors" />
           </button>
 
           <button 
             onClick={handleNextIndustry}
-            className="absolute right-0 lg:-right-16 top-32 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
+            className="absolute right-0 lg:-right-16 top-32 z-10 p-4 rounded-full bg-white/80 border border-voice-purple/20 hover:bg-white/90 transition-colors hover:scale-110 group shadow-md"
           >
-            <ChevronRight className="w-8 h-8 text-voice-cream group-hover:text-voice-purple transition-colors" />
+            <ChevronRight className="w-8 h-8 text-gray-700 group-hover:text-voice-purple transition-colors" />
           </button>
 
           <div className="space-y-12">
@@ -152,7 +152,7 @@ const InteractiveDemoSection = () => {
               transition={{ duration: 0.3 }}
               className={cn(
                 "py-3 px-6 rounded-full mx-auto max-w-max font-medium",
-                "bg-voice-dark/80 border border-voice-purple/30 backdrop-blur-sm shadow-lg",
+                "bg-white shadow-lg border border-voice-purple/30 backdrop-blur-sm",
                 getIndustryTextColor()
               )}
             >
@@ -183,7 +183,7 @@ const InteractiveDemoSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-voice-dark/50 border border-voice-purple/20 rounded-xl p-6 shadow-lg"
+              className="bg-white/90 border border-voice-purple/20 rounded-xl p-6 shadow-lg"
             >
               <IndustryAnalysis 
                 industryData={industryData}
@@ -201,9 +201,9 @@ const InteractiveDemoSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-voice-dark/50 border border-voice-purple/20 rounded-xl p-6 shadow-lg"
+              className="bg-white/90 border border-voice-purple/20 rounded-xl p-6 shadow-lg"
             >
-              <h3 className="text-xl font-semibold mb-4 inline-flex items-center">
+              <h3 className="text-xl font-semibold mb-4 inline-flex items-center text-gray-800">
                 <span className="w-2 h-2 bg-voice-purple rounded-full mr-2"></span>
                 Call Analysis Summary
               </h3>
