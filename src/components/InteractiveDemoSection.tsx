@@ -88,34 +88,45 @@ const InteractiveDemoSection = () => {
           </div>
         </motion.div>
 
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-3xl mx-auto">
           <button 
             onClick={handlePrevIndustry}
-            className="absolute left-4 lg:-left-4 top-1/2 -translate-y-1/2 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
+            className="absolute left-0 lg:-left-16 top-32 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
           >
             <ChevronLeft className="w-8 h-8 text-voice-cream group-hover:text-voice-purple transition-colors" />
           </button>
 
           <button 
             onClick={handleNextIndustry}
-            className="absolute right-4 lg:-right-4 top-1/2 -translate-y-1/2 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
+            className="absolute right-0 lg:-right-16 top-32 z-10 p-4 rounded-full bg-voice-dark/80 border border-voice-purple/20 hover:bg-voice-dark/90 transition-colors hover:scale-110 group"
           >
             <ChevronRight className="w-8 h-8 text-voice-cream group-hover:text-voice-purple transition-colors" />
           </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start px-8">
-            <div>
-              <div className="sticky top-8">
-                <PhoneInterface 
-                  isPlaying={isPlaying}
-                  togglePlay={togglePlay}
-                  activeIndustry={activeIndustry}
-                  getIndustryColor={getIndustryColor}
-                />
-              </div>
-            </div>
+          <div className="space-y-12">
+            {/* Phone interface centered */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mx-auto max-w-xs"
+            >
+              <PhoneInterface 
+                isPlaying={isPlaying}
+                togglePlay={togglePlay}
+                activeIndustry={activeIndustry}
+                getIndustryColor={getIndustryColor}
+              />
+            </motion.div>
             
-            <div className="space-y-8">
+            {/* Industry Analysis section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-voice-dark/50 border border-voice-purple/20 rounded-xl p-6 shadow-lg"
+            >
               <IndustryAnalysis 
                 industryData={industryData}
                 isScenarioOpen={true}
@@ -124,8 +135,22 @@ const InteractiveDemoSection = () => {
                 getIndustryTextColor={getIndustryTextColor}
                 activeIndustry={activeIndustry}
               />
+            </motion.div>
+            
+            {/* Analysis Summary card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-voice-dark/50 border border-voice-purple/20 rounded-xl p-6 shadow-lg"
+            >
+              <h3 className="text-xl font-semibold mb-4 inline-flex items-center">
+                <span className="w-2 h-2 bg-voice-purple rounded-full mr-2"></span>
+                Call Analysis Summary
+              </h3>
               <AnalysisSummaryCard />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
