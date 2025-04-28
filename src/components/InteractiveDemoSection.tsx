@@ -16,6 +16,9 @@ const InteractiveDemoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const isMobile = useIsMobile();
 
+  // Get the current industry data
+  const currentIndustryData = getIndustryData(activeIndustry);
+
   const industries: Industry[] = ["restaurant", "car", "medical"];
 
   const handleNextIndustry = () => {
@@ -120,7 +123,7 @@ const InteractiveDemoSection = () => {
               )}
             >
               <div className="flex items-center gap-2">
-                {industryData.icon}
+                {currentIndustryData.icon}
                 <span>{getIndustryName()} Voice Agent</span>
               </div>
             </motion.div>
@@ -149,7 +152,7 @@ const InteractiveDemoSection = () => {
               className="bg-white/90 border border-gray-200 rounded-xl p-6 shadow-lg"
             >
               <IndustryAnalysis 
-                industryData={industryData}
+                industryData={currentIndustryData}
                 isScenarioOpen={true}
                 setIsScenarioOpen={() => {}}
                 getIndustryColor={getIndustryColor}
