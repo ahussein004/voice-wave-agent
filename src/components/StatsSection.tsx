@@ -68,14 +68,17 @@ const StatsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="relative group"
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="absolute inset-0 bg-voice-purple/5 rounded-xl blur-2xl group-hover:bg-voice-purple/10 transition-colors duration-500" />
-              <div className="relative flex items-start gap-4 p-4">
-                <div className="flex-shrink-0 p-2 bg-voice-purple/10 rounded-lg">
-                  <MessageSquareQuote className="w-6 h-6 text-voice-purple-light" />
+              <div 
+                className="absolute inset-0 bg-voice-purple/5 rounded-xl blur-2xl group-hover:bg-voice-purple/20 transition-all duration-500 group-hover:blur-3xl"
+              />
+              <div className="relative flex items-start gap-4 p-6 rounded-xl backdrop-blur-sm border border-voice-purple/10 group-hover:border-voice-purple/30 transition-all duration-500">
+                <div className="flex-shrink-0 p-2 bg-voice-purple/10 rounded-lg group-hover:bg-voice-purple/20 transition-colors duration-300">
+                  <MessageSquareQuote className="w-6 h-6 text-voice-purple-light group-hover:text-voice-purple group-hover:rotate-12 transition-all duration-300" />
                 </div>
                 <div className="space-y-3">
-                  <blockquote className="text-lg text-voice-cream leading-relaxed font-light">
+                  <blockquote className="text-lg text-voice-cream leading-relaxed font-light group-hover:text-white transition-colors duration-300">
                     "{quote.quote}"
                   </blockquote>
                   <motion.div 
@@ -83,13 +86,13 @@ const StatsSection = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
-                    className="flex items-center gap-2 pt-2 border-t border-voice-purple/10"
+                    className="flex items-center gap-2 pt-2 border-t border-voice-purple/10 group-hover:border-voice-purple/30 transition-colors duration-300"
                   >
                     <div>
-                      <div className="font-medium text-voice-purple-light">
+                      <div className="font-medium text-voice-purple-light group-hover:text-voice-purple transition-colors duration-300">
                         {quote.author}
                       </div>
-                      <div className="text-sm text-voice-cream/70">
+                      <div className="text-sm text-voice-cream/70 group-hover:text-voice-cream/90 transition-colors duration-300">
                         {quote.role}, {quote.company}
                       </div>
                     </div>
