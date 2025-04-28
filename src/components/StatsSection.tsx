@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { MessageSquareQuote } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,9 +15,13 @@ import Autoplay from "embla-carousel-autoplay";
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
   
+  // Create autoplay plugin as a standalone instance
+  const autoplayOptions = { delay: 6000, stopOnInteraction: false };
+  const autoplayPlugin = Autoplay(autoplayOptions);
+  
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true }, 
-    [Autoplay({ delay: 6000, stopOnInteraction: false })]
+    [autoplayPlugin]
   );
   
   const quotes = [
