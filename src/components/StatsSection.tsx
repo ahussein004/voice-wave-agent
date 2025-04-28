@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Autoplay from "embla-carousel-autoplay";
 import { 
   Carousel, 
@@ -41,7 +42,6 @@ const StatsSection = () => {
 
     carouselApi.on("select", handleSelect);
     
-    // Cleanup
     return () => {
       carouselApi.off("select", handleSelect);
     };
@@ -50,16 +50,36 @@ const StatsSection = () => {
   return (
     <section className="relative py-24 px-4 overflow-hidden">
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-voice-dark via-voice-purple/5 to-gray-900"
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%"],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-br from-voice-dark via-voice-purple/5 to-gray-900"
+          animate={{
+            backgroundPosition: ["0% 0%", "100% 100%"],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+        <motion.div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-voice-purple/10 via-transparent to-transparent"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      </motion.div>
       
       <div className="container relative z-10 mx-auto">
         <motion.div 
@@ -81,17 +101,24 @@ const StatsSection = () => {
 
         <div className="max-w-3xl mx-auto relative">
           <Carousel 
-            opts={{ loop: true, align: "center" }}
+            opts={{ 
+              loop: true, 
+              align: "center",
+              skipSnaps: false,
+              dragFree: false
+            }}
             plugins={[plugin]}
             className="w-full"
             setApi={setCarouselApi}
           >
             <CarouselContent>
-              {quotes.map((quote, index) => (
-                <CarouselItem key={quote.author} className="flex-[0_0_100%] min-w-0">
-                  <QuoteCard quote={quote} />
-                </CarouselItem>
-              ))}
+              <AnimatePresence mode="wait">
+                {quotes.map((quote, index) => (
+                  <CarouselItem key={quote.author} className="flex-[0_0_100%] min-w-0">
+                    <QuoteCard quote={quote} />
+                  </CarouselItem>
+                ))}
+              </AnimatePresence>
             </CarouselContent>
             
             <QuoteCarouselControls 
