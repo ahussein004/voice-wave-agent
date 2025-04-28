@@ -10,12 +10,10 @@ import { quotes } from "@/data/quotes";
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
   
-  // Create autoplay plugin instance first before passing it to useEmblaCarousel
-  const autoplayPlugin = Autoplay({ delay: 6000, stopOnInteraction: false });
-  
+  // Create carousel with autoplay plugin
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true }, 
-    [autoplayPlugin]
+    [Autoplay()]
   );
   
   useEffect(() => {
