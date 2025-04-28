@@ -11,7 +11,7 @@ export const quotes = [
     author: "Satya Nadella",
     company: "Microsoft",
     role: "CEO",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png",
+    logo: "Microsoft",
     quote: "Voice agents are the future of human-computer interaction. They'll understand intent, predict needs, and act autonomously-revolutionizing customer service and workflow automation."
   },
   {
@@ -39,7 +39,7 @@ export const quotes = [
     author: "Marc Benioff",
     company: "Salesforce",
     role: "CEO",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/2560px-Salesforce.com_logo.svg.png",
+    logo: "Salesforce ☁️",
     quote: "Voice agents are a high-margin opportunity. Deploying them at scale lets businesses capture more leads, reduce overhead, and deliver instant customer joy."
   }
 ];

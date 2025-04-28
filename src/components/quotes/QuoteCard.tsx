@@ -16,6 +16,8 @@ interface QuoteCardProps {
 }
 
 export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
+  const isTextLogo = !quote.logo.startsWith('http');
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,13 +32,24 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
           <div className="flex-shrink-0 p-3 bg-voice-purple/10 rounded-lg group-hover:bg-voice-purple/20 transition-all duration-300">
             <MessageSquareQuote className="w-8 h-8 text-voice-purple-light group-hover:text-voice-purple group-hover:rotate-12 transition-all duration-300" />
           </div>
-          <img 
-            src={quote.logo}
-            alt={`${quote.company} logo`}
-            className="h-10 object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-          />
+          {isTextLogo ? (
+            <span className="text-2xl font-bold text-voice-cream/90 group-hover:text-white transition-colors duration-300">
+              {quote.logo}
+            </span>
+          ) : (
+            <img 
+              src={quote.logo}
+              alt={`${quote.company} logo`}
+              className="h-10 object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+            />
+          )}
         </div>
-        <div className="space-y-6">
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           <blockquote className="text-xl text-voice-cream leading-relaxed font-light group-hover:text-white transition-colors duration-300">
             "{quote.quote}"
           </blockquote>
@@ -44,7 +57,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
             initial={{ opacity: 0.8 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 pt-4 border-t border-voice-purple/10 group-hover:border-voice-purple/30 transition-colors duration-300"
+            className="flex items-center gap-3 pt-4 border-t border-voice-purple/10 group-hover:border-voice-purple/30 transition-all duration-300"
           >
             <div>
               <div className="font-medium text-lg text-voice-purple-light group-hover:text-voice-purple transition-colors duration-300">
@@ -55,7 +68,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

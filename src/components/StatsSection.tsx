@@ -18,7 +18,7 @@ const StatsSection = () => {
   const plugin = React.useMemo(
     () =>
       Autoplay({
-        delay: 8000,
+        delay: 10000,
         stopOnInteraction: true,
         stopOnMouseEnter: true,
       }),
@@ -49,7 +49,17 @@ const StatsSection = () => {
 
   return (
     <section className="relative py-24 px-4 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-voice-dark via-voice-purple/5 to-gray-900" />
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-voice-dark via-voice-purple/5 to-gray-900"
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%"],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
       
       <div className="container relative z-10 mx-auto">
         <motion.div 
