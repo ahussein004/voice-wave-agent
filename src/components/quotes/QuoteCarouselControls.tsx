@@ -1,11 +1,11 @@
 
 import React from "react";
-import type { EmblaCarouselType } from 'embla-carousel-react';
+import type { UseEmblaCarouselType } from 'embla-carousel-react';
 
 interface QuoteCarouselControlsProps {
   quotes: any[];
   activeQuote: number;
-  emblaApi: EmblaCarouselType | undefined;
+  emblaApi: UseEmblaCarouselType[1] | undefined;
 }
 
 export const QuoteCarouselControls: React.FC<QuoteCarouselControlsProps> = ({ 
