@@ -1,7 +1,5 @@
 
 import React from "react";
-import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
 import { MessageSquareQuote } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -34,7 +32,7 @@ const StatsSection = () => {
     {
       author: "Arvind Krishna",
       company: "IBM",
-      role: "CEO",
+      role: "CEO", 
       quote: "AI voice agents amplify human potential. They're not replacing teams-they're empowering them to focus on high-value work while automating routine interactions."
     }
   ];
@@ -44,7 +42,7 @@ const StatsSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-voice-dark to-gray-900" />
       
       <div className="container relative z-10 mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm border border-voice-purple/30">
             <span className="h-2 w-2 rounded-full bg-voice-purple-light animate-pulse mr-2" />
             <span className="text-sm font-medium text-voice-cream/90">Industry Leaders' Vision</span>
@@ -56,7 +54,7 @@ const StatsSection = () => {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+        <div className="space-y-16 max-w-4xl mx-auto">
           {quotes.map((quote, index) => (
             <motion.div
               key={quote.author}
@@ -64,35 +62,26 @@ const StatsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative"
             >
-              <Card className="h-full bg-voice-purple/5 border-voice-purple/20 backdrop-blur-sm hover:border-voice-purple/30 transition-colors">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <MessageSquareQuote className="w-6 h-6 text-voice-purple-light flex-shrink-0 mt-1" />
-                    <div className="space-y-4">
-                      <blockquote className="text-voice-cream/90 leading-relaxed">
-                        "{quote.quote}"
-                      </blockquote>
-                      <footer className="border-t border-voice-purple/10 pt-4 mt-4">
-                        <div className="font-semibold text-voice-purple-light">
-                          {quote.author}
-                        </div>
-                        <div className="text-sm text-voice-cream/70">
-                          {quote.role}, {quote.company}
-                        </div>
-                      </footer>
+              <div className="flex flex-col md:flex-row items-start gap-6">
+                <MessageSquareQuote className="w-8 h-8 text-voice-purple-light flex-shrink-0 opacity-50" />
+                <div className="space-y-4">
+                  <blockquote className="text-lg md:text-xl text-voice-cream/90 leading-relaxed font-light">
+                    "{quote.quote}"
+                  </blockquote>
+                  <div className="pt-4 border-t border-voice-purple/10">
+                    <div className="font-medium text-voice-purple-light">
+                      {quote.author}
+                    </div>
+                    <div className="text-sm text-voice-cream/70">
+                      {quote.role}, {quote.company}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white px-6">
-            Get Started Today
-          </Button>
         </div>
       </div>
     </section>
