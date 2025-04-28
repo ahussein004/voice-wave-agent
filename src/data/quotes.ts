@@ -11,7 +11,7 @@ export const quotes = [
     author: "Satya Nadella",
     company: "Microsoft",
     role: "CEO",
-    logo: "public/lovable-uploads/061d4e08-e3f5-4281-a6c9-20e97a2b5126.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png",
     quote: "Voice agents are the future of human-computer interaction. They'll understand intent, predict needs, and act autonomously-revolutionizing customer service and workflow automation."
   },
   {

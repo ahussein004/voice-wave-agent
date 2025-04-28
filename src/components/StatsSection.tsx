@@ -1,6 +1,6 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Autoplay from "embla-carousel-autoplay";
 import { 
   Carousel, 
   CarouselContent, 
@@ -14,6 +14,16 @@ import { quotes } from "@/data/quotes";
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  
+  const plugin = React.useMemo(
+    () =>
+      Autoplay({
+        delay: 8000,
+        stopOnInteraction: true,
+        stopOnMouseEnter: true,
+      }),
+    []
+  );
 
   const handleCarouselChange = (index: number) => {
     if (carouselApi) {
@@ -62,6 +72,7 @@ const StatsSection = () => {
         <div className="max-w-3xl mx-auto relative">
           <Carousel 
             opts={{ loop: true, align: "center" }}
+            plugins={[plugin]}
             className="w-full"
             setApi={setCarouselApi}
           >
