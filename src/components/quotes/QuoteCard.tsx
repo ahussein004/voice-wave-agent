@@ -1,3 +1,4 @@
+
 import React from "react";
 import { MessageSquareQuote } from "lucide-react";
 import { motion } from "framer-motion";
@@ -26,7 +27,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
       className="relative group h-full"
     >
       <motion.div 
-        className="absolute inset-0 bg-voice-purple/5 rounded-xl blur-lg"
+        className="absolute inset-0 bg-gradient-to-r from-voice-purple/10 to-blue-500/10 rounded-xl blur-lg"
         animate={{
           opacity: [0.5, 0.8, 0.5],
           scale: [1, 1.02, 1],
