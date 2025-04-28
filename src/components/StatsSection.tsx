@@ -1,172 +1,95 @@
-import React, { useEffect, useRef, useState } from "react";
+
+import React from "react";
 import { Button } from "./ui/button";
-import { ChartBar, Clock, DollarSign, MessageSquare, Percent, TrendingUp, Users } from "lucide-react";
-
-interface StatItemProps {
-  number: string;
-  prefix?: string;
-  suffix?: string;
-  description: string;
-  className?: string;
-}
-
-const StatItem: React.FC<StatItemProps> = ({ number, prefix = "", suffix = "", description, className }) => {
-  const [counted, setCounted] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
-  
-  useEffect(() => {
-    if (!isVisible) return;
-    
-    const numberValue = parseFloat(number.replace(/[^0-9.]/g, ''));
-    const duration = 1500;
-    const startTime = Date.now();
-    
-    const updateCount = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      const currentCount = Math.floor(progress * numberValue);
-      
-      if (progress < 1) {
-        setCounted(currentCount);
-        requestAnimationFrame(updateCount);
-      } else {
-        setCounted(numberValue);
-      }
-    };
-    
-    requestAnimationFrame(updateCount);
-  }, [isVisible, number]);
-  
-  return (
-    <div ref={ref} className={`inline ${className}`}>
-      <span className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-voice-purple to-voice-purple-light">
-        {prefix}
-        {counted}
-        {suffix}
-      </span>
-      <span className="ml-3 text-voice-cream/80">{description}</span>
-    </div>
-  );
-};
+import { Card, CardContent } from "./ui/card";
+import { MessageSquareQuote } from "lucide-react";
+import { motion } from "framer-motion";
 
 const StatsSection = () => {
+  const quotes = [
+    {
+      author: "Jeff Bezos",
+      company: "Amazon",
+      role: "Founder",
+      quote: "AI voice agents will become our digital assistants, transforming customer interactions. They'll handle bookings, support, and insights-making businesses more efficient and responsive."
+    },
+    {
+      author: "Satya Nadella",
+      company: "Microsoft",
+      role: "CEO",
+      quote: "Voice agents are the future of human-computer interaction. They'll understand intent, predict needs, and act autonomously-revolutionizing customer service and workflow automation."
+    },
+    {
+      author: "Sundar Pichai",
+      company: "Google",
+      role: "CEO",
+      quote: "By 2025, AI will power most customer interactions. Voice agents will be the primary interface, delivering instant resolutions and personalized experiences."
+    },
+    {
+      author: "Jensen Huang",
+      company: "NVIDIA",
+      role: "CEO",
+      quote: "Voice AI is the cornerstone of automation. Breakthroughs in generative speech are enabling hyper-realistic agents that handle complex tasks-24/7, in any language."
+    },
+    {
+      author: "Arvind Krishna",
+      company: "IBM",
+      role: "CEO",
+      quote: "AI voice agents amplify human potential. They're not replacing teams-they're empowering them to focus on high-value work while automating routine interactions."
+    }
+  ];
+
   return (
     <section className="relative py-24 px-4 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-voice-dark to-gray-900" />
       
       <div className="container relative z-10 mx-auto">
-        <div className="text-center mb-16 max-w-xl mx-auto">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm border border-voice-purple/30">
             <span className="h-2 w-2 rounded-full bg-voice-purple-light animate-pulse mr-2" />
-            <span className="text-sm font-medium text-voice-cream/90">Industry Growth</span>
+            <span className="text-sm font-medium text-voice-cream/90">Industry Leaders' Vision</span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">The Future of Customer Service</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">The Future of AI Voice Agents</h2>
           <p className="text-voice-cream/70 max-w-lg mx-auto">
-            AI voice agents are revolutionizing business communications with proven results and measurable outcomes.
+            Leading tech visionaries share their insights on the transformative power of AI voice technology
           </p>
         </div>
-        
-        <div className="max-w-4xl mx-auto space-y-16">
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Market Growth & Potential</h3>
-            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
-              The global AI voice agent market is projected to reach
-              <StatItem 
-                number="47.5" 
-                prefix="$" 
-                suffix="B"
-                description="by 2034"
-              />
-              with a remarkable annual growth rate of
-              <StatItem 
-                number="34.8" 
-                suffix="%"
-                description="year over year"
-              />.
-            </p>
-          </div>
 
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Performance & Efficiency</h3>
-            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
-              Our AI agents process inquiries
-              <StatItem 
-                number="500" 
-                suffix="%"
-                description="faster than traditional systems"
-              />
-              achieving an impressive
-              <StatItem 
-                number="73" 
-                suffix="%"
-                description="instant resolution rate"
-              />.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Business Impact</h3>
-            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
-              Businesses implementing our solution see an average
-              <StatItem 
-                number="30" 
-                suffix="%"
-                description="reduction in operational costs"
-              />
-              while meeting modern customer expectations—where
-              <StatItem 
-                number="82" 
-                suffix="%"
-                description="expect immediate responses"
-              />.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold mb-6 text-voice-cream/90">Response Time Impact</h3>
-            <p className="flex items-baseline flex-wrap gap-x-3 text-lg">
-              Quick response is crucial, with
-              <StatItem 
-                number="98" 
-                suffix="%"
-                description="conversion rate for 3-minute responses"
-              />
-              —our AI agents ensure you never miss these opportunities.
-            </p>
-          </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {quotes.map((quote, index) => (
+            <motion.div
+              key={quote.author}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Card className="h-full bg-voice-purple/5 border-voice-purple/20 backdrop-blur-sm hover:border-voice-purple/30 transition-colors">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <MessageSquareQuote className="w-6 h-6 text-voice-purple-light flex-shrink-0 mt-1" />
+                    <div className="space-y-4">
+                      <blockquote className="text-voice-cream/90 leading-relaxed">
+                        "{quote.quote}"
+                      </blockquote>
+                      <footer className="border-t border-voice-purple/10 pt-4 mt-4">
+                        <div className="font-semibold text-voice-purple-light">
+                          {quote.author}
+                        </div>
+                        <div className="text-sm text-voice-cream/70">
+                          {quote.role}, {quote.company}
+                        </div>
+                      </footer>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
-        
-        <blockquote className="max-w-2xl mx-auto text-center mt-16 p-6 border-l-4 border-voice-purple bg-voice-purple/5 rounded-r-lg">
-          <p className="text-lg italic text-voice-cream mb-4">
-            "AI voice agents will autonomously resolve 80% of common service issues by 2029."
-          </p>
-          <footer className="text-voice-cream/60 text-sm">— Gartner Research</footer>
-        </blockquote>
-        
-        <div className="mt-12 text-center">
+
+        <div className="mt-16 text-center">
           <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white px-6">
             Get Started Today
           </Button>
