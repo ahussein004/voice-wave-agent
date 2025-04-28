@@ -9,21 +9,12 @@ import WorkflowCards from "./WorkflowCards";
 import { getIndustryIntegrations } from "./demo/industryData";
 import AnalysisSummaryCard from "./AnalysisSummaryCard";
 import AgentTaskFlow from "./AgentTaskFlow";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { quotes } from "@/data/quotes";
-import { QuoteCard } from "./quotes/QuoteCard";
-import Autoplay from "embla-carousel-autoplay";
 
 type Industry = "restaurant" | "car" | "medical";
 
 const IntegrationSection = () => {
   const [activeIndustry, setActiveIndustry] = useState<Industry>("restaurant");
   const integrationData = getIndustryIntegrations(activeIndustry);
-  
-  // Autoplay plugin with 8 seconds delay
-  const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 8000, stopOnInteraction: false })
-  );
   
   return (
     <section className="py-24 bg-voice-dark border-t border-voice-purple/10">
@@ -124,33 +115,6 @@ const IntegrationSection = () => {
           {/* Industry specific workflow cards */}
           <div className="bg-voice-dark/50 backdrop-blur-sm rounded-xl p-6 border border-voice-purple/20">
             <WorkflowCards workflows={integrationData.workflows} industry={activeIndustry} wide={true} />
-          </div>
-        </motion.div>
-
-        {/* Testimonials carousel - Now more prominent */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative rounded-xl overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-voice-purple/5 to-blue-500/5 animate-pulse"></div>
-          <div className="relative z-10 py-8 px-4">
-            <h3 className="text-xl font-semibold mb-6 text-center text-gradient">What Industry Leaders Are Saying</h3>
-            <Carousel 
-              opts={{ align: "start", loop: true, skipSnaps: false }} 
-              plugins={[autoplayPlugin.current]}
-              className="mx-auto max-w-4xl"
-            >
-              <CarouselContent>
-                {quotes.map((quote, index) => (
-                  <CarouselItem key={index} className="px-2 md:basis-full">
-                    <QuoteCard quote={quote} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
           </div>
         </motion.div>
       </div>

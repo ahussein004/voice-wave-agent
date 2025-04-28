@@ -1,52 +1,17 @@
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Autoplay from "embla-carousel-autoplay";
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  type CarouselApi
-} from "@/components/ui/carousel";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { QuoteCard } from "./quotes/QuoteCard";
-import { QuoteCarouselControls } from "./quotes/QuoteCarouselControls";
+import Autoplay from "embla-carousel-autoplay";
 import { quotes } from "@/data/quotes";
 
 const StatsSection = () => {
-  const [activeQuote, setActiveQuote] = useState(0);
-  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  
-  const plugin = React.useMemo(
-    () =>
-      Autoplay({
-        delay: 10000,
-        stopOnInteraction: true,
-        stopOnMouseEnter: true,
-      }),
-    []
+  // Autoplay plugin with 8 seconds delay
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 8000, stopOnInteraction: false })
   );
-
-  const handleCarouselChange = (index: number) => {
-    if (carouselApi) {
-      carouselApi.scrollTo(index);
-    }
-    setActiveQuote(index);
-  };
-
-  React.useEffect(() => {
-    if (!carouselApi) return;
-    
-    const handleSelect = () => {
-      setActiveQuote(carouselApi.selectedScrollSnap());
-    };
-
-    carouselApi.on("select", handleSelect);
-    
-    return () => {
-      carouselApi.off("select", handleSelect);
-    };
-  }, [carouselApi]);
-
+  
   return (
     <section className="relative py-24 px-4 overflow-hidden">
       <motion.div 
@@ -81,53 +46,32 @@ const StatsSection = () => {
         />
       </motion.div>
       
-      <div className="container relative z-10 mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+      <div className="container relative z-10 mx-auto mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="relative rounded-xl overflow-hidden max-w-4xl mx-auto"
         >
-          <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-4 backdrop-blur-sm border border-voice-purple/30">
-            <span className="h-2 w-2 rounded-full bg-voice-purple-light animate-pulse mr-2" />
-            <span className="text-sm font-medium text-voice-cream/90">Industry Leaders' Vision</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gradient">The Future of AI Voice Agents</h2>
-          <p className="text-voice-cream/70 max-w-lg mx-auto">
-            Leading tech visionaries share their insights on the transformative power of AI voice technology
-          </p>
-        </motion.div>
-
-        <div className="max-w-3xl mx-auto relative">
-          <Carousel 
-            opts={{ 
-              loop: true, 
-              align: "center",
-              skipSnaps: false,
-              dragFree: false
-            }}
-            plugins={[plugin]}
-            className="w-full"
-            setApi={setCarouselApi}
-          >
-            <CarouselContent>
-              <AnimatePresence mode="wait">
+          <div className="absolute inset-0 bg-gradient-to-r from-voice-purple/5 to-blue-500/5 animate-pulse"></div>
+          <div className="relative z-10 py-8 px-4">
+            <h3 className="text-xl md:text-3xl font-semibold mb-6 text-center text-gradient">What Industry Leaders Are Saying</h3>
+            <Carousel 
+              opts={{ align: "start", loop: true, skipSnaps: false }} 
+              plugins={[autoplayPlugin.current]}
+              className="mx-auto"
+            >
+              <CarouselContent>
                 {quotes.map((quote, index) => (
-                  <CarouselItem key={quote.author} className="flex-[0_0_100%] min-w-0">
+                  <CarouselItem key={index} className="px-2 md:basis-full">
                     <QuoteCard quote={quote} />
                   </CarouselItem>
                 ))}
-              </AnimatePresence>
-            </CarouselContent>
-            
-            <QuoteCarouselControls 
-              quotes={quotes} 
-              activeQuote={activeQuote} 
-              onQuoteChange={handleCarouselChange} 
-            />
-          </Carousel>
-        </div>
+              </CarouselContent>
+            </Carousel>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
