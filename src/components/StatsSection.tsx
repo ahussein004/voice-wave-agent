@@ -5,18 +5,37 @@ import {
   Carousel, 
   CarouselContent, 
   CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
+  type CarouselApi
 } from "@/components/ui/carousel";
 import { QuoteCard } from "./quotes/QuoteCard";
+import { QuoteCarouselControls } from "./quotes/QuoteCarouselControls";
 import { quotes } from "@/data/quotes";
 
 const StatsSection = () => {
   const [activeQuote, setActiveQuote] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   const handleCarouselChange = (index: number) => {
+    if (carouselApi) {
+      carouselApi.scrollTo(index);
+    }
     setActiveQuote(index);
   };
+
+  React.useEffect(() => {
+    if (!carouselApi) return;
+    
+    const handleSelect = () => {
+      setActiveQuote(carouselApi.selectedScrollSnap());
+    };
+
+    carouselApi.on("select", handleSelect);
+    
+    // Cleanup
+    return () => {
+      carouselApi.off("select", handleSelect);
+    };
+  }, [carouselApi]);
 
   return (
     <section className="relative py-24 px-4 overflow-hidden">
@@ -44,9 +63,7 @@ const StatsSection = () => {
           <Carousel 
             opts={{ loop: true, align: "center" }}
             className="w-full"
-            onSelect={(api) => {
-              setActiveQuote(api.selectedScrollSnap());
-            }}
+            setApi={setCarouselApi}
           >
             <CarouselContent>
               {quotes.map((quote, index) => (
@@ -56,26 +73,10 @@ const StatsSection = () => {
               ))}
             </CarouselContent>
             
-            <div className="flex justify-center mt-8 gap-2">
-              {quotes.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleCarouselChange(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    activeQuote === index
-                      ? "w-8 bg-voice-purple-light"
-                      : "bg-voice-purple/30 hover:bg-voice-purple/50"
-                  }`}
-                  aria-label={`Go to quote ${index + 1}`}
-                />
-              ))}
-            </div>
-            
-            <CarouselPrevious 
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 hidden md:flex bg-voice-purple/20 hover:bg-voice-purple/30 backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
-            />
-            <CarouselNext 
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 hidden md:flex bg-voice-purple/20 hover:bg-voice-purple/30 backdrop-blur-sm border border-voice-purple/30 transition-all hover:scale-110"
+            <QuoteCarouselControls 
+              quotes={quotes} 
+              activeQuote={activeQuote} 
+              onQuoteChange={handleCarouselChange} 
             />
           </Carousel>
         </div>
