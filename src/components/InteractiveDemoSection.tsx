@@ -62,6 +62,19 @@ const InteractiveDemoSection = () => {
     }
   };
 
+  const getIndustryName = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "Restaurant Industry";
+      case "car":
+        return "Automotive Industry";
+      case "medical":
+        return "Healthcare Industry";
+      default:
+        return "Voice Agent";
+    }
+  };
+
   const industryData = getIndustryData(activeIndustry);
 
   return (
@@ -104,6 +117,25 @@ const InteractiveDemoSection = () => {
           </button>
 
           <div className="space-y-12">
+            {/* Industry header */}
+            <motion.div
+              key={activeIndustry}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3 }}
+              className={cn(
+                "py-3 px-6 rounded-full mx-auto max-w-max font-medium",
+                "bg-voice-dark/80 border border-voice-purple/30 backdrop-blur-sm shadow-lg",
+                getIndustryTextColor()
+              )}
+            >
+              <div className="flex items-center gap-2">
+                {industryData.icon}
+                <span>{getIndustryName()} Voice Agent</span>
+              </div>
+            </motion.div>
+            
             {/* Phone interface centered */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
