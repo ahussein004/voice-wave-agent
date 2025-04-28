@@ -13,39 +13,7 @@ const StatsSection = () => {
   );
   
   return (
-    <section className="relative py-24 px-4 overflow-hidden">
-      <motion.div 
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-voice-dark via-voice-purple/5 to-gray-900"
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-        <motion.div 
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-voice-purple/10 via-transparent to-transparent"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-      </motion.div>
-      
+    <section className="relative py-24 px-4 overflow-hidden bg-white text-gray-900">
       <div className="container relative z-10 mx-auto mt-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
