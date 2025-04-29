@@ -25,7 +25,13 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="relative py-28 px-4 overflow-hidden bg-hero-pattern text-gray-900">
+    <section className="relative py-28 px-4 overflow-hidden bg-white text-gray-900">
+      {/* White glowy background effect */}
+      <div className="absolute inset-0 bg-gradient-radial from-white via-gray-50 to-gray-100"></div>
+      <div className="absolute top-40 left-10 w-80 h-80 bg-gradient-to-r from-white/50 to-gray-100/50 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-20 right-10 w-96 h-96 bg-gradient-to-l from-white/60 to-gray-50/60 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-radial from-white/70 to-transparent rounded-full blur-3xl"></div>
+      
       <div className="container relative z-10 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -58,9 +64,10 @@ const StatsSection = () => {
             <ChevronRight className="w-6 h-6 text-voice-purple group-hover:text-voice-purple-dark transition-colors" />
           </button>
           
-          {/* Redesigned quotes slideshow with glass morphism */}
+          {/* Redesigned quotes slideshow with hero section (section 1) styling */}
           <div className="relative overflow-hidden rounded-2xl shadow-xl min-h-[450px] flex items-center">
-            {/* Glass background effect */}
+            {/* Hero section-like glass background effect */}
+            <div className="absolute inset-0 bg-hero-pattern"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-voice-purple/5 to-blue-500/5"></div>
             <div className="absolute inset-0 bg-voice-dark/60 backdrop-blur-sm"></div>
             
@@ -111,7 +118,7 @@ const StatsSection = () => {
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                               transition={{ delay: 0.3 }}
-                              className="text-xl md:text-2xl text-gray-700 italic leading-relaxed pl-6 relative z-10 font-light"
+                              className="text-xl md:text-2xl text-voice-cream italic leading-relaxed pl-6 relative z-10 font-light"
                             >
                               {quote.quote}
                             </motion.blockquote>
@@ -144,11 +151,6 @@ const StatsSection = () => {
           </div>
         </div>
       </div>
-      
-      {/* Enhanced background decorative elements */}
-      <div className="absolute top-40 left-10 w-80 h-80 bg-gradient-to-r from-voice-purple/5 to-blue-500/10 rounded-full blur-3xl opacity-50"></div>
-      <div className="absolute -bottom-20 right-10 w-96 h-96 bg-gradient-to-l from-voice-purple/10 to-blue-500/5 rounded-full blur-3xl opacity-60"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-radial from-voice-purple/5 to-transparent rounded-full blur-3xl opacity-30"></div>
     </section>
   );
 };
