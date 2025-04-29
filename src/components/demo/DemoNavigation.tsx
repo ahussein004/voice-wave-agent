@@ -16,12 +16,14 @@ const DemoNavigation = ({
       <button 
         onClick={handlePrevIndustry}
         className="p-4 rounded-full bg-white/10 hover:bg-white/20 border border-voice-purple/20 transition-colors shadow-lg group"
+        aria-label="Previous industry"
       >
         <ChevronLeft className="w-5 h-5 text-voice-cream group-hover:text-voice-purple-light" />
       </button>
       <button 
         onClick={handleNextIndustry}
         className="p-4 rounded-full bg-white/10 hover:bg-white/20 border border-voice-purple/20 transition-colors shadow-lg group"
+        aria-label="Next industry"
       >
         <ChevronRight className="w-5 h-5 text-voice-cream group-hover:text-voice-purple-light" />
       </button>
