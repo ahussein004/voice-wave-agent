@@ -112,6 +112,10 @@ export default {
 					'50%': { opacity: '0.8' },
 					'100%': { transform: 'translateY(-100px) translateX(20px)', opacity: '0' }
 				},
+				'quote-slide': {
+					'0%': { transform: 'translateX(20px)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -121,6 +125,7 @@ export default {
 				'wave': 'wave 1.5s infinite ease-in-out',
 				'gradient-x': 'gradient-x 15s ease infinite',
 				'particle-flow': 'particle-flow 8s ease-in-out infinite',
+				'quote-slide': 'quote-slide 0.5s ease-out',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
