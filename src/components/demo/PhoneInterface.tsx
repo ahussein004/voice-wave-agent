@@ -19,11 +19,11 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   getIndustryColor,
 }) => {
   const getPhoneGlowColor = () => {
-    return "from-voice-purple/30 via-transparent to-transparent";
+    return "from-orange-400/30 via-transparent to-transparent";
   };
   
   const getBorderColor = () => {
-    return "border-voice-purple/30";
+    return "border-orange-500/30";
   };
 
   const getIndustryHeadlineText = () => {
@@ -49,7 +49,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     >
       <div className={`absolute -inset-4 bg-gradient-to-r ${getPhoneGlowColor()} blur-3xl`} />
       <div className={`aspect-[9/16] max-w-xs mx-auto bg-gray-900/50 rounded-3xl border-8 ${getBorderColor()} shadow-2xl overflow-hidden relative backdrop-blur-xl`}>
-        <div className="absolute inset-0 phone-glow opacity-50" />
+        <div className="absolute inset-0 phone-glow opacity-50 bg-orange-500/20" />
         
         <div className="p-4 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
@@ -71,7 +71,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mr-2 p-3 bg-voice-purple/30 rounded-lg rounded-tr-none max-w-[80%] ml-auto backdrop-blur-sm"
+              className="mr-2 p-3 bg-orange-500/30 rounded-lg rounded-tr-none max-w-[80%] ml-auto backdrop-blur-sm"
             >
               Hi, I'd like to know if you have any availability for dinner tonight for 4 people?
             </motion.div>
@@ -89,9 +89,9 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="text-center my-4 text-xs text-voice-cream/60"
+              className="text-center my-4 text-xs text-orange-300/60"
             >
-              <div className="inline-block px-3 py-1 rounded-full bg-voice-purple/10 border border-voice-purple/20">
+              <div className="inline-block px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20">
                 AI is checking availability...
               </div>
             </motion.div>
@@ -100,15 +100,15 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
           <div className="h-24 relative flex items-center justify-center">
             <AudioVisualization 
               isPlaying={isPlaying} 
-              color="#9b87f5"
+              color="#F97316"
             />
             
             <button 
               onClick={togglePlay}
               className={cn(
                 "absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10 transition-transform hover:scale-105",
-                getIndustryColor(),
-                "shadow-lg shadow-voice-purple/20"
+                "bg-orange-500",
+                "shadow-lg shadow-orange-500/20"
               )}
             >
               {isPlaying ? 

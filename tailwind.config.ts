@@ -63,6 +63,19 @@ export default {
 					cream: '#f8f0e5',
 					dark: '#1A1F2C',
 				},
+				// Real World theme colors
+				orange: {
+					50: '#FFF7ED', 
+					100: '#FFEDD5',
+					200: '#FED7AA', 
+					300: '#FDBA74', 
+					400: '#FB923C', // Primary orange
+					500: '#F97316', // Accent orange
+					600: '#EA580C',
+					700: '#C2410C', 
+					800: '#9A3412',
+					900: '#7C2D12',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -112,11 +125,6 @@ export default {
 					'50%': { opacity: '0.8' },
 					'100%': { transform: 'translateY(-100px) translateX(20px)', opacity: '0' }
 				},
-				'phone-pulse': {
-					'0%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0.7)' },
-					'70%': { boxShadow: '0 0 0 10px rgba(126, 105, 171, 0)' },
-					'100%': { boxShadow: '0 0 0 0 rgba(126, 105, 171, 0)' }
-				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -126,7 +134,6 @@ export default {
 				'wave': 'wave 1.5s infinite ease-in-out',
 				'gradient-x': 'gradient-x 15s ease infinite',
 				'particle-flow': 'particle-flow 8s ease-in-out infinite',
-				'phone-pulse': 'phone-pulse 2s infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
