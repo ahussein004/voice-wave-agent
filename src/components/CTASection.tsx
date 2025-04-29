@@ -36,7 +36,7 @@ const CTASection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <div className="aspect-video w-full">
+            <div className="w-full h-[600px]">
               <iframe 
                 src="https://calendly.com/a-hu33ein/voice-ai-agency" 
                 width="100%" 
