@@ -25,7 +25,7 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="relative py-28 px-4 overflow-hidden bg-white text-gray-900">
+    <section className="relative py-28 px-4 overflow-hidden bg-hero-pattern text-gray-900">
       <div className="container relative z-10 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -62,7 +62,7 @@ const StatsSection = () => {
           <div className="relative overflow-hidden rounded-2xl shadow-xl min-h-[450px] flex items-center">
             {/* Glass background effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-voice-purple/5 to-blue-500/5"></div>
-            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+            <div className="absolute inset-0 bg-voice-dark/60 backdrop-blur-sm"></div>
             
             <div className="relative z-10 w-full">
               <AnimatePresence mode="wait">
