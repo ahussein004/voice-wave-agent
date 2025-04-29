@@ -25,42 +25,44 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="relative py-24 px-4 overflow-hidden bg-white text-gray-900">
+    <section className="relative py-28 px-4 overflow-hidden bg-white text-gray-900">
       <div className="container relative z-10 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">What Industry Leaders Are Saying</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">What Industry Leaders Are Saying</h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Top executives from leading companies share their insights on the future of voice AI technology
           </p>
         </motion.div>
         
-        <div className="relative max-w-5xl mx-auto px-4 md:px-0">
-          {/* Navigation arrows */}
+        <div className="relative max-w-6xl mx-auto px-4 md:px-0">
+          {/* Navigation arrows with enhanced styling */}
           <button 
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 md:-left-12 p-3 rounded-full bg-white/80 border border-voice-purple/20 hover:bg-white shadow-lg transition-all hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 md:-left-12 p-3 rounded-full bg-white/90 border border-voice-purple/20 hover:bg-white shadow-lg transition-all hover:scale-110 group"
             aria-label="Previous quote"
           >
-            <ChevronLeft className="w-6 h-6 text-voice-purple" />
+            <ChevronLeft className="w-6 h-6 text-voice-purple group-hover:text-voice-purple-dark transition-colors" />
           </button>
           
           <button 
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 md:-right-12 p-3 rounded-full bg-white/80 border border-voice-purple/20 hover:bg-white shadow-lg transition-all hover:scale-110"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 md:-right-12 p-3 rounded-full bg-white/90 border border-voice-purple/20 hover:bg-white shadow-lg transition-all hover:scale-110 group"
             aria-label="Next quote"
           >
-            <ChevronRight className="w-6 h-6 text-voice-purple" />
+            <ChevronRight className="w-6 h-6 text-voice-purple group-hover:text-voice-purple-dark transition-colors" />
           </button>
           
-          {/* Quotes slideshow */}
-          <div className="relative bg-gradient-to-r from-voice-purple/5 to-blue-500/5 rounded-2xl overflow-hidden shadow-xl min-h-[400px] flex items-center">
-            <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
+          {/* Redesigned quotes slideshow with glass morphism */}
+          <div className="relative overflow-hidden rounded-2xl shadow-xl min-h-[450px] flex items-center">
+            {/* Glass background effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-voice-purple/5 to-blue-500/5"></div>
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
             
             <div className="relative z-10 w-full">
               <AnimatePresence mode="wait">
@@ -68,24 +70,31 @@ const StatsSection = () => {
                   index === activeIndex && (
                     <motion.div
                       key={index}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
+                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
                       transition={{ duration: 0.5 }}
-                      className="p-8 md:p-12"
+                      className="p-8 md:p-16"
                     >
-                      <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-                        {/* Logo/company side */}
+                      <div className="flex flex-col md:flex-row md:items-center gap-10 md:gap-16">
+                        {/* Logo/company side with enhanced design */}
                         <div className="md:w-1/3 flex flex-col items-center">
-                          <div className="bg-white rounded-xl p-6 shadow-md w-full max-w-[220px] h-[120px] flex items-center justify-center mb-4">
+                          <div className="bg-white rounded-xl p-6 shadow-lg w-full max-w-[220px] h-[120px] flex items-center justify-center mb-6 border border-gray-100 hover:border-voice-purple/20 transition-colors group">
                             {quote.logo.startsWith('http') ? (
-                              <img 
+                              <motion.img 
                                 src={quote.logo} 
                                 alt={`${quote.company} logo`} 
-                                className="max-h-16 max-w-full object-contain"
+                                className="max-h-16 max-w-full object-contain transition-all duration-300 group-hover:scale-110"
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                               />
                             ) : (
-                              <span className="text-2xl font-bold text-voice-purple">{quote.logo}</span>
+                              <motion.span 
+                                className="text-2xl font-bold text-voice-purple transition-all duration-300 group-hover:scale-110"
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                {quote.logo}
+                              </motion.span>
                             )}
                           </div>
                           <div className="text-center">
@@ -94,14 +103,19 @@ const StatsSection = () => {
                           </div>
                         </div>
                         
-                        {/* Quote content side */}
+                        {/* Quote content side with enhanced typography */}
                         <div className="md:w-2/3">
                           <div className="relative">
-                            <div className="absolute -top-6 -left-2 text-6xl text-voice-purple/20">"</div>
-                            <blockquote className="text-xl md:text-2xl text-gray-700 italic leading-relaxed pl-6 relative z-10">
+                            <div className="absolute -top-8 -left-2 text-7xl text-voice-purple/10 font-serif">"</div>
+                            <motion.blockquote 
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.3 }}
+                              className="text-xl md:text-2xl text-gray-700 italic leading-relaxed pl-6 relative z-10 font-light"
+                            >
                               {quote.quote}
-                            </blockquote>
-                            <div className="absolute -bottom-10 -right-2 text-6xl text-voice-purple/20">"</div>
+                            </motion.blockquote>
+                            <div className="absolute -bottom-14 -right-2 text-7xl text-voice-purple/10 font-serif">"</div>
                           </div>
                         </div>
                       </div>
@@ -112,16 +126,16 @@ const StatsSection = () => {
             </div>
           </div>
           
-          {/* Dot indicators */}
-          <div className="flex justify-center mt-8 space-x-2">
+          {/* Enhanced dot indicators */}
+          <div className="flex justify-center mt-10 space-x-2">
             {quotes.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
+                className={`transition-all ${
                   index === activeIndex 
-                    ? "bg-voice-purple w-8" 
-                    : "bg-gray-300 hover:bg-gray-400"
+                    ? "bg-voice-purple w-10 h-3 rounded-full shadow-md" 
+                    : "bg-gray-300 w-3 h-3 rounded-full hover:bg-gray-400"
                 }`}
                 aria-label={`Go to quote ${index + 1}`}
                 aria-current={index === activeIndex ? "true" : "false"}
@@ -131,9 +145,10 @@ const StatsSection = () => {
         </div>
       </div>
       
-      {/* Background decorative elements */}
-      <div className="absolute top-40 left-10 w-64 h-64 bg-gradient-to-r from-voice-purple/5 to-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-l from-voice-purple/10 to-blue-500/5 rounded-full blur-3xl"></div>
+      {/* Enhanced background decorative elements */}
+      <div className="absolute top-40 left-10 w-80 h-80 bg-gradient-to-r from-voice-purple/5 to-blue-500/10 rounded-full blur-3xl opacity-50"></div>
+      <div className="absolute -bottom-20 right-10 w-96 h-96 bg-gradient-to-l from-voice-purple/10 to-blue-500/5 rounded-full blur-3xl opacity-60"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-radial from-voice-purple/5 to-transparent rounded-full blur-3xl opacity-30"></div>
     </section>
   );
 };
