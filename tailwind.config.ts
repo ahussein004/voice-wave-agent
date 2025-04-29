@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -135,6 +134,11 @@ export default {
 					'0%, 100%': { opacity: '0.6', filter: 'blur(10px)' },
 					'50%': { opacity: '1', filter: 'blur(15px)' },
 				},
+				'audio-wave': {
+					'0%': { transform: 'scaleY(0.3)' },
+					'50%': { transform: 'scaleY(1)' },
+					'100%': { transform: 'scaleY(0.3)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -150,11 +154,13 @@ export default {
 				'shimmer': 'shimmer 2s infinite linear',
 				'ping-slow': 'ping-slow 2s ease-in-out infinite',
 				'glow-pulse': 'glow-pulse 4s ease-in-out infinite',
+				'audio-wave': 'audio-wave 1.2s ease-in-out infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'hero-pattern': 'linear-gradient(to bottom right, rgba(110, 89, 165, 0.8), rgba(26, 31, 44, 0.95))',
 				'shimmer-gradient': 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 100%)',
+				'dots-pattern': 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
 			}
 		}
 	},

@@ -64,6 +64,7 @@
   }
 }
 
+/* Existing Wave Animation */
 .wave-animation {
   position: relative;
   display: inline-block;
@@ -73,6 +74,20 @@
   margin: 0 1px;
 }
 
+/* New Audio Visualization */
+.wave-bar {
+  position: relative;
+  display: inline-block;
+  width: 3px;
+  height: 20px;
+  background: theme('colors.voice.purple.light');
+  margin: 0 1px;
+  border-radius: 1px;
+  animation: audio-wave 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+/* Keep existing wave animation classes */
 .wave-animation:nth-child(1) {
   animation: wave 1s infinite ease-in-out;
 }
@@ -89,6 +104,7 @@
   animation: wave 1s infinite ease-in-out 0.4s;
 }
 
+/* Keep the rest of the existing code */
 .number-counter {
   counter-reset: count var(--num-start);
   animation: counter 2s forwards;
@@ -112,14 +128,20 @@
   opacity: 0;
 }
 
-/* Add NEW ANIMATION styles for the interactive demo section */
-
+/* Existing animation styles */
 @keyframes wave {
   0% { transform: scaleY(1); }
   50% { transform: scaleY(0.5); }
   100% { transform: scaleY(1); }
 }
 
+@keyframes audio-wave {
+  0% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.3); }
+}
+
+/* Keep the rest of the existing keyframes */
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.05); opacity: 0.8; }
