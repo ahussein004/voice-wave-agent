@@ -16,9 +16,6 @@ const InteractiveDemoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const isMobile = useIsMobile();
 
-  // Get the current industry data
-  const currentIndustryData = getIndustryData(activeIndustry);
-
   const industries: Industry[] = ["restaurant", "car", "medical"];
 
   const handleNextIndustry = () => {
@@ -40,7 +37,7 @@ const InteractiveDemoSection = () => {
   };
 
   const getIndustryColor = () => {
-    return "bg-orange-500";
+    return "bg-voice-purple";
   };
 
   const getIndustryTextColor = () => {
@@ -52,7 +49,7 @@ const InteractiveDemoSection = () => {
       case "medical":
         return "text-[#0EA5E9]";
       default:
-        return "text-orange-500";
+        return "text-voice-purple";
     }
   };
 
@@ -68,10 +65,29 @@ const InteractiveDemoSection = () => {
         return "Voice Agent";
     }
   };
+  
+  const getSectionBackgroundColor = () => {
+    return "bg-hero-pattern";
+  };
+
+  const getHeadlineGradient = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "bg-gradient-to-r from-[#F97316] to-[#FDBA74] bg-clip-text text-transparent";
+      case "car":
+        return "bg-gradient-to-r from-[#84cc16] to-[#bef264] bg-clip-text text-transparent";
+      case "medical":
+        return "bg-gradient-to-r from-[#0EA5E9] to-[#7dd3fc] bg-clip-text text-transparent";
+      default:
+        return "text-gradient";
+    }
+  };
+
+  const industryData = getIndustryData(activeIndustry);
 
   return (
-    <section className="py-24 relative overflow-hidden transition-colors duration-700 bg-white">
-      <div className="absolute inset-0 bg-gradient-radial from-orange-500/5 via-transparent to-transparent opacity-30" />
+    <section className={`py-24 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`}>
+      <div className="absolute inset-0 bg-gradient-radial from-voice-purple/5 via-transparent to-transparent opacity-30" />
       
       <div className="container mx-auto px-4">
         <motion.div
@@ -80,13 +96,13 @@ const InteractiveDemoSection = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-voice-cream">
             Experience Your AI Voice Agent In Action
           </h2>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className="text-lg text-voice-cream/80 mb-4">
             See how our AI handles real-world scenarios, converts inquiries into bookings, and delivers exceptional customer service.
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+          <div className="flex items-center justify-center gap-2 text-sm text-voice-cream/70">
             <ChevronLeft className="w-4 h-4" />
             <span>Scroll through industries</span>
             <ChevronRight className="w-4 h-4" />
@@ -96,16 +112,16 @@ const InteractiveDemoSection = () => {
         <div className="relative max-w-3xl mx-auto">
           <button 
             onClick={handlePrevIndustry}
-            className="absolute left-0 lg:-left-16 top-32 z-10 p-4 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors hover:scale-110 group shadow-md"
+            className="absolute left-0 lg:-left-16 top-32 z-10 p-4 rounded-full bg-white/20 border border-voice-purple/20 hover:bg-white/30 transition-colors hover:scale-110 group shadow-md"
           >
-            <ChevronLeft className="w-8 h-8 text-gray-500 group-hover:text-orange-500 transition-colors" />
+            <ChevronLeft className="w-8 h-8 text-voice-cream group-hover:text-voice-purple-light transition-colors" />
           </button>
 
           <button 
             onClick={handleNextIndustry}
-            className="absolute right-0 lg:-right-16 top-32 z-10 p-4 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors hover:scale-110 group shadow-md"
+            className="absolute right-0 lg:-right-16 top-32 z-10 p-4 rounded-full bg-white/20 border border-voice-purple/20 hover:bg-white/30 transition-colors hover:scale-110 group shadow-md"
           >
-            <ChevronRight className="w-8 h-8 text-gray-500 group-hover:text-orange-500 transition-colors" />
+            <ChevronRight className="w-8 h-8 text-voice-cream group-hover:text-voice-purple-light transition-colors" />
           </button>
 
           <div className="space-y-12">
@@ -118,12 +134,12 @@ const InteractiveDemoSection = () => {
               transition={{ duration: 0.3 }}
               className={cn(
                 "py-3 px-6 rounded-full mx-auto max-w-max font-medium",
-                "bg-orange-100 shadow-lg border border-orange-200",
-                "text-gray-700"
+                "bg-white/20 shadow-lg border border-voice-purple/30 backdrop-blur-sm",
+                "text-voice-cream"
               )}
             >
               <div className="flex items-center gap-2">
-                {currentIndustryData.icon}
+                {industryData.icon}
                 <span>{getIndustryName()} Voice Agent</span>
               </div>
             </motion.div>
@@ -149,10 +165,10 @@ const InteractiveDemoSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-white/90 border border-gray-200 rounded-xl p-6 shadow-lg"
+              className="bg-white/10 border border-voice-purple/20 rounded-xl p-6 shadow-lg backdrop-blur-sm"
             >
               <IndustryAnalysis 
-                industryData={currentIndustryData}
+                industryData={industryData}
                 isScenarioOpen={true}
                 setIsScenarioOpen={() => {}}
                 getIndustryColor={getIndustryColor}
@@ -167,10 +183,10 @@ const InteractiveDemoSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-white/90 border border-gray-200 rounded-xl p-6 shadow-lg"
+              className="bg-white/10 border border-voice-purple/20 rounded-xl p-6 shadow-lg backdrop-blur-sm"
             >
-              <h3 className="text-xl font-semibold mb-4 inline-flex items-center text-gray-800">
-                <span className="w-2 h-2 bg-orange-500 rounded-full mr-2"></span>
+              <h3 className="text-xl font-semibold mb-4 inline-flex items-center text-voice-cream">
+                <span className="w-2 h-2 bg-voice-purple rounded-full mr-2"></span>
                 Call Analysis Summary
               </h3>
               <AnalysisSummaryCard />
