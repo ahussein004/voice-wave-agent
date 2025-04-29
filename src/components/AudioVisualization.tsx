@@ -19,6 +19,8 @@ const AudioVisualization = ({ isPlaying, color }: AudioVisualizationProps) => {
 
     // Create the visualization bars
     const barCount = 40;
+    const bars = [];
+    
     for (let i = 0; i < barCount; i++) {
       const bar = document.createElement('div');
       bar.className = 'wave-bar';
@@ -37,8 +39,11 @@ const AudioVisualization = ({ isPlaying, color }: AudioVisualizationProps) => {
       // Add slight delay based on position
       bar.style.animationDelay = `${i * 0.05}s`;
       
-      containerRef.current.appendChild(bar);
+      bars.push(bar);
     }
+    
+    // Batch append all bars for better performance
+    bars.forEach(bar => containerRef.current?.appendChild(bar));
 
     return () => {
       if (containerRef.current) {
@@ -58,9 +63,7 @@ const AudioVisualization = ({ isPlaying, color }: AudioVisualizationProps) => {
           opacity: isPlaying ? 1 : 0.5,
           transition: 'opacity 0.3s ease'
         }}
-      >
-        {/* Bars will be added here dynamically */}
-      </div>
+      />
     </div>
   );
 };
