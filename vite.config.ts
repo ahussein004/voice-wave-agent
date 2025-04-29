@@ -20,10 +20,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Ensure build optimization is configured
   build: {
     outDir: "dist",
     sourcemap: true,
     minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+      },
+    },
   }
 }));
