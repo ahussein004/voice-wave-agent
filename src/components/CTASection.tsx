@@ -1,17 +1,8 @@
 
 import React from "react";
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Shield, Clock, Building } from "lucide-react";
 import { motion } from "framer-motion";
-
-const industries = [
-  { label: "Restaurant", value: "restaurant" },
-  { label: "Car Dealership", value: "car" },
-  { label: "Medical Clinic", value: "medical" }
-];
 
 const CTASection = () => {
   return (
@@ -38,7 +29,7 @@ const CTASection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Form Section */}
+          {/* Calendly Section */}
           <motion.div 
             className="bg-voice-dark/50 p-8 rounded-xl border border-voice-purple/20 backdrop-blur-sm"
             initial={{ opacity: 0, x: -20 }}
@@ -46,61 +37,39 @@ const CTASection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <form className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Your name" className="bg-voice-dark/50" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="business">Business Name</Label>
-                  <Input id="business" placeholder="Company name" className="bg-voice-dark/50" />
-                </div>
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-semibold text-voice-cream mb-2">Schedule Your Free Demo</h3>
+                <p className="text-voice-cream/70">Select a convenient time for your personalized demonstration</p>
+              </div>
+              
+              <div className="aspect-video bg-voice-dark/30 rounded-lg border border-voice-purple/10">
+                <iframe 
+                  src="https://calendly.com/a-hu33ein/voice-ai-agency" 
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0" 
+                  title="Schedule a Demo with VoiceWaveAI"
+                  className="rounded-lg"
+                ></iframe>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="industry">Industry</Label>
-                <Select>
-                  <SelectTrigger className="bg-voice-dark/50">
-                    <SelectValue placeholder="Select your industry" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {industries.map((industry) => (
-                      <SelectItem key={industry.value} value={industry.value}>
-                        {industry.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="text-center">
+                <a 
+                  href="https://calendly.com/a-hu33ein/voice-ai-agency" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <Button 
+                    className="bg-voice-purple hover:bg-voice-purple-dark text-white text-lg py-6 px-8"
+                    size="lg"
+                  >
+                    Book My Free Demo
+                  </Button>
+                </a>
               </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@company.com" className="bg-voice-dark/50" />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone</Label>
-                <Input id="phone" type="tel" placeholder="Your phone number" className="bg-voice-dark/50" />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="contact-time">Preferred Contact Time</Label>
-                <Input 
-                  id="contact-time" 
-                  type="text" 
-                  placeholder="e.g. Weekday afternoons"
-                  className="bg-voice-dark/50"
-                />
-              </div>
-
-              <Button 
-                className="w-full bg-voice-purple hover:bg-voice-purple-dark text-white text-lg py-6"
-                size="lg"
-              >
-                Book My Free Demo
-              </Button>
-            </form>
+            </div>
           </motion.div>
 
           {/* Trust Indicators */}
