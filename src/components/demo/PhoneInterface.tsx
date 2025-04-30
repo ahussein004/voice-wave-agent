@@ -1,6 +1,6 @@
 
-import React from "react";
-import { Play, Pause } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Play, Pause, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import AudioVisualization from "@/components/AudioVisualization";
 import { motion } from "framer-motion";
@@ -18,6 +18,46 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   activeIndustry,
   getIndustryColor,
 }) => {
+  // Total duration in seconds (conversation length)
+  const totalDuration = 180;
+  const [elapsedTime, setElapsedTime] = useState(0);
+  
+  // Manage elapsed time when conversation is playing
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setElapsedTime(prev => {
+          if (prev >= totalDuration) {
+            if (interval) clearInterval(interval);
+            return 0;
+          }
+          return prev + 1;
+        });
+      }, 1000);
+    } else if (interval) {
+      clearInterval(interval);
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isPlaying]);
+  
+  // Reset elapsed time when conversation stops
+  useEffect(() => {
+    if (!isPlaying) {
+      setElapsedTime(0);
+    }
+  }, [isPlaying]);
+  
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
+
   const getPhoneGlowColor = () => {
     return "from-voice-purple/30 via-transparent to-transparent";
   };
@@ -113,7 +153,17 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
         <div className="p-4 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <div className={`text-sm font-medium ${getIndustryHeadlineText()}`}>{getIndustryTitle()}</div>
-            <div className="text-sm opacity-70">2:13</div>
+            <div className="flex items-center text-xs text-voice-cream/70">
+              {isPlaying && (
+                <>
+                  <Clock size={12} className="mr-1" />
+                  <span>{formatTime(elapsedTime)}</span>
+                </>
+              )}
+              {!isPlaying && (
+                <span className="text-sm opacity-70">2:13</span>
+              )}
+            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
@@ -182,6 +232,8 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
               <AudioVisualization 
                 isPlaying={isPlaying} 
                 color="#9b87f5"
+                duration={totalDuration}
+                elapsedTime={elapsedTime}
               />
               
               <button 

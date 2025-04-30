@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
-import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Volume2, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import AudioVisualization from "@/components/AudioVisualization";
@@ -19,7 +19,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   togglePlay,
 }) => {
   const [progress, setProgress] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const progressInterval = useRef<NodeJS.Timeout | null>(null);
+  
+  // Total duration in seconds (3 minutes)
+  const totalDuration = 180;
   
   // Simulate audio progress when playing
   useEffect(() => {
@@ -28,11 +32,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         setProgress((prev) => {
           if (prev >= 100) {
             togglePlay();
+            setElapsedTime(0);
             return 0;
           }
+          // Update elapsed time based on progress percentage
+          const newElapsed = (totalDuration * prev / 100) + 0.5;
+          setElapsedTime(newElapsed);
           return prev + 0.5;
         });
-      }, 100);
+      }, 1000);
     } else if (progressInterval.current) {
       clearInterval(progressInterval.current);
     }
@@ -46,7 +54,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   
   const formatTime = (progress: number) => {
     // Total duration is 3 minutes (180 seconds)
-    const totalSeconds = Math.floor((180 * progress) / 100);
+    const totalSeconds = Math.floor((totalDuration * progress) / 100);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -57,16 +65,27 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 shadow-lg w-full"
+      className="bg-white/10 backdrop-blur-md rounded-xl p-6 shadow-lg w-full"
     >
       <div className="flex flex-col space-y-4">
-        <div className="text-lg font-medium text-voice-cream">{title}</div>
-        
-        <div className="h-16 w-full relative">
-          <AudioVisualization isPlaying={isPlaying} color={color} />
+        <div className="flex items-center justify-between">
+          <div className="text-lg font-medium text-voice-cream">{title}</div>
+          <div className="flex items-center text-xs text-voice-cream/70">
+            <Clock size={14} className="mr-1" />
+            <span>{formatTime(progress)}</span>
+          </div>
         </div>
         
-        <div className="w-full bg-voice-purple/20 rounded-full h-1.5 mt-2">
+        <div className="h-16 w-full relative">
+          <AudioVisualization 
+            isPlaying={isPlaying} 
+            color={color} 
+            duration={totalDuration} 
+            elapsedTime={elapsedTime} 
+          />
+        </div>
+        
+        <div className="w-full bg-white/5 rounded-full h-1.5 mt-2">
           <div 
             className="h-full rounded-full transition-all duration-300 ease-linear"
             style={{ 
@@ -107,7 +126,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         
         <div className="flex items-center mt-2 text-voice-cream/70">
           <Volume2 size={16} className="mr-2" />
-          <div className="w-full bg-voice-purple/20 rounded-full h-1">
+          <div className="w-full bg-white/5 rounded-full h-1">
             <div 
               className="h-full rounded-full"
               style={{ 
