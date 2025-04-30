@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Play, Pause, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -183,6 +184,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
                     "w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-voice-purple/20 transition-transform hover:scale-105 mb-4",
                     "bg-gradient-to-r from-voice-purple to-voice-purple-light",
                   )}
+                  aria-label="Play audio"
                 >
                   <Play className="text-white ml-1" size={24} />
                 </button>
@@ -245,6 +247,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
                   "bg-gradient-to-r from-voice-purple to-voice-purple-light",
                   "shadow-lg shadow-voice-purple/20"
                 )}
+                aria-label="Pause audio"
               >
                 <Pause className="text-white" size={20} />
               </button>

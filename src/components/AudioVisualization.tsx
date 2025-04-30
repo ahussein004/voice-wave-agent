@@ -81,6 +81,7 @@ const AudioVisualization = ({
     // Play or pause based on isPlaying prop
     if (audioRef.current && audioUrl) {
       if (isPlaying) {
+        console.log("Attempting to play audio:", audioUrl);
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise.catch(error => {
@@ -88,9 +89,12 @@ const AudioVisualization = ({
           });
         }
       } else {
+        console.log("Pausing audio");
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
       }
+    } else if (isPlaying && !audioUrl) {
+      console.warn("Attempted to play audio but no audioUrl provided");
     }
 
     return () => {
