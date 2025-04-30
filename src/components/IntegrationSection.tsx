@@ -146,12 +146,12 @@ const IntegrationSection = () => {
                 feature={featureData.integration} 
                 activeFeature="integration"
                 content={
-                  <div className="bg-white rounded-xl p-6 border border-orange-200 shadow-lg">
+                  <div className="bg-white rounded-xl p-6 border border-orange-200 shadow-lg h-full flex flex-col">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <Database className="w-5 h-5 mr-2 text-orange-500" />
                       System Integration Flow
                     </h3>
-                    <div className="bg-white rounded-lg p-4 shadow-sm border border-orange-100">
+                    <div className="bg-white rounded-lg p-4 shadow-sm border border-orange-100 flex-grow flex items-center">
                       <IntegrationFlowchart />
                     </div>
                   </div>
@@ -373,12 +373,12 @@ const IntegrationSection = () => {
           
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/5 via-transparent to-voice-purple/5 blur-3xl opacity-30 rounded-full"></div>
-            <div className="relative bg-white border border-voice-purple/10 rounded-xl p-8 shadow-lg">
+            <div className="relative bg-white border border-voice-purple/10 rounded-xl p-8 shadow-lg h-full flex flex-col">
               <h4 className="text-lg font-semibold mb-6 flex items-center text-gray-800">
                 <MessageSquare className="w-5 h-5 mr-2 text-voice-purple" />
                 Integration Flow
               </h4>
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex-grow flex items-center">
                 <IntegrationFlowchart />
               </div>
             </div>
@@ -416,15 +416,15 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-white rounded-2xl p-6 shadow-md border border-gray-200"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch bg-white rounded-2xl p-6 shadow-md border border-gray-200"
     >
       {/* Left Side - Interactive Demo */}
-      <div>
+      <div className="h-full flex flex-col">
         {content}
       </div>
       
       {/* Right Side - Feature Description */}
-      <div className="space-y-8">
+      <div className="space-y-8 h-full flex flex-col">
         <div>
           <div className={cn(
             "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
@@ -466,7 +466,7 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
           </div>
         </div>
         
-        <div>
+        <div className="mt-auto">
           <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
             <div className="flex items-center mb-2">
               <Cloud className={cn("w-5 h-5 mr-2", feature.color)} />
