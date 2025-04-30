@@ -1,39 +1,33 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from "./ui/button";
 import { Headphones, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-
 const HeroSection = () => {
   const particlesRef = useRef<HTMLDivElement>(null);
-  
   useEffect(() => {
     if (!particlesRef.current) return;
-    
+
     // Create particles
     const container = particlesRef.current;
     const particleCount = 20;
-    
+
     // Clear existing particles
     container.innerHTML = '';
-    
+
     // Create new particles
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle animate-particle-flow';
-      
+
       // Randomize position and animation
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
       particle.style.animationDelay = `${Math.random() * 8}s`;
       particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
-      
       container.appendChild(particle);
     }
   }, []);
-  
-  return (
-    <section className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-16 px-4">
+  return <section className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center pt-16 px-4">
       {/* Enhanced background with animated gradient */}
       <div className="absolute inset-0 bg-hero-pattern animate-gradient-x"></div>
       
@@ -42,45 +36,53 @@ const HeroSection = () => {
       
       {/* Content container with improved layout */}
       <div className="container z-10 flex flex-col lg:flex-row items-center justify-between gap-12 pt-16">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col max-w-2xl"
-        >
-          <div className="inline-flex items-center bg-voice-purple/20 rounded-full px-3 py-1 mb-6 backdrop-blur-sm border border-voice-purple/30">
-            <span className="h-2 w-2 rounded-full bg-voice-purple-light animate-pulse mr-2"></span>
-            <span className="text-sm font-medium text-voice-cream/90">Industry-leading AI Voice Technology</span>
-          </div>
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8
+      }} className="flex flex-col max-w-2xl">
           
-          <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-balance"
-          >
+          
+          <motion.h1 initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} transition={{
+          delay: 0.3,
+          duration: 0.8
+        }} className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-balance">
             Never Miss Another Call With <span className="text-gradient relative">
               Industry-Leading AI Voice Agents
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-voice-purple-light to-transparent rounded-full"></span>
             </span>
           </motion.h1>
           
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg text-voice-cream/80 mb-8 max-w-xl"
-          >
+          <motion.p initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} transition={{
+          delay: 0.5,
+          duration: 0.8
+        }} className="text-lg text-voice-cream/80 mb-8 max-w-xl">
             Transform your customer service with 24/7 AI voice assistants that book appointments, 
             answer questions, and drive revenue while you sleep
           </motion.p>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 mb-8"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          delay: 0.7,
+          duration: 0.6
+        }} className="flex flex-col sm:flex-row gap-4 mb-8">
             <Button size="lg" className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium px-6 group relative overflow-hidden">
               <span className="relative z-10 flex items-center">
                 Book a Free Demo
@@ -93,33 +95,35 @@ const HeroSection = () => {
             </Button>
           </motion.div>
           
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            className="flex items-center space-x-4 text-sm text-voice-cream/60"
-          >
+          <motion.div initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} transition={{
+          delay: 0.9,
+          duration: 0.8
+        }} className="flex items-center space-x-4 text-sm text-voice-cream/60">
             <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div 
-                  key={i} 
-                  className="w-8 h-8 rounded-full bg-gray-800/80 backdrop-blur-sm border-2 border-voice-dark flex items-center justify-center shadow-lg"
-                  style={{ zIndex: 4-i }}
-                >
+              {[1, 2, 3, 4].map(i => <div key={i} className="w-8 h-8 rounded-full bg-gray-800/80 backdrop-blur-sm border-2 border-voice-dark flex items-center justify-center shadow-lg" style={{
+              zIndex: 4 - i
+            }}>
                   <span className="text-xs">👤</span>
-                </div>
-              ))}
+                </div>)}
             </div>
             <p className="text-voice-cream/70">Trusted by <span className="font-semibold text-voice-purple-light">2,400+</span> businesses</p>
           </motion.div>
         </motion.div>
         
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="relative h-[600px] w-full max-w-md"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        scale: 0.9
+      }} animate={{
+        opacity: 1,
+        scale: 1
+      }} transition={{
+        delay: 0.5,
+        duration: 0.8
+      }} className="relative h-[600px] w-full max-w-md">
           {/* Phone mockup with enhanced glow and animations */}
           <div className="absolute inset-0 flex items-center justify-center animate-float">
             <div className="phone-glow opacity-70"></div>
@@ -180,8 +184,12 @@ const HeroSection = () => {
             {/* Enhanced circular pulse animations */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="absolute w-[300px] h-[300px] border-2 border-voice-purple-light/30 rounded-full animate-ping opacity-25"></div>
-              <div className="absolute w-[350px] h-[350px] border border-voice-purple-light/20 rounded-full animate-ping opacity-15" style={{ animationDelay: '300ms' }}></div>
-              <div className="absolute w-[400px] h-[400px] border border-voice-purple-light/10 rounded-full animate-ping opacity-10" style={{ animationDelay: '600ms' }}></div>
+              <div className="absolute w-[350px] h-[350px] border border-voice-purple-light/20 rounded-full animate-ping opacity-15" style={{
+              animationDelay: '300ms'
+            }}></div>
+              <div className="absolute w-[400px] h-[400px] border border-voice-purple-light/10 rounded-full animate-ping opacity-10" style={{
+              animationDelay: '600ms'
+            }}></div>
             </div>
           </div>
         </motion.div>
@@ -189,19 +197,16 @@ const HeroSection = () => {
       
       {/* Badge for 24/7 support with improved styling */}
       <div className="absolute bottom-8 right-8 bg-voice-purple/30 backdrop-blur-sm py-2 px-5 rounded-full flex items-center border border-voice-purple/40 animate-pulse-slow shadow-lg">
-        <motion.span 
-          animate={{ 
-            opacity: [0.7, 1, 0.7],
-            scale: [0.98, 1, 0.98]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-sm font-medium text-voice-cream"
-        >
+        <motion.span animate={{
+        opacity: [0.7, 1, 0.7],
+        scale: [0.98, 1, 0.98]
+      }} transition={{
+        duration: 2,
+        repeat: Infinity
+      }} className="text-sm font-medium text-voice-cream">
           24/7 Multilingual Support
         </motion.span>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
