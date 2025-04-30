@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IntegrationFlowchart from "./IntegrationFlowchart";
-import { Phone, MessageSquare, Brain, Laptop, FileText, Database, Cloud, Mic, Link, Mail } from "lucide-react";
+import { Phone, MessageSquare, Brain, Laptop, FileText, Database, Cloud, Mic, Link, Mail, User, Clock } from "lucide-react";
 import AnalysisSummaryCard from "./AnalysisSummaryCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -170,30 +170,104 @@ const IntegrationSection = () => {
                   <div className="bg-white rounded-xl p-6 border border-blue-200 shadow-lg">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <MessageSquare className="w-5 h-5 mr-2 text-blue-500" />
-                      Follow-up Communication
+                      Human-AI Collaboration & Follow-up Communication
                     </h3>
                     
-                    <div className="space-y-4">
-                      {/* Email Preview */}
-                      <div className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="text-sm text-gray-500">To: samantha@example.com</div>
-                          <div className="text-sm text-gray-500">12:42 PM</div>
+                    <div className="space-y-6">
+                      {/* Email - Human Task Assignment Section */}
+                      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+                        <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <Mail className="w-4 h-4 text-blue-600" />
+                              <h4 className="text-sm font-medium text-gray-800">Email Task Assignment to Staff</h4>
+                            </div>
+                            <div className="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded-full">Human Handoff</div>
+                          </div>
                         </div>
-                        <div className="text-sm font-medium mb-1 text-gray-800">Appointment Confirmation: May 2, 2:00 PM</div>
-                        <div className="text-xs text-gray-600">
-                          Hi Samantha, this is a confirmation of your appointment rescheduled for May 2 at 2:00 PM. 
-                          Please reply to confirm or call us if you need to make any changes.
+                        <div className="p-4">
+                          <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center space-x-2">
+                                <User className="w-4 h-4 text-gray-500" />
+                                <div className="text-sm text-gray-500">To: dr.smith@clinic.com</div>
+                              </div>
+                              <div className="text-xs text-gray-500 flex items-center">
+                                <Clock className="w-3 h-3 mr-1" />
+                                12:42 PM
+                              </div>
+                            </div>
+                            <div className="flex space-x-2 items-center mb-1">
+                              <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-xs font-medium">High Priority</span>
+                              <div className="text-sm font-medium text-gray-800">Patient Follow-up Required: Samantha Johnson</div>
+                            </div>
+                            <div className="text-xs text-gray-600 mb-3">
+                              <p>Dear Dr. Smith,</p>
+                              <p className="mt-1">Samantha Johnson called today regarding ongoing tooth pain. Her rescheduled appointment is set for May 2 at 2:00 PM, but she mentioned increasing discomfort.</p>
+                              <p className="mt-1">AI assessment indicates potential need for earlier intervention. Patient history and call transcript attached.</p>
+                            </div>
+                            <div className="flex items-center justify-between text-xs mt-2">
+                              <div className="flex space-x-3">
+                                <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Review Details</button>
+                                <button className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">Call Patient</button>
+                              </div>
+                              <div className="text-gray-500">Automatically assigned based on patient history</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       
-                      {/* SMS Preview */}
-                      <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                        <div className="flex justify-end mb-1">
-                          <div className="text-xs text-gray-500">12:43 PM</div>
+                      {/* SMS Follow-up Preview - Clearly labeled */}
+                      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+                        <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <MessageSquare className="w-4 h-4 text-green-600" />
+                              <h4 className="text-sm font-medium text-gray-800">Automated SMS Follow-ups</h4>
+                            </div>
+                            <div className="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">Automated</div>
+                          </div>
                         </div>
-                        <div className="bg-blue-500 text-white p-2 rounded-lg text-sm max-w-xs ml-auto">
-                          Your appointment is confirmed for May 2 at 2:00 PM. Reply YES to confirm or call (555) 123-4567 to reschedule.
+                        <div className="p-4 bg-gray-50">
+                          <div className="flex justify-between items-center mb-2">
+                            <div className="text-xs font-medium text-gray-500">2 Messages in Sequence</div>
+                            <div className="text-xs text-gray-500">Patient: +1 (555) 123-4567</div>
+                          </div>
+                          
+                          {/* Initial confirmation SMS */}
+                          <div className="flex flex-col space-y-3">
+                            <div className="flex items-start space-x-2">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                <MessageSquare className="w-4 h-4 text-blue-500" />
+                              </div>
+                              <div className="bg-blue-500 text-white px-4 py-3 rounded-lg text-sm max-w-sm">
+                                <span className="block text-xs text-blue-100 mb-1">Sent: Immediately after call</span>
+                                Your appointment is confirmed for May 2 at 2:00 PM with Dr. Smith. Reply YES to confirm or call (555) 123-4567 to reschedule.
+                              </div>
+                            </div>
+                            
+                            {/* Reminder SMS */}
+                            <div className="flex items-start space-x-2">
+                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                <Clock className="w-4 h-4 text-blue-500" />
+                              </div>
+                              <div className="bg-blue-500 text-white px-4 py-3 rounded-lg text-sm max-w-sm">
+                                <span className="block text-xs text-blue-100 mb-1">Scheduled: 24h before appointment</span>
+                                Reminder: Your dental appointment is tomorrow, May 2 at 2:00 PM. Please arrive 15 minutes early to complete paperwork. Reply INFO for directions.
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="mt-4 bg-green-50 border border-green-100 rounded-lg p-3">
+                            <div className="text-xs text-green-700">
+                              <p className="font-medium mb-1">SMS Follow-up Benefits:</p>
+                              <ul className="list-disc pl-4 space-y-1">
+                                <li>93% of SMS messages are read within 3 minutes</li>
+                                <li>Reduces appointment no-shows by up to 45%</li>
+                                <li>Automated confirmations and reminders with no staff effort</li>
+                              </ul>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
