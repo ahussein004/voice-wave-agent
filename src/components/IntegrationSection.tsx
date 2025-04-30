@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -162,132 +163,163 @@ const IntegrationSection = () => {
               value="followup" 
               className="mt-0 focus-visible:outline-none focus-visible:ring-0"
             >
-              <FeatureDisplay 
-                feature={featureData.followup} 
-                activeFeature="followup"
-                content={
-                  <div className="bg-white rounded-xl p-6 border border-blue-200 shadow-lg">
-                    <h3 className="text-lg font-medium text-gray-800 mb-6 flex items-center">
-                      <Mail className="w-5 h-5 mr-2 text-blue-500" />
-                      Human-AI Collaboration & Automated Follow-ups
-                    </h3>
+              <motion.div
+                key="followup"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 gap-8 bg-white rounded-2xl p-6 shadow-md border border-gray-200"
+              >
+                {/* Top Section: Automated Follow-ups Overview */}
+                <div className="bg-white rounded-xl p-6 border border-blue-200 shadow-lg">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-6 h-6 text-blue-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-blue-600 mb-2">Human-AI Collaboration & Automated Follow-ups</h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        Our platform enhances customer experience through AI-powered follow-ups and optimizes 
+                        workflow by delegating tasks to your staff when human expertise is required. The dual-channel 
+                        approach ensures nothing falls through the cracks.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                      <div className="flex items-center gap-2">
+                        <Mail className="h-5 w-5 text-blue-600" />
+                        <h4 className="font-medium text-blue-800">Email Task Delegation</h4>
+                      </div>
+                      <p className="mt-2 text-sm text-gray-700">Tasks requiring human expertise are automatically assigned to appropriate staff members via email for further action.</p>
+                    </div>
                     
-                    <div className="grid grid-cols-1 gap-8">
-                      {/* Email - Human Task Assignment Section - Clearly labeled */}
-                      <div className="bg-white rounded-lg shadow-md border-l-4 border-blue-600 border-t border-r border-b border-gray-200 overflow-hidden">
-                        <div className="bg-blue-50 px-6 py-4 border-b border-blue-100">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
-                              <Mail className="w-5 h-5 text-blue-600" />
-                              <h4 className="text-base font-semibold text-gray-800">Email Task Delegation to Staff</h4>
-                            </div>
-                            <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Human Handoff</div>
-                          </div>
-                          <p className="mt-2 text-sm text-gray-600">
-                            Tasks requiring human expertise are automatically assigned to appropriate staff members
-                          </p>
+                    <div className="bg-green-50 p-4 rounded-lg border border-green-100">
+                      <div className="flex items-center gap-2">
+                        <MessageSquare className="h-5 w-5 text-green-600" />
+                        <h4 className="font-medium text-green-800">SMS Customer Follow-ups</h4>
+                      </div>
+                      <p className="mt-2 text-sm text-gray-700">Automated SMS messages keep customers informed with confirmations, reminders, and follow-up communications.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Bottom Section: Email and SMS side by side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Email - Human Task Assignment Section - Left side */}
+                  <div className="bg-white rounded-lg shadow-md border-l-4 border-blue-600 border-t border-r border-b border-gray-200 overflow-hidden">
+                    <div className="bg-blue-50 px-6 py-4 border-b border-blue-100">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <Mail className="w-5 h-5 text-blue-600" />
+                          <h4 className="text-base font-semibold text-gray-800">Email Task Delegation to Staff</h4>
                         </div>
-                        
-                        <div className="p-6">
-                          <div className="border border-gray-200 rounded-lg p-5 bg-white">
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="flex items-center space-x-2">
-                                <User className="w-5 h-5 text-gray-500" />
-                                <div className="text-sm font-medium text-gray-700">To: dr.smith@clinic.com</div>
-                              </div>
-                              <div className="text-xs text-gray-500 flex items-center">
-                                <Clock className="w-3 h-3 mr-1" />
-                                12:42 PM
-                              </div>
-                            </div>
-                            <div className="flex space-x-2 items-center mb-2">
-                              <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-xs font-medium">High Priority</span>
-                              <div className="text-sm font-medium text-gray-800">Patient Follow-up Required: Samantha Johnson</div>
-                            </div>
-                            <div className="text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                              <p>Dear Dr. Smith,</p>
-                              <p className="mt-2">Samantha Johnson called today regarding ongoing tooth pain. Her rescheduled appointment is set for May 2 at 2:00 PM, but she mentioned increasing discomfort.</p>
-                              <p className="mt-2">AI assessment indicates potential need for earlier intervention. Patient history and call transcript attached.</p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div className="flex space-x-3">
-                                <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">Review Details</button>
-                                <button className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm">Call Patient</button>
-                              </div>
-                            </div>
+                        <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Human Handoff</div>
+                      </div>
+                      <p className="mt-2 text-sm text-gray-600">
+                        Tasks requiring human expertise are automatically assigned to appropriate staff members
+                      </p>
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="border border-gray-200 rounded-lg p-5 bg-white">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center space-x-2">
+                            <User className="w-5 h-5 text-gray-500" />
+                            <div className="text-sm font-medium text-gray-700">To: dr.smith@clinic.com</div>
                           </div>
-                          
-                          <div className="mt-4 text-sm">
-                            <h5 className="font-medium text-blue-700 mb-2">Benefits of AI-Human collaboration:</h5>
-                            <ul className="list-disc pl-5 space-y-1 text-gray-600">
-                              <li>Assigns tasks to appropriate staff based on skills and availability</li>
-                              <li>Includes full context and call transcript with key points highlighted</li>
-                              <li>Prioritizes tasks based on urgency and business rules</li>
-                            </ul>
+                          <div className="text-xs text-gray-500 flex items-center">
+                            <Clock className="w-3 h-3 mr-1" />
+                            12:42 PM
+                          </div>
+                        </div>
+                        <div className="flex space-x-2 items-center mb-2">
+                          <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-xs font-medium">High Priority</span>
+                          <div className="text-sm font-medium text-gray-800">Patient Follow-up Required: Samantha Johnson</div>
+                        </div>
+                        <div className="text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                          <p>Dear Dr. Smith,</p>
+                          <p className="mt-2">Samantha Johnson called today regarding ongoing tooth pain. Her rescheduled appointment is set for May 2 at 2:00 PM, but she mentioned increasing discomfort.</p>
+                          <p className="mt-2">AI assessment indicates potential need for earlier intervention. Patient history and call transcript attached.</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex space-x-3">
+                            <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">Review Details</button>
+                            <button className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm">Call Patient</button>
                           </div>
                         </div>
                       </div>
                       
-                      {/* SMS Follow-up Preview - Clearly labeled */}
-                      <div className="bg-white rounded-lg shadow-md border-l-4 border-green-500 border-t border-r border-b border-gray-200 overflow-hidden">
-                        <div className="bg-green-50 px-6 py-4 border-b border-green-100">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
-                              <MessageSquare className="w-5 h-5 text-green-600" />
-                              <h4 className="text-base font-semibold text-gray-800">Automated SMS Follow-ups to Customers</h4>
-                            </div>
-                            <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Fully Automated</div>
-                          </div>
-                          <p className="mt-2 text-sm text-gray-600">
-                            Timely confirmation and reminder texts sent automatically based on conversation content
-                          </p>
-                        </div>
-                        
-                        <div className="p-6 bg-gray-50">
-                          {/* SMS follow-up examples */}
-                          <div className="flex flex-col space-y-4">
-                            <div className="flex items-start space-x-3">
-                              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
-                                <MessageSquare className="w-5 h-5 text-green-600" />
-                              </div>
-                              <div className="bg-green-600 text-white px-5 py-3 rounded-lg text-sm max-w-md shadow-sm">
-                                <div className="flex justify-between items-center mb-1 pb-1 border-b border-green-500">
-                                  <span className="text-xs text-green-100">Automated Confirmation</span>
-                                  <span className="text-xs text-green-200">Sent immediately after call</span>
-                                </div>
-                                Your appointment is confirmed for May 2 at 2:00 PM with Dr. Smith. Reply YES to confirm or call (555) 123-4567 to reschedule.
-                              </div>
-                            </div>
-                            
-                            {/* Reminder SMS */}
-                            <div className="flex items-start space-x-3">
-                              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
-                                <Clock className="w-5 h-5 text-green-600" />
-                              </div>
-                              <div className="bg-green-600 text-white px-5 py-3 rounded-lg text-sm max-w-md shadow-sm">
-                                <div className="flex justify-between items-center mb-1 pb-1 border-b border-green-500">
-                                  <span className="text-xs text-green-100">Automated Reminder</span>
-                                  <span className="text-xs text-green-200">Sent 24h before appointment</span>
-                                </div>
-                                Reminder: Your dental appointment is tomorrow, May 2 at 2:00 PM. Please arrive 15 minutes early to complete paperwork. Reply INFO for directions.
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="mt-5 text-sm">
-                            <h5 className="font-medium text-green-700 mb-2">Why SMS automation works:</h5>
-                            <ul className="list-disc pl-5 space-y-1 text-gray-600">
-                              <li>93% of SMS messages are read within 3 minutes</li>
-                              <li>Reduces appointment no-shows by up to 45%</li>
-                              <li>No staff effort required for routine communications</li>
-                            </ul>
-                          </div>
-                        </div>
+                      <div className="mt-4 text-sm">
+                        <h5 className="font-medium text-blue-700 mb-2">Benefits of AI-Human collaboration:</h5>
+                        <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                          <li>Assigns tasks to appropriate staff based on skills and availability</li>
+                          <li>Includes full context and call transcript with key points highlighted</li>
+                          <li>Prioritizes tasks based on urgency and business rules</li>
+                        </ul>
                       </div>
                     </div>
                   </div>
-                }
-              />
+                  
+                  {/* SMS Follow-up Preview - Right side */}
+                  <div className="bg-white rounded-lg shadow-md border-l-4 border-green-500 border-t border-r border-b border-gray-200 overflow-hidden">
+                    <div className="bg-green-50 px-6 py-4 border-b border-green-100">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <MessageSquare className="w-5 h-5 text-green-600" />
+                          <h4 className="text-base font-semibold text-gray-800">Automated SMS Follow-ups to Customers</h4>
+                        </div>
+                        <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Fully Automated</div>
+                      </div>
+                      <p className="mt-2 text-sm text-gray-600">
+                        Timely confirmation and reminder texts sent automatically based on conversation content
+                      </p>
+                    </div>
+                    
+                    <div className="p-6 bg-gray-50">
+                      {/* SMS follow-up examples */}
+                      <div className="flex flex-col space-y-4">
+                        <div className="flex items-start space-x-3">
+                          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                            <MessageSquare className="w-5 h-5 text-green-600" />
+                          </div>
+                          <div className="bg-green-600 text-white px-5 py-3 rounded-lg text-sm max-w-md shadow-sm">
+                            <div className="flex justify-between items-center mb-1 pb-1 border-b border-green-500">
+                              <span className="text-xs text-green-100">Automated Confirmation</span>
+                              <span className="text-xs text-green-200">Sent immediately after call</span>
+                            </div>
+                            Your appointment is confirmed for May 2 at 2:00 PM with Dr. Smith. Reply YES to confirm or call (555) 123-4567 to reschedule.
+                          </div>
+                        </div>
+                        
+                        {/* Reminder SMS */}
+                        <div className="flex items-start space-x-3">
+                          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                            <Clock className="w-5 h-5 text-green-600" />
+                          </div>
+                          <div className="bg-green-600 text-white px-5 py-3 rounded-lg text-sm max-w-md shadow-sm">
+                            <div className="flex justify-between items-center mb-1 pb-1 border-b border-green-500">
+                              <span className="text-xs text-green-100">Automated Reminder</span>
+                              <span className="text-xs text-green-200">Sent 24h before appointment</span>
+                            </div>
+                            Reminder: Your dental appointment is tomorrow, May 2 at 2:00 PM. Please arrive 15 minutes early to complete paperwork. Reply INFO for directions.
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-5 text-sm">
+                        <h5 className="font-medium text-green-700 mb-2">Why SMS automation works:</h5>
+                        <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                          <li>93% of SMS messages are read within 3 minutes</li>
+                          <li>Reduces appointment no-shows by up to 45%</li>
+                          <li>No staff effort required for routine communications</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </TabsContent>
           </div>
         </Tabs>
