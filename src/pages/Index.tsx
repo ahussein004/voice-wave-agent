@@ -39,6 +39,28 @@ const Index = () => {
       document.removeEventListener('click', handleAnchorClick);
     };
   }, []);
+  
+  // Scroll to section on page load if hash is present in URL
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const element = document.querySelector(hash);
+      
+      if (element) {
+        setTimeout(() => {
+          // Add offset to account for fixed navbar
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-voice-dark text-voice-cream overflow-x-hidden">
