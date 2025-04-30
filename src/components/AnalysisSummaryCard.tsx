@@ -21,7 +21,7 @@ const AnalysisSummaryCard = () => {
       
       {/* Patient inquiry card */}
       <Card className="shadow-sm mb-5 flex-shrink-0">
-        <div className="p-4 bg-sky-50">
+        <div className="p-4 bg-sky-50 rounded-md">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <User className="h-4 w-4 text-gray-700" />
@@ -32,7 +32,7 @@ const AnalysisSummaryCard = () => {
             </span>
           </div>
           
-          <p className="text-sm text-gray-600 bg-white p-3 rounded-lg">
+          <p className="text-sm text-gray-600 bg-white p-3 rounded-lg border-0">
             "I've been having stomach pain since yesterday, and I'd like to schedule an appointment with Dr. Smith as soon as possible."
           </p>
         </div>
@@ -41,26 +41,26 @@ const AnalysisSummaryCard = () => {
       {/* Analysis content - reorganized for better readability */}
       <div className="space-y-5 flex-grow">
         {/* Key Entities section */}
-        <div className="p-4 bg-gray-50 rounded-lg">
+        <div className="p-4 bg-gray-50 rounded-lg border-0">
           <div className="flex items-center gap-2 mb-3">
             <MessageSquare className="h-4 w-4 text-sky-600" />
             <h4 className="text-sm font-medium text-gray-800">Key Health Concerns</h4>
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-white text-sky-600 text-xs px-3 py-1.5 rounded-full shadow-sm">
+            <span className="bg-white text-sky-600 text-xs px-3 py-1.5 rounded-full shadow-sm border-0">
               stomach pain
             </span>
-            <span className="bg-white text-amber-600 text-xs px-3 py-1.5 rounded-full shadow-sm">
+            <span className="bg-white text-amber-600 text-xs px-3 py-1.5 rounded-full shadow-sm border-0">
               urgent care
             </span>
-            <span className="bg-white text-blue-600 text-xs px-3 py-1.5 rounded-full shadow-sm">
+            <span className="bg-white text-blue-600 text-xs px-3 py-1.5 rounded-full shadow-sm border-0">
               Dr. Smith
             </span>
           </div>
         </div>
         
         {/* Clinical Actions section - Made bigger */}
-        <div className="p-6 bg-sky-50 rounded-lg">
+        <div className="p-6 bg-sky-50 rounded-lg border-0">
           <div className="flex items-center gap-2 mb-4">
             <CheckCircle className="h-5 w-5 text-sky-600" />
             <h4 className="text-base font-medium text-gray-800">Clinical Actions</h4>
