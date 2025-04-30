@@ -37,26 +37,23 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
         setElapsedTime(prev => {
           if (prev >= totalDuration) {
             if (interval) clearInterval(interval);
+            togglePlay(); // Stop playing when reaching the end
             return 0;
           }
           return prev + 1;
         });
       }, 1000);
-    } else if (interval) {
-      clearInterval(interval);
     }
     
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPlaying]);
+  }, [isPlaying, togglePlay]);
   
-  // Reset elapsed time when conversation stops
+  // Reset elapsed time when switching industries
   useEffect(() => {
-    if (!isPlaying) {
-      setElapsedTime(0);
-    }
-  }, [isPlaying]);
+    setElapsedTime(0);
+  }, [activeIndustry]);
   
   const getPhoneGlowColor = () => {
     return "from-voice-purple/30 via-transparent to-transparent";
@@ -82,6 +79,8 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   const messages = getConversationMessages(activeIndustry);
   const industryTitle = getIndustryTitle(activeIndustry);
   const ctaText = getCtaText(activeIndustry);
+  
+  console.log("PhoneInterface rendering:", { isPlaying, audioUrl, activeIndustry });
   
   return (
     <motion.div 

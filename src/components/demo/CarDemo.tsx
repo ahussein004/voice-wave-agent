@@ -10,16 +10,17 @@ interface CarDemoProps {
   togglePlay: () => void;
   getIndustryColor: () => string;
   getHeadlineGradient: () => string;
+  audioUrl?: string;
 }
 
 const CarDemo = ({ 
   isPlaying, 
   togglePlay, 
   getIndustryColor,
-  getHeadlineGradient 
+  getHeadlineGradient,
+  audioUrl
 }: CarDemoProps) => {
   const colorHex = "#84cc16"; // Green color for car dealership
-  const audioUrl = "https://storage.vapi.ai/61d1e56e-3fc8-405d-9355-f883eda67f5c-1745421414857-f3b21f5b-1d68-430a-af01-7bc5546a6b74-mono.wav";
   
   return (
     <motion.div

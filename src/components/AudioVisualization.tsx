@@ -20,7 +20,7 @@ const AudioVisualization = ({
   audioUrl
 }: AudioVisualizationProps) => {
   // Use the audio player hook to handle audio playback
-  useAudioPlayer({ isPlaying, audioUrl });
+  const { audioRef } = useAudioPlayer({ isPlaying, audioUrl });
   
   console.log("AudioVisualization render:", { isPlaying, audioUrl, elapsedTime });
 

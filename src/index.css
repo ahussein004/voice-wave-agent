@@ -111,6 +111,11 @@
   animation-duration: 1.8s;
 }
 
+/* Ensure we can see the playing state clearly */
+.wave-bar.paused {
+  animation-play-state: paused;
+}
+
 /* Keep the rest of the existing CSS */
 .number-counter {
   counter-reset: count var(--num-start);
@@ -163,4 +168,14 @@
   transition: stroke-dashoffset 0.35s;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+}
+
+/* Hover effect for buttons */
+button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Fix for Navbar background */
+.bg-slate-50 {
+  background-color: transparent !important;
 }

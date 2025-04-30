@@ -25,8 +25,12 @@ const InteractiveDemoSection = () => {
     getHeadlineGradient 
   } = useIndustryUI(activeIndustry);
 
-  // Disable auto-scrolling completely - only move when user interacts
-  // We're removing the auto-scroll effect that was previously here
+  // Handle industry change - ensure audio stops when changing industries
+  useEffect(() => {
+    if (isPlaying) {
+      setIsPlaying(false);
+    }
+  }, [activeIndustry]);
 
   const handleNextIndustry = () => {
     const nextIndex = (currentIndex + 1) % industries.length;
@@ -46,8 +50,15 @@ const InteractiveDemoSection = () => {
 
   const togglePlay = () => {
     const newPlayState = !isPlaying;
-    console.log(`Toggling play state to: ${newPlayState ? "playing" : "paused"}`);
+    console.log(`Toggling play state to: ${newPlayState ? "playing" : "paused"} for ${activeIndustry}`);
     setIsPlaying(newPlayState);
+  };
+
+  // Audio URLs for each industry
+  const audioUrls = {
+    medical: "https://storage.vapi.ai/1ffe8b56-0b12-4896-99d3-4e97a0b66f5f-1745385676949-4fa0a8aa-4656-48e3-b0e3-814328c2452a-mono.wav",
+    restaurant: "https://storage.vapi.ai/e7159544-37eb-4735-b708-51cc3e425e16-1745429620869-35dd65c1-6cad-4407-829f-6879e8f8cdc9-mono.wav",
+    car: "https://storage.vapi.ai/61d1e56e-3fc8-405d-9355-f883eda67f5c-1745421414857-f3b21f5b-1d68-430a-af01-7bc5546a6b74-mono.wav"
   };
 
   return (
@@ -74,6 +85,7 @@ const InteractiveDemoSection = () => {
             togglePlay={togglePlay}
             getIndustryColor={getIndustryColor}
             getHeadlineGradient={getHeadlineGradient}
+            audioUrl={audioUrls.restaurant}
           />
         )}
 
@@ -83,6 +95,7 @@ const InteractiveDemoSection = () => {
             togglePlay={togglePlay}
             getIndustryColor={getIndustryColor}
             getHeadlineGradient={getHeadlineGradient}
+            audioUrl={audioUrls.car}
           />
         )}
 
@@ -92,6 +105,7 @@ const InteractiveDemoSection = () => {
             togglePlay={togglePlay}
             getIndustryColor={getIndustryColor}
             getHeadlineGradient={getHeadlineGradient}
+            audioUrl={audioUrls.medical}
           />
         )}
 

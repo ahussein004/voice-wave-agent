@@ -34,6 +34,15 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
             .then(() => console.log("Audio playback started successfully"))
             .catch(error => {
               console.error("Audio playback error:", error);
+              // Auto-retry once with user interaction simulation
+              document.addEventListener('click', function audioPlayHandler() {
+                if (audioRef.current) {
+                  audioRef.current.play()
+                    .then(() => console.log("Audio started after user interaction"))
+                    .catch(err => console.error("Still couldn't play audio:", err));
+                }
+                document.removeEventListener('click', audioPlayHandler);
+              }, { once: true });
             });
         }
       } else {

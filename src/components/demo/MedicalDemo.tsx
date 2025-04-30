@@ -10,16 +10,17 @@ interface MedicalDemoProps {
   togglePlay: () => void;
   getIndustryColor: () => string;
   getHeadlineGradient: () => string;
+  audioUrl?: string;
 }
 
 const MedicalDemo = ({ 
   isPlaying, 
   togglePlay, 
   getIndustryColor,
-  getHeadlineGradient 
+  getHeadlineGradient,
+  audioUrl
 }: MedicalDemoProps) => {
   const colorHex = "#0EA5E9"; // Blue color for medical
-  const audioUrl = "https://storage.vapi.ai/1ffe8b56-0b12-4896-99d3-4e97a0b66f5f-1745385676949-4fa0a8aa-4656-48e3-b0e3-814328c2452a-mono.wav";
   
   return (
     <motion.div

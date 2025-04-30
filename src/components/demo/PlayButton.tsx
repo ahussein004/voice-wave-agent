@@ -24,6 +24,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ togglePlay, text }) => {
         className={cn(
           "w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-voice-purple/20 transition-transform hover:scale-105 mb-4",
           "bg-gradient-to-r from-voice-purple to-voice-purple-light",
+          "focus:outline-none focus:ring-2 focus:ring-voice-purple-light/50" // Added focus styles
         )}
         aria-label="Play audio"
       >
