@@ -34,7 +34,7 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
             .then(() => console.log("Audio playback started successfully"))
             .catch(error => {
               console.error("Audio playback error:", error);
-              // Auto-retry once with user interaction simulation
+              // Auto-retry once with user interaction emulation
               document.addEventListener('click', function audioPlayHandler() {
                 if (audioRef.current) {
                   audioRef.current.play()
@@ -45,7 +45,7 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
               }, { once: true });
             });
         }
-      } else {
+      } else if (audioRef.current) {
         console.log("Pausing audio");
         audioRef.current.pause();
       }

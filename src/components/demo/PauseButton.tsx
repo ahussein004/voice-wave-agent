@@ -13,7 +13,7 @@ const PauseButton: React.FC<PauseButtonProps> = ({ togglePlay }) => {
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Pause button clicked");
+        console.log("Pause button clicked - should toggle to paused state");
         togglePlay();
       }}
       className={cn(

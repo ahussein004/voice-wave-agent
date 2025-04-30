@@ -30,6 +30,7 @@ const InteractiveDemoSection = () => {
     if (isPlaying) {
       setIsPlaying(false);
     }
+    console.log("Industry changed to:", activeIndustry);
   }, [activeIndustry]);
 
   const handleNextIndustry = () => {
@@ -60,6 +61,12 @@ const InteractiveDemoSection = () => {
     restaurant: "https://storage.vapi.ai/e7159544-37eb-4735-b708-51cc3e425e16-1745429620869-35dd65c1-6cad-4407-829f-6879e8f8cdc9-mono.wav",
     car: "https://storage.vapi.ai/61d1e56e-3fc8-405d-9355-f883eda67f5c-1745421414857-f3b21f5b-1d68-430a-af01-7bc5546a6b74-mono.wav"
   };
+
+  useEffect(() => {
+    // Debug active industry and audio URL
+    console.log("Current active industry:", activeIndustry);
+    console.log("Current audio URL:", audioUrls[activeIndustry]);
+  }, [activeIndustry, isPlaying]);
 
   return (
     <section className={`py-24 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`} id="demo-section">

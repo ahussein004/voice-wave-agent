@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import VisualizationBars from './visualization/VisualizationBars';
 import AudioProgressBar from './visualization/AudioProgressBar';
 import useAudioPlayer from '@/hooks/useAudioPlayer';
@@ -22,7 +22,19 @@ const AudioVisualization = ({
   // Use the audio player hook to handle audio playback
   const { audioRef } = useAudioPlayer({ isPlaying, audioUrl });
   
-  console.log("AudioVisualization render:", { isPlaying, audioUrl, elapsedTime });
+  useEffect(() => {
+    console.log("AudioVisualization updated:", { isPlaying, audioUrl, elapsedTime });
+    
+    // Debug audio element status
+    if (audioRef.current) {
+      console.log("Audio element state:", {
+        paused: audioRef.current.paused,
+        currentTime: audioRef.current.currentTime,
+        src: audioRef.current.src,
+        readyState: audioRef.current.readyState
+      });
+    }
+  }, [isPlaying, audioUrl, elapsedTime, audioRef]);
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center">
