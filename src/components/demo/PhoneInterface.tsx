@@ -66,10 +66,10 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="relative"
+      className="relative h-full flex flex-col"
     >
-      <div className="bg-gray-900/50 backdrop-blur-xl rounded-xl p-6 shadow-lg">
-        <div className="p-4">
+      <div className="bg-gray-900/50 backdrop-blur-xl rounded-xl p-6 shadow-lg h-full flex flex-col">
+        <div className="p-4 flex-1 flex flex-col">
           <PhoneHeader 
             title={industryTitle}
             titleClassName={getIndustryHeadlineText(activeIndustry)}
@@ -77,11 +77,12 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             elapsedTime={elapsedTime}
           />
 
-          <div className="overflow-y-auto mb-4 text-left text-sm space-y-4">
+          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
             {!isPlaying && (
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                className="h-full flex items-center justify-center"
               >
                 <PlayButton togglePlay={togglePlay} text={ctaText} />
               </motion.div>

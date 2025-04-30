@@ -29,9 +29,9 @@ const CarDemo = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      className="grid md:grid-cols-2 gap-8 items-center mb-24"
+      className="grid md:grid-cols-2 gap-8 items-stretch mb-24"
     >
-      <div>
+      <div className="h-full flex flex-col">
         <PhoneInterface 
           isPlaying={isPlaying}
           togglePlay={togglePlay}
@@ -40,7 +40,7 @@ const CarDemo = ({
           audioUrl={audioUrl}
         />
       </div>
-      <div>
+      <div className="h-full flex flex-col">
         <CallAnalysis
           title="Car Dealership Call Analysis"
           summary="John Doe contacted Westgate Luxury Motors about a Porsche Cayenne he saw on their website. After discussing financing options, including a special 0.9% APR offer, John scheduled a test drive by providing his name and phone number (12345)."

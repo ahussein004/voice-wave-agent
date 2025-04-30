@@ -62,14 +62,11 @@ const InteractiveDemoSection = () => {
     car: "https://storage.vapi.ai/61d1e56e-3fc8-405d-9355-f883eda67f5c-1745421414857-f3b21f5b-1d68-430a-af01-7bc5546a6b74-mono.wav"
   };
 
-  useEffect(() => {
-    // Debug active industry and audio URL
-    console.log("Current active industry:", activeIndustry);
-    console.log("Current audio URL:", audioUrls[activeIndustry]);
-  }, [activeIndustry, isPlaying]);
-
   return (
-    <section className={`py-24 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`} id="demo-section">
+    <section 
+      className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`} 
+      id="demo-section"
+    >
       <div className="absolute inset-0 bg-gradient-radial from-voice-purple/5 via-transparent to-transparent opacity-30" />
       <div className="absolute inset-0 bg-[url('/bg-dots.png')] opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-voice-dark/50" />
@@ -86,35 +83,37 @@ const InteractiveDemoSection = () => {
         />
 
         {/* Industry Demos */}
-        {activeIndustry === "restaurant" && (
-          <RestaurantDemo 
-            isPlaying={isPlaying}
-            togglePlay={togglePlay}
-            getIndustryColor={getIndustryColor}
-            getHeadlineGradient={getHeadlineGradient}
-            audioUrl={audioUrls.restaurant}
-          />
-        )}
+        <div className="min-h-[600px] flex flex-col">
+          {activeIndustry === "restaurant" && (
+            <RestaurantDemo 
+              isPlaying={isPlaying}
+              togglePlay={togglePlay}
+              getIndustryColor={getIndustryColor}
+              getHeadlineGradient={getHeadlineGradient}
+              audioUrl={audioUrls.restaurant}
+            />
+          )}
 
-        {activeIndustry === "car" && (
-          <CarDemo 
-            isPlaying={isPlaying}
-            togglePlay={togglePlay}
-            getIndustryColor={getIndustryColor}
-            getHeadlineGradient={getHeadlineGradient}
-            audioUrl={audioUrls.car}
-          />
-        )}
+          {activeIndustry === "car" && (
+            <CarDemo 
+              isPlaying={isPlaying}
+              togglePlay={togglePlay}
+              getIndustryColor={getIndustryColor}
+              getHeadlineGradient={getHeadlineGradient}
+              audioUrl={audioUrls.car}
+            />
+          )}
 
-        {activeIndustry === "medical" && (
-          <MedicalDemo 
-            isPlaying={isPlaying}
-            togglePlay={togglePlay}
-            getIndustryColor={getIndustryColor}
-            getHeadlineGradient={getHeadlineGradient}
-            audioUrl={audioUrls.medical}
-          />
-        )}
+          {activeIndustry === "medical" && (
+            <MedicalDemo 
+              isPlaying={isPlaying}
+              togglePlay={togglePlay}
+              getIndustryColor={getIndustryColor}
+              getHeadlineGradient={getHeadlineGradient}
+              audioUrl={audioUrls.medical}
+            />
+          )}
+        </div>
 
         <DemoNavigation 
           handlePrevIndustry={handlePrevIndustry}

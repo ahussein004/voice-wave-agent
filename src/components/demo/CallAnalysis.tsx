@@ -23,7 +23,7 @@ const CallAnalysis = ({ title, summary, extractedData, nextSteps, color }: CallA
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="bg-voice-dark/80 backdrop-blur-sm border border-voice-purple/20 rounded-xl p-6 shadow-lg text-left"
+      className="bg-voice-dark/80 backdrop-blur-sm border border-voice-purple/20 rounded-xl p-6 shadow-lg text-left h-full flex flex-col"
     >
       <h3 className="text-xl font-semibold mb-3" style={{ color }}>
         {title}
@@ -50,7 +50,7 @@ const CallAnalysis = ({ title, summary, extractedData, nextSteps, color }: CallA
         </ul>
       </div>
       
-      <div>
+      <div className="mt-auto">
         <h4 className="text-sm font-semibold mb-2 flex items-center">
           <Check className="w-4 h-4 mr-2" style={{ color }} />
           AI System Actions

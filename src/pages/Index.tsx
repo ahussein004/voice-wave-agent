@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
@@ -8,6 +8,38 @@ import IntegrationSection from "@/components/IntegrationSection";
 import CTASection from "@/components/CTASection";
 
 const Index = () => {
+  // Add smooth scroll behavior
+  useEffect(() => {
+    // Handle anchor link clicks for smooth scrolling
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        const href = target.getAttribute('href');
+        if (!href) return;
+        
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+          // Add offset to account for fixed navbar
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+    
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-voice-dark text-voice-cream overflow-x-hidden">
       <Navbar />

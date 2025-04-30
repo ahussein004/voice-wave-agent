@@ -29,9 +29,9 @@ const MedicalDemo = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      className="grid md:grid-cols-2 gap-8 items-center mb-24"
+      className="grid md:grid-cols-2 gap-8 items-stretch mb-24"
     >
-      <div>
+      <div className="h-full flex flex-col">
         <PhoneInterface 
           isPlaying={isPlaying}
           togglePlay={togglePlay}
@@ -40,7 +40,7 @@ const MedicalDemo = ({
           audioUrl={audioUrl}
         />
       </div>
-      <div>
+      <div className="h-full flex flex-col">
         <CallAnalysis
           title="Medical Clinic Call Analysis"
           summary="John Doe, a new customer, called Trinity Health and Wellness to schedule an appointment for a stomach ache. Sarah booked him for a same-day appointment at 2 p.m. and advised him to bring ID and insurance information."

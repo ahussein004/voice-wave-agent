@@ -29,9 +29,9 @@ const RestaurantDemo = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      className="grid md:grid-cols-2 gap-8 items-center mb-24"
+      className="grid md:grid-cols-2 gap-8 items-stretch mb-24"
     >
-      <div>
+      <div className="h-full flex flex-col">
         <PhoneInterface 
           isPlaying={isPlaying}
           togglePlay={togglePlay}
@@ -40,7 +40,7 @@ const RestaurantDemo = ({
           audioUrl={audioUrl}
         />
       </div>
-      <div>
+      <div className="h-full flex flex-col">
         <CallAnalysis
           title="Restaurant Reservation Call Analysis"
           summary="The caller made a reservation for a party of 4 at Savarelle for 8 PM this Saturday, requesting a garden patio table. They mentioned it's for a friend's birthday and arranged for champagne upon arrival and a special birthday dessert tray, with no dietary requirements noted."

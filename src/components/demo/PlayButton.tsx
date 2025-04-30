@@ -10,8 +10,8 @@ interface PlayButtonProps {
 
 const PlayButton: React.FC<PlayButtonProps> = ({ togglePlay, text }) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center p-4">
-      <p className="text-voice-cream mb-6 text-sm">
+    <div className="flex flex-col items-center justify-center text-center p-4 w-full">
+      <p className="text-voice-cream mb-6 text-sm md:text-base">
         {text}
       </p>
       <button 
