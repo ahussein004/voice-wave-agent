@@ -20,7 +20,7 @@ const AnalysisSummaryCard = () => {
       </div>
       
       {/* Patient inquiry card */}
-      <Card className="shadow-sm mb-5 flex-shrink-0">
+      <Card className="shadow-sm mb-5 flex-shrink-0 border-0">
         <div className="p-4 bg-sky-50 rounded-md">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
