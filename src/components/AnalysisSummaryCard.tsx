@@ -15,9 +15,7 @@ const AnalysisSummaryCard = () => {
           <Stethoscope className="h-5 w-5 text-sky-500" />
           <h3 className="font-semibold text-gray-800">Medical Call Analysis</h3>
         </div>
-        <div className="px-2 py-1 text-xs font-medium text-white bg-sky-500 rounded-full">
-          Live
-        </div>
+        
       </div>
       
       {/* Patient inquiry card */}
