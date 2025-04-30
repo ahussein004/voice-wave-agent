@@ -3,11 +3,11 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 interface DemoIndustrySelectorProps {
-  activeIndustry: "restaurant" | "car" | "medical";
-  setActiveIndustry: (industry: "restaurant" | "car" | "medical") => void;
+  activeIndustry: "medical" | "restaurant" | "car";
+  setActiveIndustry: (industry: "medical" | "restaurant" | "car") => void;
   setCurrentIndex: (index: number) => void;
   setIsPlaying: (isPlaying: boolean) => void;
-  industries: ("restaurant" | "car" | "medical")[];
+  industries: ("medical" | "restaurant" | "car")[];
 }
 
 const DemoIndustrySelector = ({
@@ -17,14 +17,14 @@ const DemoIndustrySelector = ({
   setIsPlaying,
   industries
 }: DemoIndustrySelectorProps) => {
-  const getIndustryName = (industry: "restaurant" | "car" | "medical") => {
+  const getIndustryName = (industry: "medical" | "restaurant" | "car") => {
     switch (industry) {
+      case "medical":
+        return "Healthcare Industry";
       case "restaurant":
         return "Restaurant Industry";
       case "car":
         return "Automotive Industry";
-      case "medical":
-        return "Healthcare Industry";
       default:
         return "Voice Agent";
     }

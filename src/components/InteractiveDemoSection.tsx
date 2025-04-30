@@ -10,15 +10,15 @@ import RestaurantDemo from "./demo/RestaurantDemo";
 import CarDemo from "./demo/CarDemo";
 import MedicalDemo from "./demo/MedicalDemo";
 
-type Industry = "restaurant" | "car" | "medical";
+type Industry = "medical" | "restaurant" | "car";
 
 const InteractiveDemoSection = () => {
   const [activeIndustry, setActiveIndustry] = useState<Industry>("medical");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(2); // Start with medical (index 2)
+  const [currentIndex, setCurrentIndex] = useState(0); // Start with medical (index 0)
   const isMobile = useIsMobile();
 
-  const industries: Industry[] = ["restaurant", "car", "medical"];
+  const industries: Industry[] = ["medical", "restaurant", "car"]; // Reordering industries to make medical first
   const { 
     getIndustryColor, 
     getSectionBackgroundColor, 
