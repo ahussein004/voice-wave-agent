@@ -23,6 +23,7 @@ const PauseButton: React.FC<PauseButtonProps> = ({ togglePlay }) => {
         "focus:outline-none focus:ring-2 focus:ring-voice-purple-light/50" // Added focus styles for better accessibility
       )}
       aria-label="Pause audio"
+      type="button"
     >
       <Pause className="text-white" size={20} />
     </button>

@@ -27,6 +27,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ togglePlay, text }) => {
           "focus:outline-none focus:ring-2 focus:ring-voice-purple-light/50" // Added focus styles
         )}
         aria-label="Play audio"
+        type="button"
       >
         <Play className="text-white ml-1" size={24} />
       </button>
