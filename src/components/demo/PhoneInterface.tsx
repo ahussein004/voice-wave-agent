@@ -38,6 +38,39 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
         return "";
     }
   };
+
+  const getConversationMessages = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return [
+          { sender: "ai", text: "Thank you for calling Savarelle. How may I assist you today?" },
+          { sender: "user", text: "Hi, I'd like to make a reservation for this Saturday at 8 PM for 4 people." },
+          { sender: "ai", text: "Certainly! I'd be happy to help with that. Would you prefer indoor seating or our garden patio?" },
+          { sender: "user", text: "The garden patio would be great. It's my friend's birthday." },
+          { sender: "system", text: "Checking availability for garden patio..." }
+        ];
+      case "car":
+        return [
+          { sender: "ai", text: "Welcome to Westgate Luxury Motors. How can I help you today?" },
+          { sender: "user", text: "Hi, I saw a Porsche Cayenne on your website and wanted to know if it's still available." },
+          { sender: "ai", text: "Yes, we do have the Porsche Cayenne in stock. Would you like to schedule a test drive or learn more about financing options?" },
+          { sender: "user", text: "I'm interested in both. What kind of financing rates do you offer?" },
+          { sender: "system", text: "Retrieving current financing offers..." }
+        ];
+      case "medical":
+        return [
+          { sender: "ai", text: "Thank you for calling Trinity Health and Wellness. How may I assist you today?" },
+          { sender: "user", text: "Hi, I'm having a stomach ache and would like to see a doctor today if possible." },
+          { sender: "ai", text: "I'm sorry to hear that. I'd be happy to check for any available appointments today. Are you a current patient with us?" },
+          { sender: "user", text: "No, this would be my first visit." },
+          { sender: "system", text: "Checking same-day availability..." }
+        ];
+      default:
+        return [];
+    }
+  };
+  
+  const messages = getConversationMessages();
   
   return (
     <motion.div 
@@ -58,43 +91,40 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
           </div>
 
           <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="ml-2 p-3 bg-gray-800/50 rounded-lg rounded-tl-none max-w-[80%] backdrop-blur-sm"
-            >
-              Hello, this is VoiceWave AI, how can I assist you today?
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="mr-2 p-3 bg-voice-purple/30 rounded-lg rounded-tr-none max-w-[80%] ml-auto backdrop-blur-sm"
-            >
-              Hi, I'd like to know if you have any availability for dinner tonight for 4 people?
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-              className="ml-2 p-3 bg-gray-800/50 rounded-lg rounded-tl-none max-w-[80%] backdrop-blur-sm"
-            >
-              Absolutely! Let me check our availability for tonight. What time were you looking for?
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-              className="text-center my-4 text-xs text-voice-cream/60"
-            >
-              <div className="inline-block px-3 py-1 rounded-full bg-voice-purple/10 border border-voice-purple/20">
-                AI is checking availability...
-              </div>
-            </motion.div>
+            {messages.map((message, index) => {
+              if (message.sender === "system") {
+                return (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 + index * 0.3 }}
+                    className="text-center my-4 text-xs text-voice-cream/60"
+                  >
+                    <div className="inline-block px-3 py-1 rounded-full bg-voice-purple/10 border border-voice-purple/20">
+                      {message.text}
+                    </div>
+                  </motion.div>
+                );
+              }
+              
+              return (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.3 }}
+                  className={cn(
+                    "p-3 rounded-lg max-w-[80%]",
+                    message.sender === "ai" 
+                      ? "ml-2 bg-gray-800/50 rounded-tl-none backdrop-blur-sm" 
+                      : "mr-2 bg-voice-purple/30 rounded-tr-none ml-auto backdrop-blur-sm"
+                  )}
+                >
+                  {message.text}
+                </motion.div>
+              );
+            })}
           </div>
 
           <div className="h-24 relative flex items-center justify-center">

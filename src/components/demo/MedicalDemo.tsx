@@ -1,8 +1,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import AudioPlayer from "./AudioPlayer";
-import { getIndustryData } from "./industryData";
+import PhoneInterface from "./PhoneInterface";
+import CallAnalysis from "./CallAnalysis";
+import { Clock, Calendar, FileText, User, Stethoscope } from "lucide-react";
 
 interface MedicalDemoProps {
   isPlaying: boolean;
@@ -17,8 +18,8 @@ const MedicalDemo = ({
   getIndustryColor,
   getHeadlineGradient 
 }: MedicalDemoProps) => {
-  const industryData = getIndustryData("medical");
-
+  const colorHex = "#0EA5E9"; // Blue color for medical
+  
   return (
     <motion.div
       key="medical"
@@ -29,46 +30,31 @@ const MedicalDemo = ({
       className="grid md:grid-cols-2 gap-8 items-center mb-24"
     >
       <div>
-        <AudioPlayer 
-          title={industryData.audioTitle} 
-          color={getIndustryColor()}
+        <PhoneInterface 
           isPlaying={isPlaying}
           togglePlay={togglePlay}
+          activeIndustry="medical"
+          getIndustryColor={() => colorHex}
         />
       </div>
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 shadow-lg">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex items-center mb-4">
-            {industryData.icon}
-            <h3 className={`text-2xl font-bold ${getHeadlineGradient()}`}>
-              {industryData.title}
-            </h3>
-          </div>
-          <p className="text-voice-cream/90 mb-6">
-            {industryData.scenario}
-          </p>
-          <div className="mb-4">
-            <h4 className="text-lg font-medium text-voice-cream mb-2">Business Impact</h4>
-            <div className="p-4 border border-white/10 rounded-lg bg-white/5 text-voice-cream">
-              <span className="text-lg font-bold" style={{ color: getIndustryColor() }}>"{industryData.impact}"</span>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <h4 className="text-lg font-medium text-voice-cream">Agent Flow</h4>
-            <ul className="space-y-2">
-              {industryData.steps.map((step, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="mr-2 mt-1 h-2 w-2 rounded-full" style={{ background: getIndustryColor() }}></span>
-                  <span className="text-voice-cream/80">{step}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
+      <div>
+        <CallAnalysis
+          title="Medical Clinic Call Analysis"
+          summary="John Doe, a new customer, called Trinity Health and Wellness to schedule an appointment for a stomach ache. Sarah booked him for a same-day appointment at 2 p.m. and advised him to bring ID and insurance information."
+          extractedData={[
+            { icon: <User className="w-4 h-4 text-sky-500" />, content: "New Patient: John Doe" },
+            { icon: <Stethoscope className="w-4 h-4 text-sky-500" />, content: "Concern: Stomach ache" },
+            { icon: <Calendar className="w-4 h-4 text-sky-500" />, content: "Today at 2:00 PM" },
+            { icon: <FileText className="w-4 h-4 text-sky-500" />, content: "Required: ID and insurance info" }
+          ]}
+          nextSteps={[
+            "New patient record created in EHR system",
+            "Urgent same-day appointment scheduled",
+            "Reminder SMS sent with appointment details",
+            "Practitioner notified about new patient and symptoms"
+          ]}
+          color={colorHex}
+        />
       </div>
     </motion.div>
   );

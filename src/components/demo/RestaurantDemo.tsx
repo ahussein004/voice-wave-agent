@@ -1,8 +1,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import AudioPlayer from "./AudioPlayer";
-import { getIndustryData } from "./industryData";
+import PhoneInterface from "./PhoneInterface";
+import CallAnalysis from "./CallAnalysis";
+import { Calendar, Clock, MapPin, User, Cake } from "lucide-react";
 
 interface RestaurantDemoProps {
   isPlaying: boolean;
@@ -17,8 +18,9 @@ const RestaurantDemo = ({
   getIndustryColor,
   getHeadlineGradient 
 }: RestaurantDemoProps) => {
-  const industryData = getIndustryData("restaurant");
-
+  const industryColor = getIndustryColor().replace("bg-", "");
+  const colorHex = "#F97316"; // Orange color for restaurant
+  
   return (
     <motion.div
       key="restaurant"
@@ -29,40 +31,31 @@ const RestaurantDemo = ({
       className="grid md:grid-cols-2 gap-8 items-center mb-24"
     >
       <div>
-        <AudioPlayer 
-          title={industryData.audioTitle} 
-          color={getIndustryColor()}
+        <PhoneInterface 
           isPlaying={isPlaying}
           togglePlay={togglePlay}
+          activeIndustry="restaurant"
+          getIndustryColor={() => colorHex}
         />
       </div>
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8 shadow-lg">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex items-center mb-4">
-            {industryData.icon}
-            <h3 className={`text-2xl font-bold ${getHeadlineGradient()}`}>
-              {industryData.title}
-            </h3>
-          </div>
-          <p className="text-voice-cream/90 mb-6">
-            {industryData.scenario}
-          </p>
-          <div className="space-y-4">
-            <h4 className="text-lg font-medium text-voice-cream">Key Features</h4>
-            <ul className="space-y-2">
-              {industryData.keyFeatures.map((feature, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="mr-2 mt-1 h-2 w-2 rounded-full" style={{ background: getIndustryColor() }}></span>
-                  <span className="text-voice-cream/80">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
+      <div>
+        <CallAnalysis
+          title="Restaurant Reservation Call Analysis"
+          summary="The caller made a reservation for a party of 4 at Savarelle for 8 PM this Saturday, requesting a garden patio table. They mentioned it's for a friend's birthday and arranged for champagne upon arrival and a special birthday dessert tray, with no dietary requirements noted."
+          extractedData={[
+            { icon: <Calendar className="w-4 h-4 text-orange-500" />, content: "Saturday, 8:00 PM" },
+            { icon: <User className="w-4 h-4 text-orange-500" />, content: "Party of 4 people" },
+            { icon: <MapPin className="w-4 h-4 text-orange-500" />, content: "Garden patio table requested" },
+            { icon: <Cake className="w-4 h-4 text-orange-500" />, content: "Friend's birthday celebration" }
+          ]}
+          nextSteps={[
+            "Reservation added to restaurant management system",
+            "Special request for champagne upon arrival noted",
+            "Birthday dessert tray arranged with kitchen",
+            "Confirmation SMS sent to customer with details"
+          ]}
+          color={colorHex}
+        />
       </div>
     </motion.div>
   );
