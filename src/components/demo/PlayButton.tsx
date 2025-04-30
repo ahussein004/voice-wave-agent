@@ -1,0 +1,34 @@
+
+import React from "react";
+import { Play } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+interface PlayButtonProps {
+  togglePlay: () => void;
+  text: string;
+}
+
+const PlayButton: React.FC<PlayButtonProps> = ({ togglePlay, text }) => {
+  return (
+    <div className="h-full flex flex-col items-center justify-center text-center p-4">
+      <p className="text-voice-cream mb-6 text-sm">
+        {text}
+      </p>
+      <button 
+        onClick={togglePlay}
+        className={cn(
+          "w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-voice-purple/20 transition-transform hover:scale-105 mb-4",
+          "bg-gradient-to-r from-voice-purple to-voice-purple-light",
+        )}
+        aria-label="Play audio"
+      >
+        <Play className="text-white ml-1" size={24} />
+      </button>
+      <p className="text-voice-cream/60 text-xs mt-2">
+        Click to hear the conversation
+      </p>
+    </div>
+  );
+};
+
+export default PlayButton;
