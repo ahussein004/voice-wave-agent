@@ -7,10 +7,8 @@ import AnalysisSummaryCard from "./AnalysisSummaryCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
 const IntegrationSection = () => {
   const [activeFeature, setActiveFeature] = useState<"analysis" | "integration" | "followup">("analysis");
-
   const featureData = {
     analysis: {
       title: "AI Call Analysis",
@@ -19,12 +17,7 @@ const IntegrationSection = () => {
       bgColor: "bg-voice-purple/10",
       borderColor: "border-voice-purple/20",
       icon: <Brain className="h-6 w-6 text-voice-purple" />,
-      steps: [
-        "Voice transcription starts as soon as call begins",
-        "AI analyzes speech patterns and identifies key entities",
-        "Sentiment and intent are detected in real-time",
-        "Structured data is extracted from natural conversation"
-      ]
+      steps: ["Voice transcription starts as soon as call begins", "AI analyzes speech patterns and identifies key entities", "Sentiment and intent are detected in real-time", "Structured data is extracted from natural conversation"]
     },
     integration: {
       title: "System Integration",
@@ -33,12 +26,7 @@ const IntegrationSection = () => {
       bgColor: "bg-orange-500/10",
       borderColor: "border-orange-500/20",
       icon: <Link className="h-6 w-6 text-orange-500" />,
-      steps: [
-        "API connects to your existing business tools",
-        "Data is synchronized across all systems",
-        "Custom workflows are triggered based on conversation",
-        "Secure data pipeline ensures information integrity"
-      ]
+      steps: ["API connects to your existing business tools", "Data is synchronized across all systems", "Custom workflows are triggered based on conversation", "Secure data pipeline ensures information integrity"]
     },
     followup: {
       title: "Automated Follow-ups",
@@ -47,25 +35,22 @@ const IntegrationSection = () => {
       bgColor: "bg-blue-500/10",
       borderColor: "border-blue-500/20",
       icon: <Mail className="h-6 w-6 text-blue-500" />,
-      steps: [
-        "AI determines appropriate follow-up actions based on call content",
-        "Tasks requiring human attention are delegated to staff via email",
-        "Automated confirmations and reminders are sent to customers via SMS",
-        "All communications are tracked and analyzed for continuous improvement"
-      ]
+      steps: ["AI determines appropriate follow-up actions based on call content", "Tasks requiring human attention are delegated to staff via email", "Automated confirmations and reminders are sent to customers via SMS", "All communications are tracked and analyzed for continuous improvement"]
     }
   };
-
-  return (
-    <section className="py-24 bg-gray-50 border-t border-gray-200" id="integrations">
+  return <section className="py-24 bg-gray-50 border-t border-gray-200" id="integrations">
       <div className="container mx-auto px-2 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 18
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.6
+      }} className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 text-gray-800">
             Intelligent Call Analysis & System Integration
           </h2>
@@ -76,48 +61,20 @@ const IntegrationSection = () => {
         </motion.div>
 
         {/* Feature Tabs - Redesigned for better visibility */}
-        <Tabs 
-          defaultValue="analysis" 
-          onValueChange={(value) => setActiveFeature(value as "analysis" | "integration" | "followup")}
-          className="w-full max-w-5xl mx-auto"
-        >
+        <Tabs defaultValue="analysis" onValueChange={value => setActiveFeature(value as "analysis" | "integration" | "followup")} className="w-full max-w-5xl mx-auto">
           <div className="flex justify-center mb-8">
             <TabsList className="bg-white p-1.5 rounded-full shadow-sm">
-              <TabsTrigger 
-                value="analysis" 
-                className={cn(
-                  "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
-                  "data-[state=active]:shadow-md font-medium",
-                  "data-[state=active]:bg-voice-purple data-[state=active]:text-white",
-                  "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
-                )}
-              >
+              <TabsTrigger value="analysis" className={cn("rounded-full px-6 py-2.5 gap-2 transition-all duration-300", "data-[state=active]:shadow-md font-medium", "data-[state=active]:bg-voice-purple data-[state=active]:text-white", "hover:bg-gray-50 data-[state=inactive]:text-gray-700")}>
                 <Brain className="h-4 w-4" />
                 <span className="hidden sm:inline">AI Call Analysis</span>
               </TabsTrigger>
               
-              <TabsTrigger 
-                value="integration" 
-                className={cn(
-                  "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
-                  "data-[state=active]:shadow-md font-medium",
-                  "data-[state=active]:bg-orange-500 data-[state=active]:text-white",
-                  "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
-                )}
-              >
+              <TabsTrigger value="integration" className={cn("rounded-full px-6 py-2.5 gap-2 transition-all duration-300", "data-[state=active]:shadow-md font-medium", "data-[state=active]:bg-orange-500 data-[state=active]:text-white", "hover:bg-gray-50 data-[state=inactive]:text-gray-700")}>
                 <Link className="h-4 w-4" />
                 <span className="hidden sm:inline">System Integration</span>
               </TabsTrigger>
               
-              <TabsTrigger 
-                value="followup" 
-                className={cn(
-                  "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
-                  "data-[state=active]:shadow-md font-medium",
-                  "data-[state=active]:bg-blue-500 data-[state=active]:text-white",
-                  "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
-                )}
-              >
+              <TabsTrigger value="followup" className={cn("rounded-full px-6 py-2.5 gap-2 transition-all duration-300", "data-[state=active]:shadow-md font-medium", "data-[state=active]:bg-blue-500 data-[state=active]:text-white", "hover:bg-gray-50 data-[state=inactive]:text-gray-700")}>
                 <Mail className="h-4 w-4" />
                 <span className="hidden sm:inline">Automated Follow-ups</span>
               </TabsTrigger>
@@ -126,26 +83,12 @@ const IntegrationSection = () => {
 
           {/* Feature Content - Enhanced with better contrast and readability */}
           <div className="mt-6">
-            <TabsContent 
-              value="analysis" 
-              className="mt-0 focus-visible:outline-none focus-visible:ring-0"
-            >
-              <FeatureDisplay 
-                feature={featureData.analysis} 
-                activeFeature="analysis"
-                content={<AnalysisSummaryCard />}
-              />
+            <TabsContent value="analysis" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
+              <FeatureDisplay feature={featureData.analysis} activeFeature="analysis" content={<AnalysisSummaryCard />} />
             </TabsContent>
             
-            <TabsContent 
-              value="integration" 
-              className="mt-0 focus-visible:outline-none focus-visible:ring-0"
-            >
-              <FeatureDisplay 
-                feature={featureData.integration} 
-                activeFeature="integration"
-                content={
-                  <div className="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+            <TabsContent value="integration" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
+              <FeatureDisplay feature={featureData.integration} activeFeature="integration" content={<div className="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <Database className="w-5 h-5 mr-2 text-orange-500" />
                       System Integration Flow
@@ -153,22 +96,17 @@ const IntegrationSection = () => {
                     <div className="bg-white rounded-lg p-4 shadow-sm flex-grow flex items-center">
                       <IntegrationFlowchart />
                     </div>
-                  </div>
-                }
-              />
+                  </div>} />
             </TabsContent>
             
-            <TabsContent 
-              value="followup" 
-              className="mt-0 focus-visible:outline-none focus-visible:ring-0"
-            >
-              <motion.div
-                key="followup"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="grid grid-cols-1 gap-8 bg-white rounded-2xl p-8 shadow-lg"
-              >
+            <TabsContent value="followup" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
+              <motion.div key="followup" initial={{
+              opacity: 0
+            }} animate={{
+              opacity: 1
+            }} transition={{
+              duration: 0.5
+            }} className="grid grid-cols-1 gap-8 bg-white rounded-2xl p-8 shadow-lg">
                 {/* Top Section: Automated Follow-ups Overview */}
                 <div className="bg-white rounded-xl p-6 shadow-md">
                   <div className="flex items-start gap-4 mb-6">
@@ -324,68 +262,9 @@ const IntegrationSection = () => {
         </Tabs>
         
         {/* Integration Process - Redesigned for better visual clarity */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-24 max-w-6xl mx-auto"
-        >
-          <div className="bg-white p-8 rounded-2xl shadow-lg">
-            <h3 className="text-2xl font-bold mb-4 text-gray-800">Seamless Integration Process</h3>
-            <p className="text-gray-600 mb-6">
-              Our platform is designed to work with your existing tech stack, not replace it. We offer multiple integration methods to ensure a smooth experience:
-            </p>
-            
-            <div className="space-y-6">
-              <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 group-hover:shadow-md transition-all">
-                  <Cloud className="w-5 h-5 text-voice-purple" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-gray-800 group-hover:text-voice-purple transition-colors">API Integration</h4>
-                  <p className="text-gray-600 text-sm">Connect directly to our REST API for full control and customization of the integration flow</p>
-                </div>
-              </div>
-              
-              <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 group-hover:shadow-md transition-all">
-                  <FileText className="w-5 h-5 text-voice-purple" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-gray-800 group-hover:text-voice-purple transition-colors">Webhooks</h4>
-                  <p className="text-gray-600 text-sm">Receive real-time data in your systems as conversations happen and analysis is performed</p>
-                </div>
-              </div>
-              
-              <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 group-hover:shadow-md transition-all">
-                  <Database className="w-5 h-5 text-voice-purple" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1 text-gray-800 group-hover:text-voice-purple transition-colors">Pre-built Connectors</h4>
-                  <p className="text-gray-600 text-sm">Use our library of pre-built connectors for popular platforms like Salesforce, Zendesk, HubSpot and more</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/5 via-transparent to-voice-purple/5 blur-3xl opacity-30 rounded-full"></div>
-            <div className="relative bg-white rounded-xl p-8 shadow-lg h-full flex flex-col">
-              <h4 className="text-lg font-semibold mb-6 flex items-center text-gray-800">
-                <MessageSquare className="w-5 h-5 mr-2 text-voice-purple" />
-                Integration Flow
-              </h4>
-              <div className="bg-white p-4 rounded-lg shadow-sm flex-grow flex items-center">
-                <IntegrationFlowchart />
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        
       </div>
-    </section>
-  );
+    </section>;
 };
 
 // Redesigned reusable component for feature display with better contrast
@@ -402,21 +281,19 @@ interface FeatureDisplayProps {
   activeFeature: "analysis" | "integration" | "followup";
   content: React.ReactNode;
 }
-
-const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps) => {
-  const accentColor = 
-    activeFeature === "analysis" ? "bg-voice-purple text-white" :
-    activeFeature === "integration" ? "bg-orange-500 text-white" : 
-    "bg-blue-500 text-white";
-
-  return (
-    <motion.div
-      key={activeFeature}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch bg-white rounded-2xl p-8 shadow-lg"
-    >
+const FeatureDisplay = ({
+  feature,
+  activeFeature,
+  content
+}: FeatureDisplayProps) => {
+  const accentColor = activeFeature === "analysis" ? "bg-voice-purple text-white" : activeFeature === "integration" ? "bg-orange-500 text-white" : "bg-blue-500 text-white";
+  return <motion.div key={activeFeature} initial={{
+    opacity: 0
+  }} animate={{
+    opacity: 1
+  }} transition={{
+    duration: 0.5
+  }} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch bg-white rounded-2xl p-8 shadow-lg">
       {/* Left Side - Interactive Demo */}
       <div className="h-full flex flex-col">
         {content}
@@ -425,20 +302,11 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
       {/* Right Side - Feature Description */}
       <div className="space-y-8 h-full flex flex-col">
         <div>
-          <div className={cn(
-            "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
-            "shadow-md", 
-            activeFeature === "analysis" ? "bg-voice-purple/10" :
-            activeFeature === "integration" ? "bg-orange-500/10" : 
-            "bg-blue-500/10"
-          )}>
+          <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center mb-6", "shadow-md", activeFeature === "analysis" ? "bg-voice-purple/10" : activeFeature === "integration" ? "bg-orange-500/10" : "bg-blue-500/10")}>
             {feature.icon}
           </div>
           
-          <h3 className={cn(
-            "text-3xl font-bold mb-4", 
-            feature.color
-          )}>
+          <h3 className={cn("text-3xl font-bold mb-4", feature.color)}>
             {feature.title}
           </h3>
           
@@ -449,17 +317,12 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
           <div className="bg-gray-50 p-5 rounded-xl">
             <h4 className="font-medium text-gray-800 mb-3">How it works:</h4>
             <div className="space-y-3">
-              {feature.steps.map((step, index) => (
-                <div key={index} className="flex items-start group">
-                  <div className={cn(
-                    "w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3 flex-shrink-0 mt-0.5 transition-transform group-hover:scale-110",
-                    accentColor
-                  )}>
+              {feature.steps.map((step, index) => <div key={index} className="flex items-start group">
+                  <div className={cn("w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3 flex-shrink-0 mt-0.5 transition-transform group-hover:scale-110", accentColor)}>
                     {index + 1}
                   </div>
                   <p className="text-gray-600">{step}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -478,8 +341,6 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
           </div>
         </div>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 };
-
 export default IntegrationSection;
