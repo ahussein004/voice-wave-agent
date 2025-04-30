@@ -33,6 +33,7 @@ const InteractiveDemoSection = () => {
     setCurrentIndex(nextIndex);
     setActiveIndustry(industries[nextIndex]);
     setIsPlaying(false);
+    console.log("Changed to next industry:", industries[nextIndex]);
   };
 
   const handlePrevIndustry = () => {
@@ -40,10 +41,13 @@ const InteractiveDemoSection = () => {
     setCurrentIndex(prevIndex);
     setActiveIndustry(industries[prevIndex]);
     setIsPlaying(false);
+    console.log("Changed to previous industry:", industries[prevIndex]);
   };
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    const newPlayState = !isPlaying;
+    console.log(`Toggling play state to: ${newPlayState ? "playing" : "paused"}`);
+    setIsPlaying(newPlayState);
   };
 
   return (

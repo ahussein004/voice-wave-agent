@@ -14,12 +14,14 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
     if (!audioRef.current && audioUrl) {
       audioRef.current = new Audio(audioUrl);
       audioRef.current.preload = "auto";
+      console.log("Created new audio element with URL:", audioUrl);
     }
 
     // Update audio source if URL changes
     if (audioRef.current && audioUrl && audioRef.current.src !== audioUrl) {
       audioRef.current.src = audioUrl;
       audioRef.current.load();
+      console.log("Updated audio source to:", audioUrl);
     }
 
     // Play or pause based on isPlaying prop
@@ -28,9 +30,11 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
         console.log("Attempting to play audio:", audioUrl);
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.error("Audio playback error:", error);
-          });
+          playPromise
+            .then(() => console.log("Audio playback started successfully"))
+            .catch(error => {
+              console.error("Audio playback error:", error);
+            });
         }
       } else {
         console.log("Pausing audio");
@@ -44,6 +48,7 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        console.log("Audio cleanup: paused audio");
       }
     };
   }, [isPlaying, audioUrl]);

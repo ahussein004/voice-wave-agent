@@ -18,6 +18,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ togglePlay, text }) => {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
+          console.log("Play button clicked");
           togglePlay();
         }}
         className={cn(

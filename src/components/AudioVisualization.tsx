@@ -21,6 +21,8 @@ const AudioVisualization = ({
 }: AudioVisualizationProps) => {
   // Use the audio player hook to handle audio playback
   useAudioPlayer({ isPlaying, audioUrl });
+  
+  console.log("AudioVisualization render:", { isPlaying, audioUrl, elapsedTime });
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center">
