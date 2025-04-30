@@ -55,27 +55,6 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     setElapsedTime(0);
   }, [activeIndustry]);
   
-  const getPhoneGlowColor = () => {
-    return "from-voice-purple/30 via-transparent to-transparent";
-  };
-  
-  const getBorderColor = () => {
-    return "border-voice-purple/30";
-  };
-
-  const getIndustryHeadlineText = () => {
-    switch (activeIndustry) {
-      case "restaurant":
-        return "bg-gradient-to-r from-[#F97316] to-[#FDBA74] bg-clip-text text-transparent";
-      case "car":
-        return "bg-gradient-to-r from-[#84cc16] to-[#bef264] bg-clip-text text-transparent";
-      case "medical":
-        return "bg-gradient-to-r from-[#0EA5E9] to-[#7dd3fc] bg-clip-text text-transparent";
-      default:
-        return "";
-    }
-  };
-  
   const messages = getConversationMessages(activeIndustry);
   const industryTitle = getIndustryTitle(activeIndustry);
   const ctaText = getCtaText(activeIndustry);
@@ -84,25 +63,21 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   
   return (
     <motion.div 
-      initial={{ opacity: 0, x: 20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
       className="relative"
     >
-      <div className={`absolute -inset-4 bg-gradient-to-r ${getPhoneGlowColor()} blur-3xl`} />
-      <div className={`aspect-[9/16] max-w-xs mx-auto bg-gray-900/50 rounded-3xl border-8 ${getBorderColor()} shadow-2xl overflow-hidden relative backdrop-blur-xl`}>
-        <div className="absolute inset-0 phone-glow opacity-50" />
-        
-        <div className="p-4 h-full flex flex-col">
+      <div className="bg-gray-900/50 backdrop-blur-xl rounded-xl p-6 shadow-lg">
+        <div className="p-4">
           <PhoneHeader 
             title={industryTitle}
-            titleClassName={getIndustryHeadlineText()}
+            titleClassName={getIndustryHeadlineText(activeIndustry)}
             isPlaying={isPlaying}
             elapsedTime={elapsedTime}
           />
 
-          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
+          <div className="overflow-y-auto mb-4 text-left text-sm space-y-4">
             {!isPlaying && (
               <motion.div 
                 initial={{ opacity: 0 }}
@@ -132,6 +107,20 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
       </div>
     </motion.div>
   );
+  
+  // Helper function for industry-specific text styling
+  function getIndustryHeadlineText(industry: "restaurant" | "car" | "medical") {
+    switch (industry) {
+      case "restaurant":
+        return "bg-gradient-to-r from-[#F97316] to-[#FDBA74] bg-clip-text text-transparent";
+      case "car":
+        return "bg-gradient-to-r from-[#84cc16] to-[#bef264] bg-clip-text text-transparent";
+      case "medical":
+        return "bg-gradient-to-r from-[#0EA5E9] to-[#7dd3fc] bg-clip-text text-transparent";
+      default:
+        return "";
+    }
+  }
 };
 
 export default PhoneInterface;
