@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 const Navbar = () => {
   return <div className="fixed top-0 left-0 w-full z-50 bg-voice-dark/80 backdrop-blur-md border-b border-voice-purple/20">
-      <div className="container mx-auto flex items-center justify-between py-4">
+      <div className="container mx-auto flex items-center justify-between py-4 bg-slate-50">
         <div className="flex items-center">
           <h1 className="font-bold text-2xl text-gradient">VoiceWave<span className="text-white">AI</span></h1>
         </div>
