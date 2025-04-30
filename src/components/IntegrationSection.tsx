@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -83,7 +82,7 @@ const IntegrationSection = () => {
           className="w-full max-w-5xl mx-auto"
         >
           <div className="flex justify-center mb-8">
-            <TabsList className="bg-white p-1.5 rounded-full shadow-sm border border-gray-200">
+            <TabsList className="bg-white p-1.5 rounded-full shadow-sm">
               <TabsTrigger 
                 value="analysis" 
                 className={cn(
@@ -146,12 +145,12 @@ const IntegrationSection = () => {
                 feature={featureData.integration} 
                 activeFeature="integration"
                 content={
-                  <div className="bg-white rounded-xl p-6 border border-orange-200 shadow-lg h-full flex flex-col">
+                  <div className="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <Database className="w-5 h-5 mr-2 text-orange-500" />
                       System Integration Flow
                     </h3>
-                    <div className="bg-white rounded-lg p-4 shadow-sm border border-orange-100 flex-grow flex items-center">
+                    <div className="bg-white rounded-lg p-4 shadow-sm flex-grow flex items-center">
                       <IntegrationFlowchart />
                     </div>
                   </div>
@@ -168,12 +167,12 @@ const IntegrationSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="grid grid-cols-1 gap-8 bg-white rounded-2xl p-6 shadow-md border border-gray-200"
+                className="grid grid-cols-1 gap-8 bg-white rounded-2xl p-8 shadow-lg"
               >
                 {/* Top Section: Automated Follow-ups Overview */}
-                <div className="bg-white rounded-xl p-6 border border-blue-200 shadow-lg">
+                <div className="bg-white rounded-xl p-6 shadow-md">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                       <Mail className="w-6 h-6 text-blue-500" />
                     </div>
                     <div>
@@ -187,7 +186,7 @@ const IntegrationSection = () => {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <div className="bg-blue-50 p-4 rounded-lg">
                       <div className="flex items-center gap-2">
                         <Mail className="h-5 w-5 text-blue-600" />
                         <h4 className="font-medium text-blue-800">Email Task Delegation</h4>
@@ -195,7 +194,7 @@ const IntegrationSection = () => {
                       <p className="mt-2 text-sm text-gray-700">Tasks requiring human expertise are automatically assigned to appropriate staff members via email for further action.</p>
                     </div>
                     
-                    <div className="bg-green-50 p-4 rounded-lg border border-green-100">
+                    <div className="bg-green-50 p-4 rounded-lg">
                       <div className="flex items-center gap-2">
                         <MessageSquare className="h-5 w-5 text-green-600" />
                         <h4 className="font-medium text-green-800">SMS Customer Follow-ups</h4>
@@ -208,8 +207,8 @@ const IntegrationSection = () => {
                 {/* Bottom Section: Email and SMS side by side */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Email - Human Task Assignment Section - Left side */}
-                  <div className="bg-white rounded-lg shadow-md border-l-4 border-blue-600 border-t border-r border-b border-gray-200 overflow-hidden">
-                    <div className="bg-blue-50 px-6 py-4 border-b border-blue-100">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="bg-blue-50 px-6 py-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <Mail className="w-5 h-5 text-blue-600" />
@@ -223,7 +222,7 @@ const IntegrationSection = () => {
                     </div>
                     
                     <div className="p-6">
-                      <div className="border border-gray-200 rounded-lg p-5 bg-white">
+                      <div className="rounded-lg p-5 bg-white shadow-sm">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center space-x-2">
                             <User className="w-5 h-5 text-gray-500" />
@@ -238,7 +237,7 @@ const IntegrationSection = () => {
                           <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-xs font-medium">High Priority</span>
                           <div className="text-sm font-medium text-gray-800">Patient Follow-up Required: Samantha Johnson</div>
                         </div>
-                        <div className="text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                        <div className="text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-lg">
                           <p>Dear Dr. Smith,</p>
                           <p className="mt-2">Samantha Johnson called today regarding ongoing tooth pain. Her rescheduled appointment is set for May 2 at 2:00 PM, but she mentioned increasing discomfort.</p>
                           <p className="mt-2">AI assessment indicates potential need for earlier intervention. Patient history and call transcript attached.</p>
@@ -263,8 +262,8 @@ const IntegrationSection = () => {
                   </div>
                   
                   {/* SMS Follow-up Preview - Right side */}
-                  <div className="bg-white rounded-lg shadow-md border-l-4 border-green-500 border-t border-r border-b border-gray-200 overflow-hidden">
-                    <div className="bg-green-50 px-6 py-4 border-b border-green-100">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="bg-green-50 px-6 py-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <MessageSquare className="w-5 h-5 text-green-600" />
@@ -332,7 +331,7 @@ const IntegrationSection = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-24 max-w-6xl mx-auto"
         >
-          <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200">
+          <div className="bg-white p-8 rounded-2xl shadow-lg">
             <h3 className="text-2xl font-bold mb-4 text-gray-800">Seamless Integration Process</h3>
             <p className="text-gray-600 mb-6">
               Our platform is designed to work with your existing tech stack, not replace it. We offer multiple integration methods to ensure a smooth experience:
@@ -340,7 +339,7 @@ const IntegrationSection = () => {
             
             <div className="space-y-6">
               <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 group-hover:shadow-md transition-all">
                   <Cloud className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
@@ -350,7 +349,7 @@ const IntegrationSection = () => {
               </div>
               
               <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 group-hover:shadow-md transition-all">
                   <FileText className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
@@ -360,7 +359,7 @@ const IntegrationSection = () => {
               </div>
               
               <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 group-hover:shadow-md transition-all">
                   <Database className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
@@ -373,12 +372,12 @@ const IntegrationSection = () => {
           
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/5 via-transparent to-voice-purple/5 blur-3xl opacity-30 rounded-full"></div>
-            <div className="relative bg-white border border-voice-purple/10 rounded-xl p-8 shadow-lg h-full flex flex-col">
+            <div className="relative bg-white rounded-xl p-8 shadow-lg h-full flex flex-col">
               <h4 className="text-lg font-semibold mb-6 flex items-center text-gray-800">
                 <MessageSquare className="w-5 h-5 mr-2 text-voice-purple" />
                 Integration Flow
               </h4>
-              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex-grow flex items-center">
+              <div className="bg-white p-4 rounded-lg shadow-sm flex-grow flex items-center">
                 <IntegrationFlowchart />
               </div>
             </div>
@@ -416,7 +415,7 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch bg-white rounded-2xl p-6 shadow-md border border-gray-200"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch bg-white rounded-2xl p-8 shadow-lg"
     >
       {/* Left Side - Interactive Demo */}
       <div className="h-full flex flex-col">
@@ -429,10 +428,9 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
           <div className={cn(
             "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
             "shadow-md", 
-            activeFeature === "analysis" ? "bg-voice-purple/10 border-voice-purple/20" :
-            activeFeature === "integration" ? "bg-orange-500/10 border-orange-500/20" : 
-            "bg-blue-500/10 border-blue-500/20",
-            "border"
+            activeFeature === "analysis" ? "bg-voice-purple/10" :
+            activeFeature === "integration" ? "bg-orange-500/10" : 
+            "bg-blue-500/10"
           )}>
             {feature.icon}
           </div>
@@ -448,7 +446,7 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
             {feature.description}
           </p>
           
-          <div className="bg-gray-50 p-5 rounded-xl border border-gray-100">
+          <div className="bg-gray-50 p-5 rounded-xl">
             <h4 className="font-medium text-gray-800 mb-3">How it works:</h4>
             <div className="space-y-3">
               {feature.steps.map((step, index) => (
@@ -467,7 +465,7 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
         </div>
         
         <div className="mt-auto">
-          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+          <div className="bg-white rounded-lg p-4 shadow-sm">
             <div className="flex items-center mb-2">
               <Cloud className={cn("w-5 h-5 mr-2", feature.color)} />
               <h4 className="font-medium text-gray-800">Real-world impact:</h4>
