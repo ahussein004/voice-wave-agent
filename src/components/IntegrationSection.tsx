@@ -58,7 +58,7 @@ const IntegrationSection = () => {
   };
 
   return (
-    <section className="py-24 bg-white border-t border-gray-200" id="integrations">
+    <section className="py-24 bg-white border-t border-gray-100" id="integrations">
       <div className="container mx-auto px-2 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -67,28 +67,30 @@ const IntegrationSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-voice-dark bg-clip-text text-transparent bg-gradient-to-r from-voice-dark to-voice-dark/80">
+          <h2 className="text-4xl font-bold mb-4 text-gray-800">
             Intelligent Call Analysis & System Integration
           </h2>
-          <p className="text-lg text-voice-dark/80 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Our AI automatically analyzes every conversation in real-time and seamlessly integrates with 
             your existing systems to automate workflows and improve operational efficiency
           </p>
         </motion.div>
 
-        {/* Feature Tabs */}
+        {/* Feature Tabs - Redesigned for better visibility */}
         <Tabs 
           defaultValue="analysis" 
           onValueChange={(value) => setActiveFeature(value as "analysis" | "integration" | "followup")}
           className="w-full max-w-5xl mx-auto"
         >
           <div className="flex justify-center mb-8">
-            <TabsList className="bg-gray-100/50 p-1 shadow-inner">
+            <TabsList className="bg-gray-100 p-1.5 rounded-full shadow-sm border border-gray-200">
               <TabsTrigger 
                 value="analysis" 
                 className={cn(
-                  "rounded-full data-[state=active]:shadow-md transition-all px-6 py-2.5 gap-2",
-                  "data-[state=active]:bg-white data-[state=active]:text-voice-purple font-medium"
+                  "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
+                  "data-[state=active]:shadow-md font-medium",
+                  "data-[state=active]:bg-white data-[state=active]:text-voice-purple",
+                  "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
                 )}
               >
                 <Brain className="h-4 w-4" />
@@ -98,8 +100,10 @@ const IntegrationSection = () => {
               <TabsTrigger 
                 value="integration" 
                 className={cn(
-                  "rounded-full data-[state=active]:shadow-md transition-all px-6 py-2.5 gap-2",
-                  "data-[state=active]:bg-white data-[state=active]:text-orange-500 font-medium"
+                  "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
+                  "data-[state=active]:shadow-md font-medium",
+                  "data-[state=active]:bg-white data-[state=active]:text-orange-500",
+                  "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
                 )}
               >
                 <Link className="h-4 w-4" />
@@ -109,8 +113,10 @@ const IntegrationSection = () => {
               <TabsTrigger 
                 value="followup" 
                 className={cn(
-                  "rounded-full data-[state=active]:shadow-md transition-all px-6 py-2.5 gap-2",
-                  "data-[state=active]:bg-white data-[state=active]:text-blue-500 font-medium"
+                  "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
+                  "data-[state=active]:shadow-md font-medium",
+                  "data-[state=active]:bg-white data-[state=active]:text-blue-500",
+                  "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
                 )}
               >
                 <Mail className="h-4 w-4" />
@@ -119,7 +125,7 @@ const IntegrationSection = () => {
             </TabsList>
           </div>
 
-          {/* Feature Content */}
+          {/* Feature Content - Enhanced with better contrast and readability */}
           <div className="mt-6">
             <TabsContent 
               value="analysis" 
@@ -140,12 +146,12 @@ const IntegrationSection = () => {
                 feature={featureData.integration} 
                 activeFeature="integration"
                 content={
-                  <div className="bg-gradient-to-br from-orange-50 to-white rounded-xl p-6 border border-orange-200/30 shadow-lg">
+                  <div className="bg-white rounded-xl p-6 border border-orange-200 shadow-lg">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <Database className="w-5 h-5 mr-2 text-orange-500" />
                       System Integration Flow
                     </h3>
-                    <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-inner">
+                    <div className="bg-white rounded-lg p-4 shadow-sm border border-orange-100">
                       <IntegrationFlowchart />
                     </div>
                   </div>
@@ -161,7 +167,7 @@ const IntegrationSection = () => {
                 feature={featureData.followup} 
                 activeFeature="followup"
                 content={
-                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-200/30 shadow-lg">
+                  <div className="bg-white rounded-xl p-6 border border-blue-200 shadow-lg">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <MessageSquare className="w-5 h-5 mr-2 text-blue-500" />
                       Follow-up Communication
@@ -174,7 +180,7 @@ const IntegrationSection = () => {
                           <div className="text-sm text-gray-500">To: samantha@example.com</div>
                           <div className="text-sm text-gray-500">12:42 PM</div>
                         </div>
-                        <div className="text-sm font-medium mb-1">Appointment Confirmation: May 2, 2:00 PM</div>
+                        <div className="text-sm font-medium mb-1 text-gray-800">Appointment Confirmation: May 2, 2:00 PM</div>
                         <div className="text-xs text-gray-600">
                           Hi Samantha, this is a confirmation of your appointment rescheduled for May 2 at 2:00 PM. 
                           Please reply to confirm or call us if you need to make any changes.
@@ -182,7 +188,7 @@ const IntegrationSection = () => {
                       </div>
                       
                       {/* SMS Preview */}
-                      <div className="border border-gray-200 rounded-lg p-4 bg-blue-50">
+                      <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                         <div className="flex justify-end mb-1">
                           <div className="text-xs text-gray-500">12:43 PM</div>
                         </div>
@@ -198,7 +204,7 @@ const IntegrationSection = () => {
           </div>
         </Tabs>
         
-        {/* Integration Process - Keep this section */}
+        {/* Integration Process - Redesigned for better visual clarity */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -206,40 +212,40 @@ const IntegrationSection = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-24 max-w-6xl mx-auto"
         >
-          <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-sm border border-gray-100">
-            <h3 className="text-2xl font-bold mb-4 text-voice-dark">Seamless Integration Process</h3>
-            <p className="text-voice-dark/80 mb-6">
+          <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200">
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">Seamless Integration Process</h3>
+            <p className="text-gray-600 mb-6">
               Our platform is designed to work with your existing tech stack, not replace it. We offer multiple integration methods to ensure a smooth experience:
             </p>
             
             <div className="space-y-6">
               <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/20 to-voice-purple/5 flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
                   <Cloud className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1 text-voice-dark group-hover:text-voice-purple transition-colors">API Integration</h4>
-                  <p className="text-voice-dark/70 text-sm">Connect directly to our REST API for full control and customization of the integration flow</p>
+                  <h4 className="font-semibold mb-1 text-gray-800 group-hover:text-voice-purple transition-colors">API Integration</h4>
+                  <p className="text-gray-600 text-sm">Connect directly to our REST API for full control and customization of the integration flow</p>
                 </div>
               </div>
               
               <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/20 to-voice-purple/5 flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
                   <FileText className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1 text-voice-dark group-hover:text-voice-purple transition-colors">Webhooks</h4>
-                  <p className="text-voice-dark/70 text-sm">Receive real-time data in your systems as conversations happen and analysis is performed</p>
+                  <h4 className="font-semibold mb-1 text-gray-800 group-hover:text-voice-purple transition-colors">Webhooks</h4>
+                  <p className="text-gray-600 text-sm">Receive real-time data in your systems as conversations happen and analysis is performed</p>
                 </div>
               </div>
               
               <div className="flex gap-4 items-start group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/20 to-voice-purple/5 flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/10 to-white flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
                   <Database className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1 text-voice-dark group-hover:text-voice-purple transition-colors">Pre-built Connectors</h4>
-                  <p className="text-voice-dark/70 text-sm">Use our library of pre-built connectors for popular platforms like Salesforce, Zendesk, HubSpot and more</p>
+                  <h4 className="font-semibold mb-1 text-gray-800 group-hover:text-voice-purple transition-colors">Pre-built Connectors</h4>
+                  <p className="text-gray-600 text-sm">Use our library of pre-built connectors for popular platforms like Salesforce, Zendesk, HubSpot and more</p>
                 </div>
               </div>
             </div>
@@ -248,11 +254,11 @@ const IntegrationSection = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/5 via-transparent to-voice-purple/5 blur-3xl opacity-30 rounded-full"></div>
             <div className="relative bg-white border border-voice-purple/10 rounded-xl p-8 shadow-lg">
-              <h4 className="text-lg font-semibold mb-6 flex items-center text-voice-dark">
+              <h4 className="text-lg font-semibold mb-6 flex items-center text-gray-800">
                 <MessageSquare className="w-5 h-5 mr-2 text-voice-purple" />
                 Integration Flow
               </h4>
-              <div className="bg-gradient-to-b from-white to-gray-50 p-4 rounded-lg shadow-inner">
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                 <IntegrationFlowchart />
               </div>
             </div>
@@ -263,7 +269,7 @@ const IntegrationSection = () => {
   );
 };
 
-// Added reusable component for feature display
+// Redesigned reusable component for feature display with better contrast
 interface FeatureDisplayProps {
   feature: {
     title: string;
@@ -279,11 +285,6 @@ interface FeatureDisplayProps {
 }
 
 const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps) => {
-  const gradientBg = 
-    activeFeature === "analysis" ? "from-voice-purple/5 to-white" :
-    activeFeature === "integration" ? "from-orange-500/5 to-white" : 
-    "from-blue-500/5 to-white";
-    
   const accentColor = 
     activeFeature === "analysis" ? "bg-voice-purple text-white" :
     activeFeature === "integration" ? "bg-orange-500 text-white" : 
@@ -295,15 +296,11 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-gradient-to-br from-gray-50/50 to-white rounded-2xl p-6 shadow-sm"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-white rounded-2xl p-6 shadow-md border border-gray-200"
     >
       {/* Left Side - Interactive Demo */}
       <div>
-        <div className={cn(
-          "overflow-hidden rounded-xl shadow-lg",
-        )}>
-          {content}
-        </div>
+        {content}
       </div>
       
       {/* Right Side - Feature Description */}
@@ -311,9 +308,11 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
         <div>
           <div className={cn(
             "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
-            "bg-gradient-to-br", gradientBg,
-            "border", feature.borderColor,
-            "shadow-md"
+            "shadow-md", 
+            activeFeature === "analysis" ? "bg-voice-purple/10 border-voice-purple/20" :
+            activeFeature === "integration" ? "bg-orange-500/10 border-orange-500/20" : 
+            "bg-blue-500/10 border-blue-500/20",
+            "border"
           )}>
             {feature.icon}
           </div>
@@ -329,7 +328,7 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
             {feature.description}
           </p>
           
-          <div>
+          <div className="bg-gray-50 p-5 rounded-xl border border-gray-100">
             <h4 className="font-medium text-gray-800 mb-3">How it works:</h4>
             <div className="space-y-3">
               {feature.steps.map((step, index) => (
@@ -348,12 +347,12 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
         </div>
         
         <div>
-          <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-lg p-4 shadow-sm">
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
             <div className="flex items-center mb-2">
               <Cloud className={cn("w-5 h-5 mr-2", feature.color)} />
               <h4 className="font-medium text-gray-800">Real-world impact:</h4>
             </div>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-700">
               {activeFeature === "analysis" && "Companies using our AI analysis see a 40% reduction in call handling time and 35% improvement in first-call resolution rates."}
               {activeFeature === "integration" && "Businesses report saving 15+ hours per week on manual data entry and seeing a 28% increase in workflow efficiency after integration."}
               {activeFeature === "followup" && "Automated follow-ups have resulted in a 53% increase in appointment confirmations and a 47% decrease in no-shows."}

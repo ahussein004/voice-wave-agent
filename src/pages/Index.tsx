@@ -14,7 +14,9 @@ const Index = () => {
       <HeroSection />
       <StatsSection />
       <InteractiveDemoSection />
-      <IntegrationSection />
+      <div className="bg-white">
+        <IntegrationSection />
+      </div>
       <CTASection />
     </div>
   );

@@ -44,8 +44,8 @@ const Flowchart = ({ className }: FlowchartProps) => {
                   />
                 </div>
                 <div className="flex flex-col items-center text-center">
-                  <span className="text-sm font-medium text-voice-cream">{node.label}</span>
-                  <span className="text-xs text-voice-cream/60">{node.subLabel}</span>
+                  <span className="text-sm font-medium text-gray-800">{node.label}</span>
+                  <span className="text-xs text-gray-500">{node.subLabel}</span>
                 </div>
               </motion.div>
               
@@ -57,7 +57,7 @@ const Flowchart = ({ className }: FlowchartProps) => {
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="hidden md:flex items-center"
                 >
-                  <ArrowRight className="w-6 h-6 text-voice-purple/40" />
+                  <ArrowRight className="w-6 h-6 text-gray-300" />
                 </motion.div>
               )}
             </React.Fragment>
