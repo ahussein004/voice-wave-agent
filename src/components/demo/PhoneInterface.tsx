@@ -70,6 +70,32 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     }
   };
   
+  const getIndustryTitle = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "Restaurant Reservation";
+      case "car":
+        return "Car Dealership Inquiry";
+      case "medical":
+        return "Healthcare Appointment";
+      default:
+        return "AI Voice Agent";
+    }
+  };
+
+  const getCtaText = () => {
+    switch (activeIndustry) {
+      case "restaurant":
+        return "See how our AI handles restaurant reservations";
+      case "car":
+        return "See how our AI handles car sales inquiries";
+      case "medical":
+        return "See how our AI handles medical appointments";
+      default:
+        return "Listen to our AI voice agent in action";
+    }
+  };
+  
   const messages = getConversationMessages();
   
   return (
@@ -86,12 +112,36 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
         
         <div className="p-4 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
-            <div className={`text-sm font-medium ${getIndustryHeadlineText()}`}>AI Voice Agent</div>
+            <div className={`text-sm font-medium ${getIndustryHeadlineText()}`}>{getIndustryTitle()}</div>
             <div className="text-sm opacity-70">2:13</div>
           </div>
 
           <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
-            {messages.map((message, index) => {
+            {!isPlaying && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="h-full flex flex-col items-center justify-center text-center p-4"
+              >
+                <p className="text-voice-cream mb-6 text-sm">
+                  {getCtaText()}
+                </p>
+                <button 
+                  onClick={togglePlay}
+                  className={cn(
+                    "w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-voice-purple/20 transition-transform hover:scale-105 mb-4",
+                    "bg-gradient-to-r from-voice-purple to-voice-purple-light",
+                  )}
+                >
+                  <Play className="text-white ml-1" size={24} />
+                </button>
+                <p className="text-voice-cream/60 text-xs mt-2">
+                  Click to hear the conversation
+                </p>
+              </motion.div>
+            )}
+            
+            {isPlaying && messages.map((message, index) => {
               if (message.sender === "system") {
                 return (
                   <motion.div 
@@ -127,26 +177,25 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             })}
           </div>
 
-          <div className="h-24 relative flex items-center justify-center">
-            <AudioVisualization 
-              isPlaying={isPlaying} 
-              color="#9b87f5"
-            />
-            
-            <button 
-              onClick={togglePlay}
-              className={cn(
-                "absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10 transition-transform hover:scale-105",
-                getIndustryColor(),
-                "shadow-lg shadow-voice-purple/20"
-              )}
-            >
-              {isPlaying ? 
-                <Pause className="text-white" size={20} /> : 
-                <Play className="text-white ml-1" size={20} />
-              }
-            </button>
-          </div>
+          {isPlaying && (
+            <div className="h-24 relative flex items-center justify-center">
+              <AudioVisualization 
+                isPlaying={isPlaying} 
+                color="#9b87f5"
+              />
+              
+              <button 
+                onClick={togglePlay}
+                className={cn(
+                  "absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10 transition-transform hover:scale-105",
+                  "bg-gradient-to-r from-voice-purple to-voice-purple-light",
+                  "shadow-lg shadow-voice-purple/20"
+                )}
+              >
+                <Pause className="text-white" size={20} />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>

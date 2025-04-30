@@ -13,9 +13,9 @@ import MedicalDemo from "./demo/MedicalDemo";
 type Industry = "restaurant" | "car" | "medical";
 
 const InteractiveDemoSection = () => {
-  const [activeIndustry, setActiveIndustry] = useState<Industry>("restaurant");
+  const [activeIndustry, setActiveIndustry] = useState<Industry>("medical");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(2); // Start with medical (index 2)
   const isMobile = useIsMobile();
 
   const industries: Industry[] = ["restaurant", "car", "medical"];
@@ -25,18 +25,8 @@ const InteractiveDemoSection = () => {
     getHeadlineGradient 
   } = useIndustryUI(activeIndustry);
 
-  // Auto-scroll through industries
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (!isPlaying) {
-        const nextIndex = (currentIndex + 1) % industries.length;
-        setCurrentIndex(nextIndex);
-        setActiveIndustry(industries[nextIndex]);
-      }
-    }, 15000); // Change every 15 seconds if not playing audio
-
-    return () => clearInterval(timer);
-  }, [currentIndex, industries, isPlaying]);
+  // Disable auto-scrolling completely - only move when user interacts
+  // We're removing the auto-scroll effect that was previously here
 
   const handleNextIndustry = () => {
     const nextIndex = (currentIndex + 1) % industries.length;
