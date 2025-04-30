@@ -18,8 +18,8 @@ const RestaurantDemo = ({
   getIndustryColor,
   getHeadlineGradient 
 }: RestaurantDemoProps) => {
-  const industryColor = getIndustryColor().replace("bg-", "");
   const colorHex = "#F97316"; // Orange color for restaurant
+  const audioUrl = "https://storage.vapi.ai/e7159544-37eb-4735-b708-51cc3e425e16-1745429620869-35dd65c1-6cad-4407-829f-6879e8f8cdc9-mono.wav";
   
   return (
     <motion.div
@@ -36,6 +36,7 @@ const RestaurantDemo = ({
           togglePlay={togglePlay}
           activeIndustry="restaurant"
           getIndustryColor={() => colorHex}
+          audioUrl={audioUrl}
         />
       </div>
       <div>

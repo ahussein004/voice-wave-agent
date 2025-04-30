@@ -10,6 +10,7 @@ interface PhoneInterfaceProps {
   togglePlay: () => void;
   activeIndustry: "restaurant" | "car" | "medical";
   getIndustryColor: () => string;
+  audioUrl?: string;
 }
 
 const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
@@ -17,6 +18,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   togglePlay,
   activeIndustry,
   getIndustryColor,
+  audioUrl
 }) => {
   // Total duration in seconds (conversation length)
   const totalDuration = 180;
@@ -234,6 +236,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
                 color="#9b87f5"
                 duration={totalDuration}
                 elapsedTime={elapsedTime}
+                audioUrl={audioUrl}
               />
               
               <button 

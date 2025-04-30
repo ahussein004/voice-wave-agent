@@ -64,25 +64,51 @@
   }
 }
 
-/* Audio Visualization Animations */
+/* Improved Audio Visualization Animations */
 .wave-bar {
   position: relative;
   display: inline-block;
   width: 3px;
   height: 20px;
-  background: theme('colors.voice.purple.light');
   margin: 0 1px;
-  border-radius: 1px;
+  border-radius: 2px;
   animation: audio-wave 1.2s ease-in-out infinite;
   transform-origin: bottom;
-  will-change: transform; /* Optimize animations */
+  will-change: transform, opacity;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
 }
 
-/* Improved animations with smoother transitions */
 @keyframes audio-wave {
-  0% { transform: scaleY(0.2); opacity: 0.7; }
-  50% { transform: scaleY(1); opacity: 1; }
-  100% { transform: scaleY(0.2); opacity: 0.7; }
+  0%, 100% { 
+    transform: scaleY(0.3); 
+    opacity: 0.7; 
+  }
+  25% { 
+    transform: scaleY(0.5); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: scaleY(1); 
+    opacity: 1; 
+  }
+  75% { 
+    transform: scaleY(0.7); 
+    opacity: 0.9; 
+  }
+}
+
+/* Add animation variation for a more natural look */
+.wave-bar:nth-child(odd) {
+  animation-duration: 1.3s;
+}
+
+.wave-bar:nth-child(3n) {
+  animation-duration: 1.5s;
+}
+
+.wave-bar:nth-child(3n+1) {
+  animation-duration: 1.8s;
 }
 
 /* Keep the rest of the existing CSS */

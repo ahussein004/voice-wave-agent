@@ -4,17 +4,20 @@ import React, { useEffect, useRef } from 'react';
 interface AudioVisualizationProps {
   isPlaying: boolean;
   color: string;
-  duration?: number; // Optional duration in seconds
-  elapsedTime?: number; // Optional elapsed time in seconds
+  duration?: number; // Duration in seconds
+  elapsedTime?: number; // Elapsed time in seconds
+  audioUrl?: string; // New prop for audio URL
 }
 
 const AudioVisualization = ({ 
   isPlaying, 
   color,
   duration,
-  elapsedTime
+  elapsedTime,
+  audioUrl
 }: AudioVisualizationProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -39,11 +42,11 @@ const AudioVisualization = ({
       const height = 3 + Math.floor(Math.random() * 20) * heightFactor;
       bar.style.height = `${height}px`;
       
-      // Randomize the animation duration slightly
-      const duration = 1 + Math.random() * 0.5; // 1 to 1.5 seconds
-      bar.style.animationDuration = `${duration}s`;
+      // Randomize the animation duration slightly for more natural look
+      const animDuration = 1 + Math.random() * 0.7; // 1 to 1.7 seconds
+      bar.style.animationDuration = `${animDuration}s`;
       
-      // Add slight delay based on position
+      // Add slight delay based on position for wave-like effect
       bar.style.animationDelay = `${i * 0.05}s`;
       
       bars.push(bar);
@@ -61,12 +64,53 @@ const AudioVisualization = ({
     };
   }, [isPlaying, color]);
 
+  // Handle audio playback
+  useEffect(() => {
+    // Create audio element if it doesn't exist
+    if (!audioRef.current && audioUrl) {
+      audioRef.current = new Audio(audioUrl);
+    }
+
+    // Update audio source if URL changes
+    if (audioRef.current && audioUrl && audioRef.current.src !== audioUrl) {
+      audioRef.current.src = audioUrl;
+    }
+
+    // Play or pause based on isPlaying prop
+    if (audioRef.current) {
+      if (isPlaying) {
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.error("Audio playback error:", error);
+          });
+        }
+      } else {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, [isPlaying, audioUrl]);
+
   // Format time in MM:SS format
   const formatTime = (seconds?: number) => {
     if (seconds === undefined) return "--:--";
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
+
+  // Calculate remaining time
+  const getRemainingTime = () => {
+    if (duration === undefined || elapsedTime === undefined) return "--:--";
+    const remaining = Math.max(0, duration - elapsedTime);
+    return formatTime(remaining);
   };
 
   return (
@@ -83,12 +127,18 @@ const AudioVisualization = ({
       
       {/* Timer display - only show if duration is provided */}
       {duration !== undefined && (
-        <div className="absolute bottom-0 w-full flex justify-center items-center text-xs text-voice-cream/80 mt-2">
-          <div className="flex space-x-2 items-center">
-            <span>{formatTime(elapsedTime)}</span>
-            <span className="mx-1">/</span>
-            <span>{formatTime(duration)}</span>
+        <div className="absolute bottom-0 w-full flex justify-between items-center text-xs text-voice-cream/80 mt-2 px-2">
+          <span>{formatTime(elapsedTime)}</span>
+          <div className="flex-grow mx-2 h-1 bg-voice-cream/20 rounded-full overflow-hidden">
+            <div 
+              className="h-full rounded-full transition-all duration-300 ease-linear"
+              style={{ 
+                width: `${(elapsedTime || 0) / (duration || 1) * 100}%`,
+                backgroundColor: color 
+              }}
+            />
           </div>
+          <span>{getRemainingTime()}</span>
         </div>
       )}
     </div>

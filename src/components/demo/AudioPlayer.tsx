@@ -10,6 +10,7 @@ interface AudioPlayerProps {
   color: string;
   isPlaying: boolean;
   togglePlay: () => void;
+  audioUrl?: string;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -17,6 +18,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   color,
   isPlaying,
   togglePlay,
+  audioUrl
 }) => {
   const [progress, setProgress] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -59,6 +61,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
+
+  // Calculate remaining time
+  const getRemainingTime = () => {
+    const elapsed = (totalDuration * progress) / 100;
+    const remaining = Math.max(0, totalDuration - elapsed);
+    const minutes = Math.floor(remaining / 60);
+    const seconds = Math.floor(remaining % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
   
   return (
     <motion.div 
@@ -81,7 +92,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
             isPlaying={isPlaying} 
             color={color} 
             duration={totalDuration} 
-            elapsedTime={elapsedTime} 
+            elapsedTime={(totalDuration * progress) / 100}
+            audioUrl={audioUrl}
           />
         </div>
         
@@ -97,7 +109,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         
         <div className="flex justify-between text-xs text-voice-cream/70">
           <span>{formatTime(progress)}</span>
-          <span>3:00</span>
+          <span>{getRemainingTime()}</span>
         </div>
         
         <div className="flex items-center justify-between mt-4">
