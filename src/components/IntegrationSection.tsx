@@ -1,22 +1,23 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IntegrationFlowchart from "./IntegrationFlowchart";
 import { Phone, MessageSquare, Brain, Laptop, FileText, Database, Cloud } from "lucide-react";
 import AnalysisSummaryCard from "./AnalysisSummaryCard";
-
 const IntegrationSection = () => {
-  return (
-    <section className="py-24 bg-voice-dark border-t border-voice-purple/10" id="integrations">
+  return <section className="py-24 bg-voice-dark border-t border-voice-purple/10" id="integrations">
       <div className="container mx-auto px-2 sm:px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 18 }} 
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 18
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.6
+      }} className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 text-gradient">
             Intelligent Call Analysis & System Integration
           </h2>
@@ -28,13 +29,17 @@ const IntegrationSection = () => {
 
         {/* Call Analysis Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-voice-dark/60 backdrop-blur-sm border border-voice-purple/10 rounded-xl p-8 shadow-lg"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5
+        }} className="bg-voice-dark/60 backdrop-blur-sm border border-voice-purple/10 rounded-xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-br from-voice-purple to-voice-purple-light rounded-lg flex items-center justify-center mb-4">
               <Brain className="text-white" />
             </div>
@@ -62,13 +67,18 @@ const IntegrationSection = () => {
             </ul>
           </motion.div>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-voice-dark/60 backdrop-blur-sm border border-voice-purple/10 rounded-xl p-8 shadow-lg"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.2
+        }} className="bg-voice-dark/60 backdrop-blur-sm border border-voice-purple/10 rounded-xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-300 rounded-lg flex items-center justify-center mb-4">
               <Laptop className="text-white" />
             </div>
@@ -96,13 +106,18 @@ const IntegrationSection = () => {
             </ul>
           </motion.div>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-voice-dark/60 backdrop-blur-sm border border-voice-purple/10 rounded-xl p-8 shadow-lg"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.4
+        }} className="bg-voice-dark/60 backdrop-blur-sm border border-voice-purple/10 rounded-xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-300 rounded-lg flex items-center justify-center mb-4">
               <MessageSquare className="text-white" />
             </div>
@@ -132,30 +147,21 @@ const IntegrationSection = () => {
         </div>
         
         {/* Live Analysis Example */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-16"
-        >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-2">See AI Analysis in Action</h3>
-            <p className="text-voice-cream/70 max-w-2xl mx-auto">
-              Our AI analyzes conversations in real-time, extracting key information and insights that power your business workflows
-            </p>
-          </div>
-          <AnalysisSummaryCard />
-        </motion.div>
+        
         
         {/* Integration Process */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 10
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.5,
+        delay: 0.4
+      }} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <h3 className="text-2xl font-bold mb-4">Seamless Integration Process</h3>
             <p className="text-voice-cream/80 mb-6">
@@ -207,8 +213,6 @@ const IntegrationSection = () => {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default IntegrationSection;
