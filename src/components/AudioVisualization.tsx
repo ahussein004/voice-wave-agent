@@ -6,7 +6,7 @@ interface AudioVisualizationProps {
   color: string;
   duration?: number; // Duration in seconds
   elapsedTime?: number; // Elapsed time in seconds
-  audioUrl?: string; // New prop for audio URL
+  audioUrl?: string; // Audio URL prop
 }
 
 const AudioVisualization = ({ 
@@ -69,15 +69,17 @@ const AudioVisualization = ({
     // Create audio element if it doesn't exist
     if (!audioRef.current && audioUrl) {
       audioRef.current = new Audio(audioUrl);
+      audioRef.current.preload = "auto";
     }
 
     // Update audio source if URL changes
     if (audioRef.current && audioUrl && audioRef.current.src !== audioUrl) {
       audioRef.current.src = audioUrl;
+      audioRef.current.load();
     }
 
     // Play or pause based on isPlaying prop
-    if (audioRef.current) {
+    if (audioRef.current && audioUrl) {
       if (isPlaying) {
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
@@ -94,6 +96,7 @@ const AudioVisualization = ({
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        audioRef.current.currentTime = 0;
       }
     };
   }, [isPlaying, audioUrl]);
