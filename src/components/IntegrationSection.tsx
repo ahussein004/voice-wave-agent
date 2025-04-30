@@ -49,16 +49,16 @@ const IntegrationSection = () => {
       borderColor: "border-blue-500/20",
       icon: <Mail className="h-6 w-6 text-blue-500" />,
       steps: [
-        "Follow-up messages are generated based on call content",
-        "Confirmation and reminder messages are scheduled",
-        "Personalized communication based on customer preference",
-        "Multi-channel engagement ensures delivery"
+        "AI determines appropriate follow-up actions based on call content",
+        "Tasks requiring human attention are delegated to staff via email",
+        "Automated confirmations and reminders are sent to customers via SMS",
+        "All communications are tracked and analyzed for continuous improvement"
       ]
     }
   };
 
   return (
-    <section className="py-24 bg-white border-t border-gray-100" id="integrations">
+    <section className="py-24 bg-gray-50 border-t border-gray-200" id="integrations">
       <div className="container mx-auto px-2 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -83,13 +83,13 @@ const IntegrationSection = () => {
           className="w-full max-w-5xl mx-auto"
         >
           <div className="flex justify-center mb-8">
-            <TabsList className="bg-gray-100 p-1.5 rounded-full shadow-sm border border-gray-200">
+            <TabsList className="bg-white p-1.5 rounded-full shadow-sm border border-gray-200">
               <TabsTrigger 
                 value="analysis" 
                 className={cn(
                   "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
                   "data-[state=active]:shadow-md font-medium",
-                  "data-[state=active]:bg-white data-[state=active]:text-voice-purple",
+                  "data-[state=active]:bg-voice-purple data-[state=active]:text-white",
                   "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
                 )}
               >
@@ -102,7 +102,7 @@ const IntegrationSection = () => {
                 className={cn(
                   "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
                   "data-[state=active]:shadow-md font-medium",
-                  "data-[state=active]:bg-white data-[state=active]:text-orange-500",
+                  "data-[state=active]:bg-orange-500 data-[state=active]:text-white",
                   "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
                 )}
               >
@@ -115,7 +115,7 @@ const IntegrationSection = () => {
                 className={cn(
                   "rounded-full px-6 py-2.5 gap-2 transition-all duration-300",
                   "data-[state=active]:shadow-md font-medium",
-                  "data-[state=active]:bg-white data-[state=active]:text-blue-500",
+                  "data-[state=active]:bg-blue-500 data-[state=active]:text-white",
                   "hover:bg-gray-50 data-[state=inactive]:text-gray-700"
                 )}
               >
@@ -169,23 +169,28 @@ const IntegrationSection = () => {
                 content={
                   <div className="bg-white rounded-xl p-6 border border-blue-200 shadow-lg">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
-                      <MessageSquare className="w-5 h-5 mr-2 text-blue-500" />
-                      Human-AI Collaboration & Follow-up Communication
+                      <Mail className="w-5 h-5 mr-2 text-blue-500" />
+                      Human-AI Collaboration & Automated Follow-ups
                     </h3>
                     
-                    <div className="space-y-6">
-                      {/* Email - Human Task Assignment Section */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Email - Human Task Assignment Section - Clearly labeled */}
                       <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-                        <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <div className="bg-blue-50 px-4 py-3 border-b border-blue-200">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-2">
                               <Mail className="w-4 h-4 text-blue-600" />
-                              <h4 className="text-sm font-medium text-gray-800">Email Task Assignment to Staff</h4>
+                              <h4 className="text-sm font-medium text-gray-800">Staff Email Delegation</h4>
                             </div>
                             <div className="text-xs px-2 py-1 bg-blue-100 text-blue-600 rounded-full">Human Handoff</div>
                           </div>
                         </div>
                         <div className="p-4">
+                          <div className="text-xs text-gray-500 mb-3">
+                            <p className="font-medium text-blue-800 mb-1">When human expertise is needed:</p>
+                            <p>Our AI automatically assigns tasks to your staff based on call content, expertise required, and availability.</p>
+                          </div>
+                          
                           <div className="border border-gray-200 rounded-lg p-4 bg-white">
                             <div className="flex items-center justify-between mb-2">
                               <div className="flex items-center space-x-2">
@@ -211,62 +216,66 @@ const IntegrationSection = () => {
                                 <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Review Details</button>
                                 <button className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">Call Patient</button>
                               </div>
-                              <div className="text-gray-500">Automatically assigned based on patient history</div>
                             </div>
+                          </div>
+                          
+                          <div className="mt-3 text-xs text-blue-700">
+                            <ul className="list-disc pl-4 space-y-1">
+                              <li>Assigns tasks to appropriate staff based on skills and availability</li>
+                              <li>Includes full context and call transcript with key points highlighted</li>
+                              <li>Prioritizes tasks based on urgency and business rules</li>
+                            </ul>
                           </div>
                         </div>
                       </div>
                       
                       {/* SMS Follow-up Preview - Clearly labeled */}
                       <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
-                        <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <div className="bg-green-50 px-4 py-3 border-b border-green-200">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-2">
                               <MessageSquare className="w-4 h-4 text-green-600" />
-                              <h4 className="text-sm font-medium text-gray-800">Automated SMS Follow-ups</h4>
+                              <h4 className="text-sm font-medium text-gray-800">Customer SMS Follow-ups</h4>
                             </div>
-                            <div className="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">Automated</div>
+                            <div className="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">Fully Automated</div>
                           </div>
                         </div>
                         <div className="p-4 bg-gray-50">
-                          <div className="flex justify-between items-center mb-2">
-                            <div className="text-xs font-medium text-gray-500">2 Messages in Sequence</div>
-                            <div className="text-xs text-gray-500">Patient: +1 (555) 123-4567</div>
+                          <div className="text-xs text-gray-500 mb-3">
+                            <p className="font-medium text-green-800 mb-1">Timely automated customer communications:</p>
+                            <p>Our system automatically sends confirmation and reminder texts based on the conversation content.</p>
                           </div>
                           
-                          {/* Initial confirmation SMS */}
+                          {/* SMS follow-up examples */}
                           <div className="flex flex-col space-y-3">
                             <div className="flex items-start space-x-2">
-                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
-                                <MessageSquare className="w-4 h-4 text-blue-500" />
+                              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                <MessageSquare className="w-4 h-4 text-green-500" />
                               </div>
-                              <div className="bg-blue-500 text-white px-4 py-3 rounded-lg text-sm max-w-sm">
-                                <span className="block text-xs text-blue-100 mb-1">Sent: Immediately after call</span>
+                              <div className="bg-green-500 text-white px-4 py-3 rounded-lg text-sm max-w-sm">
+                                <span className="block text-xs text-green-100 mb-1">Sent: Immediately after call</span>
                                 Your appointment is confirmed for May 2 at 2:00 PM with Dr. Smith. Reply YES to confirm or call (555) 123-4567 to reschedule.
                               </div>
                             </div>
                             
                             {/* Reminder SMS */}
                             <div className="flex items-start space-x-2">
-                              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
-                                <Clock className="w-4 h-4 text-blue-500" />
+                              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                <Clock className="w-4 h-4 text-green-500" />
                               </div>
-                              <div className="bg-blue-500 text-white px-4 py-3 rounded-lg text-sm max-w-sm">
-                                <span className="block text-xs text-blue-100 mb-1">Scheduled: 24h before appointment</span>
+                              <div className="bg-green-500 text-white px-4 py-3 rounded-lg text-sm max-w-sm">
+                                <span className="block text-xs text-green-100 mb-1">Scheduled: 24h before appointment</span>
                                 Reminder: Your dental appointment is tomorrow, May 2 at 2:00 PM. Please arrive 15 minutes early to complete paperwork. Reply INFO for directions.
                               </div>
                             </div>
                           </div>
                           
-                          <div className="mt-4 bg-green-50 border border-green-100 rounded-lg p-3">
-                            <div className="text-xs text-green-700">
-                              <p className="font-medium mb-1">SMS Follow-up Benefits:</p>
-                              <ul className="list-disc pl-4 space-y-1">
-                                <li>93% of SMS messages are read within 3 minutes</li>
-                                <li>Reduces appointment no-shows by up to 45%</li>
-                                <li>Automated confirmations and reminders with no staff effort</li>
-                              </ul>
-                            </div>
+                          <div className="mt-3 text-xs text-green-700">
+                            <ul className="list-disc pl-4 space-y-1">
+                              <li>93% of SMS messages are read within 3 minutes</li>
+                              <li>Reduces appointment no-shows by up to 45%</li>
+                              <li>No staff effort required for routine communications</li>
+                            </ul>
                           </div>
                         </div>
                       </div>
@@ -429,7 +438,7 @@ const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps
             <p className="text-gray-700">
               {activeFeature === "analysis" && "Companies using our AI analysis see a 40% reduction in call handling time and 35% improvement in first-call resolution rates."}
               {activeFeature === "integration" && "Businesses report saving 15+ hours per week on manual data entry and seeing a 28% increase in workflow efficiency after integration."}
-              {activeFeature === "followup" && "Automated follow-ups have resulted in a 53% increase in appointment confirmations and a 47% decrease in no-shows."}
+              {activeFeature === "followup" && "Our dual approach of human delegation and automated messaging has improved response times by 64% and increased customer satisfaction scores by 41%."}
             </p>
           </div>
         </div>
