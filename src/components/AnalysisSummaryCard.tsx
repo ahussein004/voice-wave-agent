@@ -25,30 +25,30 @@ const AnalysisSummaryCard = () => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.6 }}
-    className="mt-8 w-full bg-voice-dark/80 rounded-2xl border border-voice-purple/30 shadow-xl p-8"
+    className="bg-gradient-to-br from-voice-purple/10 to-white rounded-lg border border-voice-purple/20 shadow-lg p-6"
   >
     <div className="mb-2 text-xs text-voice-purple uppercase font-semibold tracking-wider">
       Live Call Analysis Example
     </div>
-    <div className="text-base font-medium mb-3 text-balance">{analysis.summary}</div>
+    <div className="text-gray-800 text-base font-medium mb-4 text-balance">{analysis.summary}</div>
     <div className="flex flex-wrap gap-4 mb-4">
       {analysis.stats.map((stat, i) => (
         <div
           key={stat.label}
-          className="flex items-center space-x-2 px-3 py-2 bg-voice-purple/10 rounded-lg border border-voice-purple/20 min-w-[120px]"
+          className="flex items-center space-x-2 px-3 py-2 bg-white rounded-lg border border-voice-purple/10 shadow-sm min-w-[120px]"
         >
           {stat.icon}
-          <span className="font-semibold">{stat.value}</span>
-          <span className="text-xs text-voice-cream/60">{stat.label}</span>
+          <span className="font-semibold text-gray-900">{stat.value}</span>
+          <span className="text-xs text-gray-500">{stat.label}</span>
         </div>
       ))}
     </div>
-    <div className="text-[13px] text-voice-cream/80 mb-1">Key information extracted:</div>
+    <div className="text-[13px] text-gray-700 mb-2">Key information extracted:</div>
     <ul className="flex flex-wrap gap-2">
       {analysis.extraction.map((item, idx) => (
         <li
           key={idx}
-          className="px-3 py-1 rounded-full bg-voice-purple/10 border border-voice-purple/20 text-xs text-voice-purple"
+          className="px-3 py-1 rounded-full bg-white border border-voice-purple/20 text-xs text-voice-purple shadow-sm hover:shadow transition-all duration-150"
         >
           {item}
         </li>

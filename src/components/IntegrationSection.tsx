@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -6,6 +7,7 @@ import { Phone, MessageSquare, Brain, Laptop, FileText, Database, Cloud, Mic, Li
 import AnalysisSummaryCard from "./AnalysisSummaryCard";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 const IntegrationSection = () => {
   const [activeFeature, setActiveFeature] = useState<"analysis" | "integration" | "followup">("analysis");
@@ -65,7 +67,7 @@ const IntegrationSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4 text-voice-dark">
+          <h2 className="text-4xl font-bold mb-4 text-voice-dark bg-clip-text text-transparent bg-gradient-to-r from-voice-dark to-voice-dark/80">
             Intelligent Call Analysis & System Integration
           </h2>
           <p className="text-lg text-voice-dark/80 max-w-3xl mx-auto">
@@ -74,161 +76,127 @@ const IntegrationSection = () => {
           </p>
         </motion.div>
 
-        {/* Interactive Feature Selector */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {(Object.keys(featureData) as Array<keyof typeof featureData>).map((key) => (
-            <motion.button
-              key={key}
-              onClick={() => setActiveFeature(key)}
-              className={cn(
-                "px-6 py-3 rounded-full flex items-center gap-2 transition-all",
-                activeFeature === key 
-                  ? `${featureData[key].bgColor} ${featureData[key].borderColor} border shadow-lg` 
-                  : "bg-gray-100 hover:bg-gray-200 border border-gray-200"
-              )}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center",
-                activeFeature === key ? featureData[key].color : "text-gray-500"
-              )}>
-                {featureData[key].icon}
-              </span>
-              <span className={cn(
-                "font-medium", 
-                activeFeature === key ? featureData[key].color : "text-gray-700"
-              )}>
-                {featureData[key].title}
-              </span>
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Feature Demo Content */}
-        <motion.div
-          key={activeFeature}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16"
+        {/* Feature Tabs */}
+        <Tabs 
+          defaultValue="analysis" 
+          onValueChange={(value) => setActiveFeature(value as "analysis" | "integration" | "followup")}
+          className="w-full max-w-5xl mx-auto"
         >
-          {/* Left Side - Interactive Demo */}
-          <div>
-            <div className={cn(
-              "p-2 rounded-2xl border shadow-lg overflow-hidden",
-              featureData[activeFeature].borderColor
-            )}>
-              <div className="relative">
-                <div className={cn(
-                  "absolute -inset-4 blur-2xl opacity-20",
-                  featureData[activeFeature].bgColor
-                )}></div>
-                
-                {activeFeature === "analysis" && (
-                  <AnalysisSummaryCard />
+          <div className="flex justify-center mb-8">
+            <TabsList className="bg-gray-100/50 p-1 shadow-inner">
+              <TabsTrigger 
+                value="analysis" 
+                className={cn(
+                  "rounded-full data-[state=active]:shadow-md transition-all px-6 py-2.5 gap-2",
+                  "data-[state=active]:bg-white data-[state=active]:text-voice-purple font-medium"
                 )}
-                
-                {activeFeature === "integration" && (
-                  <div className="bg-white rounded-xl p-6">
+              >
+                <Brain className="h-4 w-4" />
+                <span className="hidden sm:inline">AI Call Analysis</span>
+              </TabsTrigger>
+              
+              <TabsTrigger 
+                value="integration" 
+                className={cn(
+                  "rounded-full data-[state=active]:shadow-md transition-all px-6 py-2.5 gap-2",
+                  "data-[state=active]:bg-white data-[state=active]:text-orange-500 font-medium"
+                )}
+              >
+                <Link className="h-4 w-4" />
+                <span className="hidden sm:inline">System Integration</span>
+              </TabsTrigger>
+              
+              <TabsTrigger 
+                value="followup" 
+                className={cn(
+                  "rounded-full data-[state=active]:shadow-md transition-all px-6 py-2.5 gap-2",
+                  "data-[state=active]:bg-white data-[state=active]:text-blue-500 font-medium"
+                )}
+              >
+                <Mail className="h-4 w-4" />
+                <span className="hidden sm:inline">Automated Follow-ups</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
+
+          {/* Feature Content */}
+          <div className="mt-6">
+            <TabsContent 
+              value="analysis" 
+              className="mt-0 focus-visible:outline-none focus-visible:ring-0"
+            >
+              <FeatureDisplay 
+                feature={featureData.analysis} 
+                activeFeature="analysis"
+                content={<AnalysisSummaryCard />}
+              />
+            </TabsContent>
+            
+            <TabsContent 
+              value="integration" 
+              className="mt-0 focus-visible:outline-none focus-visible:ring-0"
+            >
+              <FeatureDisplay 
+                feature={featureData.integration} 
+                activeFeature="integration"
+                content={
+                  <div className="bg-gradient-to-br from-orange-50 to-white rounded-xl p-6 border border-orange-200/30 shadow-lg">
                     <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <Database className="w-5 h-5 mr-2 text-orange-500" />
                       System Integration Flow
                     </h3>
-                    <IntegrationFlowchart />
+                    <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow-inner">
+                      <IntegrationFlowchart />
+                    </div>
                   </div>
-                )}
-                
-                {activeFeature === "followup" && (
-                  <div className="bg-white rounded-xl p-6 space-y-4">
-                    <h3 className="text-lg font-medium text-gray-800 mb-2 flex items-center">
+                }
+              />
+            </TabsContent>
+            
+            <TabsContent 
+              value="followup" 
+              className="mt-0 focus-visible:outline-none focus-visible:ring-0"
+            >
+              <FeatureDisplay 
+                feature={featureData.followup} 
+                activeFeature="followup"
+                content={
+                  <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-200/30 shadow-lg">
+                    <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
                       <MessageSquare className="w-5 h-5 mr-2 text-blue-500" />
                       Follow-up Communication
                     </h3>
                     
-                    {/* Email Preview */}
-                    <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-sm text-gray-500">To: samantha@example.com</div>
-                        <div className="text-sm text-gray-500">12:42 PM</div>
+                    <div className="space-y-4">
+                      {/* Email Preview */}
+                      <div className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="text-sm text-gray-500">To: samantha@example.com</div>
+                          <div className="text-sm text-gray-500">12:42 PM</div>
+                        </div>
+                        <div className="text-sm font-medium mb-1">Appointment Confirmation: May 2, 2:00 PM</div>
+                        <div className="text-xs text-gray-600">
+                          Hi Samantha, this is a confirmation of your appointment rescheduled for May 2 at 2:00 PM. 
+                          Please reply to confirm or call us if you need to make any changes.
+                        </div>
                       </div>
-                      <div className="text-sm font-medium mb-1">Appointment Confirmation: May 2, 2:00 PM</div>
-                      <div className="text-xs text-gray-600">
-                        Hi Samantha, this is a confirmation of your appointment rescheduled for May 2 at 2:00 PM. 
-                        Please reply to confirm or call us if you need to make any changes.
-                      </div>
-                    </div>
-                    
-                    {/* SMS Preview */}
-                    <div className="border border-gray-200 rounded-lg p-4 bg-blue-50">
-                      <div className="flex justify-end mb-1">
-                        <div className="text-xs text-gray-500">12:43 PM</div>
-                      </div>
-                      <div className="bg-blue-500 text-white p-2 rounded-lg text-sm max-w-xs ml-auto">
-                        Your appointment is confirmed for May 2 at 2:00 PM. Reply YES to confirm or call (555) 123-4567 to reschedule.
+                      
+                      {/* SMS Preview */}
+                      <div className="border border-gray-200 rounded-lg p-4 bg-blue-50">
+                        <div className="flex justify-end mb-1">
+                          <div className="text-xs text-gray-500">12:43 PM</div>
+                        </div>
+                        <div className="bg-blue-500 text-white p-2 rounded-lg text-sm max-w-xs ml-auto">
+                          Your appointment is confirmed for May 2 at 2:00 PM. Reply YES to confirm or call (555) 123-4567 to reschedule.
+                        </div>
                       </div>
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
+                }
+              />
+            </TabsContent>
           </div>
-          
-          {/* Right Side - Feature Description */}
-          <div className="space-y-8">
-            <div>
-              <div className={cn(
-                "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
-                featureData[activeFeature].bgColor
-              )}>
-                {featureData[activeFeature].icon}
-              </div>
-              
-              <h3 className={cn(
-                "text-3xl font-bold mb-4", 
-                featureData[activeFeature].color
-              )}>
-                {featureData[activeFeature].title}
-              </h3>
-              
-              <p className="text-gray-700 mb-6 text-lg">
-                {featureData[activeFeature].description}
-              </p>
-              
-              <div>
-                <h4 className="font-medium text-gray-800 mb-3">How it works:</h4>
-                <div className="space-y-3">
-                  {featureData[activeFeature].steps.map((step, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className={cn(
-                        "w-6 h-6 rounded-full flex items-center justify-center text-xs text-white mr-3 flex-shrink-0 mt-0.5",
-                        activeFeature === "analysis" ? "bg-voice-purple" : 
-                        activeFeature === "integration" ? "bg-orange-500" : "bg-blue-500"
-                      )}>
-                        {index + 1}
-                      </div>
-                      <p className="text-gray-600">{step}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                <div className="flex items-center mb-2">
-                  <Cloud className={cn("w-5 h-5 mr-2", featureData[activeFeature].color)} />
-                  <h4 className="font-medium text-gray-800">Real-world impact:</h4>
-                </div>
-                <p className="text-gray-600 text-sm">
-                  {activeFeature === "analysis" && "Companies using our AI analysis see a 40% reduction in call handling time and 35% improvement in first-call resolution rates."}
-                  {activeFeature === "integration" && "Businesses report saving 15+ hours per week on manual data entry and seeing a 28% increase in workflow efficiency after integration."}
-                  {activeFeature === "followup" && "Automated follow-ups have resulted in a 53% increase in appointment confirmations and a 47% decrease in no-shows."}
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        </Tabs>
         
         {/* Integration Process - Keep this section */}
         <motion.div
@@ -236,41 +204,41 @@ const IntegrationSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-24 max-w-6xl mx-auto"
         >
-          <div>
+          <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <h3 className="text-2xl font-bold mb-4 text-voice-dark">Seamless Integration Process</h3>
             <p className="text-voice-dark/80 mb-6">
               Our platform is designed to work with your existing tech stack, not replace it. We offer multiple integration methods to ensure a smooth experience:
             </p>
             
             <div className="space-y-6">
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-full bg-voice-purple/20 flex items-center justify-center flex-shrink-0 border border-voice-purple/30">
+              <div className="flex gap-4 items-start group">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/20 to-voice-purple/5 flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
                   <Cloud className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1 text-voice-dark">API Integration</h4>
+                  <h4 className="font-semibold mb-1 text-voice-dark group-hover:text-voice-purple transition-colors">API Integration</h4>
                   <p className="text-voice-dark/70 text-sm">Connect directly to our REST API for full control and customization of the integration flow</p>
                 </div>
               </div>
               
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-full bg-voice-purple/20 flex items-center justify-center flex-shrink-0 border border-voice-purple/30">
+              <div className="flex gap-4 items-start group">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/20 to-voice-purple/5 flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
                   <FileText className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1 text-voice-dark">Webhooks</h4>
+                  <h4 className="font-semibold mb-1 text-voice-dark group-hover:text-voice-purple transition-colors">Webhooks</h4>
                   <p className="text-voice-dark/70 text-sm">Receive real-time data in your systems as conversations happen and analysis is performed</p>
                 </div>
               </div>
               
-              <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-full bg-voice-purple/20 flex items-center justify-center flex-shrink-0 border border-voice-purple/30">
+              <div className="flex gap-4 items-start group">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-voice-purple/20 to-voice-purple/5 flex items-center justify-center flex-shrink-0 border border-voice-purple/20 group-hover:shadow-md transition-all">
                   <Database className="w-5 h-5 text-voice-purple" />
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1 text-voice-dark">Pre-built Connectors</h4>
+                  <h4 className="font-semibold mb-1 text-voice-dark group-hover:text-voice-purple transition-colors">Pre-built Connectors</h4>
                   <p className="text-voice-dark/70 text-sm">Use our library of pre-built connectors for popular platforms like Salesforce, Zendesk, HubSpot and more</p>
                 </div>
               </div>
@@ -278,18 +246,122 @@ const IntegrationSection = () => {
           </div>
           
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/10 via-transparent to-voice-purple/10 blur-3xl opacity-30"></div>
-            <div className="relative bg-white border border-voice-purple/20 rounded-xl p-6 shadow-lg">
-              <h4 className="text-lg font-semibold mb-4 flex items-center text-voice-dark">
+            <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/5 via-transparent to-voice-purple/5 blur-3xl opacity-30 rounded-full"></div>
+            <div className="relative bg-white border border-voice-purple/10 rounded-xl p-8 shadow-lg">
+              <h4 className="text-lg font-semibold mb-6 flex items-center text-voice-dark">
                 <MessageSquare className="w-5 h-5 mr-2 text-voice-purple" />
                 Integration Flow
               </h4>
-              <IntegrationFlowchart />
+              <div className="bg-gradient-to-b from-white to-gray-50 p-4 rounded-lg shadow-inner">
+                <IntegrationFlowchart />
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
+  );
+};
+
+// Added reusable component for feature display
+interface FeatureDisplayProps {
+  feature: {
+    title: string;
+    description: string;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+    icon: JSX.Element;
+    steps: string[];
+  };
+  activeFeature: "analysis" | "integration" | "followup";
+  content: React.ReactNode;
+}
+
+const FeatureDisplay = ({ feature, activeFeature, content }: FeatureDisplayProps) => {
+  const gradientBg = 
+    activeFeature === "analysis" ? "from-voice-purple/5 to-white" :
+    activeFeature === "integration" ? "from-orange-500/5 to-white" : 
+    "from-blue-500/5 to-white";
+    
+  const accentColor = 
+    activeFeature === "analysis" ? "bg-voice-purple text-white" :
+    activeFeature === "integration" ? "bg-orange-500 text-white" : 
+    "bg-blue-500 text-white";
+
+  return (
+    <motion.div
+      key={activeFeature}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-gradient-to-br from-gray-50/50 to-white rounded-2xl p-6 shadow-sm"
+    >
+      {/* Left Side - Interactive Demo */}
+      <div>
+        <div className={cn(
+          "overflow-hidden rounded-xl shadow-lg",
+        )}>
+          {content}
+        </div>
+      </div>
+      
+      {/* Right Side - Feature Description */}
+      <div className="space-y-8">
+        <div>
+          <div className={cn(
+            "w-16 h-16 rounded-2xl flex items-center justify-center mb-6",
+            "bg-gradient-to-br", gradientBg,
+            "border", feature.borderColor,
+            "shadow-md"
+          )}>
+            {feature.icon}
+          </div>
+          
+          <h3 className={cn(
+            "text-3xl font-bold mb-4", 
+            feature.color
+          )}>
+            {feature.title}
+          </h3>
+          
+          <p className="text-gray-700 mb-6 text-lg">
+            {feature.description}
+          </p>
+          
+          <div>
+            <h4 className="font-medium text-gray-800 mb-3">How it works:</h4>
+            <div className="space-y-3">
+              {feature.steps.map((step, index) => (
+                <div key={index} className="flex items-start group">
+                  <div className={cn(
+                    "w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3 flex-shrink-0 mt-0.5 transition-transform group-hover:scale-110",
+                    accentColor
+                  )}>
+                    {index + 1}
+                  </div>
+                  <p className="text-gray-600">{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            <div className="flex items-center mb-2">
+              <Cloud className={cn("w-5 h-5 mr-2", feature.color)} />
+              <h4 className="font-medium text-gray-800">Real-world impact:</h4>
+            </div>
+            <p className="text-gray-600 text-sm">
+              {activeFeature === "analysis" && "Companies using our AI analysis see a 40% reduction in call handling time and 35% improvement in first-call resolution rates."}
+              {activeFeature === "integration" && "Businesses report saving 15+ hours per week on manual data entry and seeing a 28% increase in workflow efficiency after integration."}
+              {activeFeature === "followup" && "Automated follow-ups have resulted in a 53% increase in appointment confirmations and a 47% decrease in no-shows."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
