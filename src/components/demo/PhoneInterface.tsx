@@ -48,7 +48,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPlaying, togglePlay]);
+  }, [isPlaying, togglePlay, totalDuration]);
   
   // Reset elapsed time when switching industries
   useEffect(() => {
