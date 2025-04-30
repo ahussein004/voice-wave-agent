@@ -15,7 +15,11 @@ const PlayButton: React.FC<PlayButtonProps> = ({ togglePlay, text }) => {
         {text}
       </p>
       <button 
-        onClick={togglePlay}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          togglePlay();
+        }}
         className={cn(
           "w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-voice-purple/20 transition-transform hover:scale-105 mb-4",
           "bg-gradient-to-r from-voice-purple to-voice-purple-light",

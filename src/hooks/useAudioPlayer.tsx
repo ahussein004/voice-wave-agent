@@ -35,7 +35,6 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
       } else {
         console.log("Pausing audio");
         audioRef.current.pause();
-        audioRef.current.currentTime = 0;
       }
     } else if (isPlaying && !audioUrl) {
       console.warn("Attempted to play audio but no audioUrl provided");
@@ -45,7 +44,6 @@ const useAudioPlayer = ({ isPlaying, audioUrl }: UseAudioPlayerProps) => {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.currentTime = 0;
       }
     };
   }, [isPlaying, audioUrl]);
