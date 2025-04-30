@@ -29,7 +29,15 @@ const CarDemo = ({
       transition={{ duration: 0.5 }}
       className="grid md:grid-cols-2 gap-8 items-center mb-24"
     >
-      <div className="order-2 md:order-1">
+      <div>
+        <PhoneInterface 
+          isPlaying={isPlaying}
+          togglePlay={togglePlay}
+          activeIndustry="car"
+          getIndustryColor={() => colorHex}
+        />
+      </div>
+      <div>
         <CallAnalysis
           title="Car Dealership Call Analysis"
           summary="John Doe contacted Westgate Luxury Motors about a Porsche Cayenne he saw on their website. After discussing financing options, including a special 0.9% APR offer, John scheduled a test drive by providing his name and phone number (12345)."
@@ -46,14 +54,6 @@ const CarDemo = ({
             "Financing pre-qualification started with provided information"
           ]}
           color={colorHex}
-        />
-      </div>
-      <div className="order-1 md:order-2">
-        <PhoneInterface 
-          isPlaying={isPlaying}
-          togglePlay={togglePlay}
-          activeIndustry="car"
-          getIndustryColor={() => colorHex}
         />
       </div>
     </motion.div>

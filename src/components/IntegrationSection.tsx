@@ -1,19 +1,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import IntegrationFlowchart from "./IntegrationFlowchart";
-import WorkflowCards from "./WorkflowCards";
-import { getIndustryIntegrations } from "./demo/industryData";
-import { Phone, MessageSquare, Brain, Laptop } from "lucide-react";
-
-type Industry = "restaurant" | "car" | "medical";
+import { Phone, MessageSquare, Brain, Laptop, FileText, Database, Cloud } from "lucide-react";
+import AnalysisSummaryCard from "./AnalysisSummaryCard";
 
 const IntegrationSection = () => {
-  const [activeIndustry, setActiveIndustry] = React.useState<Industry>("restaurant");
-  const integrationData = getIndustryIntegrations(activeIndustry);
-  
   return (
     <section className="py-24 bg-voice-dark border-t border-voice-purple/10" id="integrations">
       <div className="container mx-auto px-2 sm:px-6">
@@ -28,7 +21,7 @@ const IntegrationSection = () => {
             Intelligent Call Analysis & System Integration
           </h2>
           <p className="text-lg text-voice-cream/80 max-w-3xl mx-auto">
-            Our AI automatically analyzes every conversation and seamlessly integrates with 
+            Our AI automatically analyzes every conversation in real-time and seamlessly integrates with 
             your existing systems to automate workflows and improve operational efficiency
           </p>
         </motion.div>
@@ -62,6 +55,10 @@ const IntegrationSection = () => {
                 <span className="mr-2 mt-1 h-2 w-2 rounded-full bg-voice-purple"></span>
                 <span className="text-voice-cream/80 text-sm">Structured data extraction</span>
               </li>
+              <li className="flex items-start">
+                <span className="mr-2 mt-1 h-2 w-2 rounded-full bg-voice-purple"></span>
+                <span className="text-voice-cream/80 text-sm">Customer history contextualization</span>
+              </li>
             </ul>
           </motion.div>
           
@@ -91,6 +88,10 @@ const IntegrationSection = () => {
               <li className="flex items-start">
                 <span className="mr-2 mt-1 h-2 w-2 rounded-full bg-orange-500"></span>
                 <span className="text-voice-cream/80 text-sm">Zapier & Make.com support</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2 mt-1 h-2 w-2 rounded-full bg-orange-500"></span>
+                <span className="text-voice-cream/80 text-sm">Secure data synchronization</span>
               </li>
             </ul>
           </motion.div>
@@ -122,65 +123,87 @@ const IntegrationSection = () => {
                 <span className="mr-2 mt-1 h-2 w-2 rounded-full bg-blue-500"></span>
                 <span className="text-voice-cream/80 text-sm">Personalized communication</span>
               </li>
+              <li className="flex items-start">
+                <span className="mr-2 mt-1 h-2 w-2 rounded-full bg-blue-500"></span>
+                <span className="text-voice-cream/80 text-sm">Multi-channel engagement</span>
+              </li>
             </ul>
           </motion.div>
         </div>
         
-        {/* Industry-specific Workflows */}
-        <div className="mb-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-between mb-6"
-          >
-            <h3 className="text-2xl font-bold">Industry-specific Workflow Examples</h3>
-            <Tabs 
-              defaultValue={activeIndustry} 
-              className="w-fit"
-              onValueChange={(value) => setActiveIndustry(value as Industry)}
-            >
-              <TabsList className="bg-voice-dark/50 border border-voice-purple/20">
-                <TabsTrigger value="restaurant" className="data-[state=active]:text-orange-500">Restaurant</TabsTrigger>
-                <TabsTrigger value="car" className="data-[state=active]:text-lime-500">Automotive</TabsTrigger>
-                <TabsTrigger value="medical" className="data-[state=active]:text-sky-500">Medical</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-10"
-          >
-            <WorkflowCards
-              workflows={integrationData.workflows}
-              industry={activeIndustry}
-              wide={true}
-            />
-          </motion.div>
-        </div>
+        {/* Live Analysis Example */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold mb-2">See AI Analysis in Action</h3>
+            <p className="text-voice-cream/70 max-w-2xl mx-auto">
+              Our AI analyzes conversations in real-time, extracting key information and insights that power your business workflows
+            </p>
+          </div>
+          <AnalysisSummaryCard />
+        </motion.div>
         
-        {/* Integration Flow Diagram */}
+        {/* Integration Process */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="max-w-4xl mx-auto mt-16 px-4"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4">How It Works</h3>
-            <p className="text-voice-cream/70">
-              Our seamless integration flow connects voice conversations to your business systems
+          <div>
+            <h3 className="text-2xl font-bold mb-4">Seamless Integration Process</h3>
+            <p className="text-voice-cream/80 mb-6">
+              Our platform is designed to work with your existing tech stack, not replace it. We offer multiple integration methods to ensure a smooth experience:
             </p>
+            
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-voice-purple/20 flex items-center justify-center flex-shrink-0 border border-voice-purple/30">
+                  <Cloud className="w-5 h-5 text-voice-purple" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">API Integration</h4>
+                  <p className="text-voice-cream/70 text-sm">Connect directly to our REST API for full control and customization of the integration flow</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-voice-purple/20 flex items-center justify-center flex-shrink-0 border border-voice-purple/30">
+                  <FileText className="w-5 h-5 text-voice-purple" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Webhooks</h4>
+                  <p className="text-voice-cream/70 text-sm">Receive real-time data in your systems as conversations happen and analysis is performed</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-full bg-voice-purple/20 flex items-center justify-center flex-shrink-0 border border-voice-purple/30">
+                  <Database className="w-5 h-5 text-voice-purple" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Pre-built Connectors</h4>
+                  <p className="text-voice-cream/70 text-sm">Use our library of pre-built connectors for popular platforms like Salesforce, Zendesk, HubSpot and more</p>
+                </div>
+              </div>
+            </div>
           </div>
+          
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-r from-voice-purple/20 via-transparent to-voice-purple/20 blur-3xl opacity-30"></div>
-            <IntegrationFlowchart />
+            <div className="relative bg-voice-dark/40 border border-voice-purple/20 rounded-xl p-6 backdrop-blur-sm">
+              <h4 className="text-lg font-semibold mb-4 flex items-center">
+                <MessageSquare className="w-5 h-5 mr-2 text-voice-purple" />
+                Integration Flow
+              </h4>
+              <IntegrationFlowchart />
+            </div>
           </div>
         </motion.div>
       </div>
