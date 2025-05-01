@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -67,8 +66,8 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <StatsSection />
-      <IntegrationSection />
       <InteractiveDemoSection />
+      <IntegrationSection />
       <CTASection />
     </div>
   );
