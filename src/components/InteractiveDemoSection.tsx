@@ -65,7 +65,7 @@ const InteractiveDemoSection = () => {
   return (
     <section 
       className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`} 
-      id="features"
+      id="demo-section"
     >
       <div className="absolute inset-0 bg-gradient-radial from-voice-purple/5 via-transparent to-transparent opacity-30" />
       <div className="absolute inset-0 bg-[url('/bg-dots.png')] opacity-10" />

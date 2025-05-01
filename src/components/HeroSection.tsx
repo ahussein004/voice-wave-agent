@@ -98,9 +98,11 @@ const HeroSection = () => {
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-voice-purple to-voice-purple-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Button>
-            <Button size="lg" variant="outline" className="border-voice-purple text-voice-purple-light hover:bg-voice-purple/10 font-medium backdrop-blur-sm px-8 py-6 text-lg">
-              <Headphones className="mr-2 h-5 w-5" /> Hear It In Action
-            </Button>
+            <a href="#demo-section">
+              <Button size="lg" variant="outline" className="border-voice-purple text-voice-purple-light hover:bg-voice-purple/10 font-medium backdrop-blur-sm px-8 py-6 text-lg">
+                <Headphones className="mr-2 h-5 w-5" /> Hear It In Action
+              </Button>
+            </a>
           </motion.div>
           
           <motion.div 
