@@ -91,13 +91,15 @@ const HeroSection = () => {
             transition={{ delay: 0.7, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 mb-12"
           >
-            <Button size="lg" className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium px-8 py-6 text-lg group relative overflow-hidden">
-              <span className="relative z-10 flex items-center">
-                Book a Free Demo
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-voice-purple to-voice-purple-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            </Button>
+            <a href="#cta-section">
+              <Button size="lg" className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium px-8 py-6 text-lg group relative overflow-hidden">
+                <span className="relative z-10 flex items-center">
+                  Book a Free Demo
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-voice-purple to-voice-purple-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Button>
+            </a>
             <a href="#demo-section">
               <Button size="lg" variant="outline" className="border-voice-purple text-voice-purple-light hover:bg-voice-purple/10 font-medium backdrop-blur-sm px-8 py-6 text-lg">
                 <Headphones className="mr-2 h-5 w-5" /> Hear It In Action

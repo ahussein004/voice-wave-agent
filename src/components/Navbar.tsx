@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
@@ -40,7 +41,9 @@ const Navbar = () => {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
-          <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium text-base">Book Demo</Button>
+          <a href="#cta-section">
+            <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium text-base">Book Demo</Button>
+          </a>
         </div>
       </div>
 
