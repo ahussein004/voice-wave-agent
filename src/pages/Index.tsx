@@ -66,10 +66,8 @@ const Index = () => {
     <div className="min-h-screen bg-voice-dark text-voice-cream overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <div id="features">
-        <StatsSection />
-        <IntegrationSection />
-      </div>
+      <StatsSection />
+      <IntegrationSection />
       <InteractiveDemoSection />
       <CTASection />
     </div>

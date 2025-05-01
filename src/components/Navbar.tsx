@@ -26,7 +26,7 @@ const Navbar = () => {
     <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white"}`}>
       <div className="container mx-auto flex items-center justify-between py-4">
         <div className="flex items-center">
-          <h1 className="font-bold text-2xl"><span className="text-gradient">VoiceWave</span><span className="text-voice-dark">AI</span></h1>
+          <h1 className="font-bold text-3xl"><span className="text-gradient">VoiceWave</span><span className="text-voice-purple">AI</span></h1>
         </div>
         
         {/* Desktop Navigation */}
@@ -35,7 +35,7 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-sm text-voice-purple hover:text-voice-purple-light transition-colors font-medium"
+              className="text-base font-semibold text-voice-purple hover:text-voice-purple-light transition-colors"
             >
               {link.name}
             </a>
@@ -52,7 +52,7 @@ const Navbar = () => {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
-          <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white">Contact Sales</Button>
+          <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium">Contact Sales</Button>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ const Navbar = () => {
                 <a 
                   key={link.name} 
                   href={link.href} 
-                  className="text-sm text-voice-purple hover:text-voice-purple-light transition-colors py-2 font-medium"
+                  className="text-base text-voice-purple hover:text-voice-purple-light transition-colors py-2 font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}

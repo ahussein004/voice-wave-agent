@@ -25,12 +25,12 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="relative py-28 px-4 overflow-hidden bg-white text-gray-900">
-      {/* White glowy background effect */}
-      <div className="absolute inset-0 bg-gradient-radial from-white via-gray-50 to-gray-100"></div>
-      <div className="absolute top-40 left-10 w-80 h-80 bg-gradient-to-r from-white/50 to-gray-100/50 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-20 right-10 w-96 h-96 bg-gradient-to-l from-white/60 to-gray-50/60 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-radial from-white/70 to-transparent rounded-full blur-3xl"></div>
+    <section className="relative py-28 px-4 overflow-hidden bg-gradient-to-b from-white to-gray-50 text-gray-900" id="features">
+      {/* Enhanced background effect */}
+      <div className="absolute inset-0 bg-[url('/bg-dots.png')] opacity-5"></div>
+      <div className="absolute top-40 left-10 w-80 h-80 bg-gradient-to-r from-voice-purple/10 to-blue-400/10 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-20 right-10 w-96 h-96 bg-gradient-to-l from-voice-purple/10 to-blue-300/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-1/2 bg-gradient-radial from-white/70 to-transparent rounded-full blur-3xl"></div>
       
       <div className="container relative z-10 mx-auto">
         <motion.div
@@ -40,7 +40,7 @@ const StatsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gradient">What Industry Leaders Are Saying</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-voice-purple to-voice-purple-light bg-clip-text text-transparent">What Industry Leaders Are Saying</h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Top executives from leading companies share their insights on the future of voice AI technology
           </p>
@@ -50,26 +50,26 @@ const StatsSection = () => {
           {/* Navigation arrows with enhanced styling */}
           <button 
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 md:-left-12 p-3 rounded-full bg-white/90 border border-voice-purple/20 hover:bg-white shadow-lg transition-all hover:scale-110 group"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 md:-left-12 p-3 rounded-full bg-gradient-to-r from-voice-purple/80 to-purple-500/80 text-white hover:from-voice-purple hover:to-purple-500 shadow-lg transition-all hover:scale-110 group"
             aria-label="Previous quote"
           >
-            <ChevronLeft className="w-6 h-6 text-voice-purple group-hover:text-voice-purple-dark transition-colors" />
+            <ChevronLeft className="w-6 h-6 text-white group-hover:text-white transition-colors" />
           </button>
           
           <button 
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 md:-right-12 p-3 rounded-full bg-white/90 border border-voice-purple/20 hover:bg-white shadow-lg transition-all hover:scale-110 group"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 md:-right-12 p-3 rounded-full bg-gradient-to-r from-voice-purple/80 to-purple-500/80 text-white hover:from-voice-purple hover:to-purple-500 shadow-lg transition-all hover:scale-110 group"
             aria-label="Next quote"
           >
-            <ChevronRight className="w-6 h-6 text-voice-purple group-hover:text-voice-purple-dark transition-colors" />
+            <ChevronRight className="w-6 h-6 text-white group-hover:text-white transition-colors" />
           </button>
           
-          {/* Redesigned quotes slideshow with hero section (section 1) styling */}
-          <div className="relative overflow-hidden rounded-2xl shadow-xl min-h-[450px] flex items-center">
-            {/* Hero section-like glass background effect */}
-            <div className="absolute inset-0 bg-hero-pattern"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-voice-purple/5 to-blue-500/5"></div>
-            <div className="absolute inset-0 bg-voice-dark/60 backdrop-blur-sm"></div>
+          {/* Redesigned quotes slideshow */}
+          <div className="relative overflow-hidden rounded-2xl shadow-2xl min-h-[450px] flex items-center">
+            {/* Enhanced background effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-voice-purple/90 to-purple-700/90"></div>
+            <div className="absolute inset-0 bg-[url('/bg-dots.png')] opacity-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/50 backdrop-blur-sm"></div>
             
             <div className="relative z-10 w-full">
               <AnimatePresence mode="wait">
@@ -86,7 +86,7 @@ const StatsSection = () => {
                       <div className="flex flex-col md:flex-row md:items-center gap-10 md:gap-16">
                         {/* Logo/company side with enhanced design */}
                         <div className="md:w-1/3 flex flex-col items-center">
-                          <div className="bg-white rounded-xl p-6 shadow-lg w-full max-w-[220px] h-[120px] flex items-center justify-center mb-6 border border-gray-100 hover:border-voice-purple/20 transition-colors group">
+                          <div className="bg-white/90 rounded-xl p-6 shadow-lg w-full max-w-[220px] h-[120px] flex items-center justify-center mb-6 border border-white/50 backdrop-blur-md hover:transform hover:scale-105 transition-all duration-300 group">
                             {quote.logo.startsWith('http') ? (
                               <motion.img 
                                 src={quote.logo} 
@@ -97,7 +97,7 @@ const StatsSection = () => {
                               />
                             ) : (
                               <motion.span 
-                                className="text-2xl font-bold text-voice-purple transition-all duration-300 group-hover:scale-110"
+                                className="text-3xl font-bold bg-gradient-to-r from-voice-purple to-purple-600 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-110"
                                 whileHover={{ scale: 1.05 }}
                               >
                                 {quote.logo}
@@ -105,24 +105,24 @@ const StatsSection = () => {
                             )}
                           </div>
                           <div className="text-center">
-                            <p className="font-bold text-lg text-voice-purple">{quote.author}</p>
-                            <p className="text-sm text-gray-600">{quote.role}, {quote.company}</p>
+                            <p className="font-bold text-xl text-white">{quote.author}</p>
+                            <p className="text-base text-purple-100">{quote.role}, {quote.company}</p>
                           </div>
                         </div>
                         
                         {/* Quote content side with enhanced typography */}
                         <div className="md:w-2/3">
                           <div className="relative">
-                            <div className="absolute -top-8 -left-2 text-7xl text-voice-purple/10 font-serif">"</div>
+                            <div className="absolute -top-8 -left-2 text-7xl text-white/20 font-serif">"</div>
                             <motion.blockquote 
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                               transition={{ delay: 0.3 }}
-                              className="text-xl md:text-2xl text-voice-cream italic leading-relaxed pl-6 relative z-10 font-light"
+                              className="text-xl md:text-2xl text-white italic leading-relaxed pl-6 relative z-10 font-light"
                             >
                               {quote.quote}
                             </motion.blockquote>
-                            <div className="absolute -bottom-14 -right-2 text-7xl text-voice-purple/10 font-serif">"</div>
+                            <div className="absolute -bottom-14 -right-2 text-7xl text-white/20 font-serif">"</div>
                           </div>
                         </div>
                       </div>
@@ -141,8 +141,8 @@ const StatsSection = () => {
                 onClick={() => setActiveIndex(index)}
                 className={`transition-all ${
                   index === activeIndex 
-                    ? "bg-voice-purple w-10 h-3 rounded-full shadow-md" 
-                    : "bg-gray-300 w-3 h-3 rounded-full hover:bg-gray-400"
+                    ? "bg-gradient-to-r from-voice-purple to-purple-500 w-10 h-3 rounded-full shadow-md" 
+                    : "bg-gray-300 w-3 h-3 rounded-full hover:bg-voice-purple/50"
                 }`}
                 aria-label={`Go to quote ${index + 1}`}
                 aria-current={index === activeIndex ? "true" : "false"}

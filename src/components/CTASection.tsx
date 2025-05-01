@@ -19,7 +19,7 @@ const CTASection = () => {
           </motion.div>
           
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6 text-gradient"
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-voice-purple-light to-voice-cream bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -40,7 +40,7 @@ const CTASection = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-stretch">
-          {/* Calendly on the left - taller */}
+          {/* Calendly on the left - matching height */}
           <motion.div 
             className="w-full lg:w-3/5 bg-voice-dark/50 p-6 rounded-xl border border-voice-purple/20 backdrop-blur-sm"
             initial={{ opacity: 0, x: -20 }}
@@ -48,7 +48,7 @@ const CTASection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <div className="w-full h-[650px]"> {/* Increased height */}
+            <div className="w-full h-[700px]"> {/* Increased height */}
               <iframe 
                 src="https://calendly.com/a-hu33ein/voice-ai-agency" 
                 width="100%" 
@@ -68,56 +68,58 @@ const CTASection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <div className="bg-voice-dark/30 p-8 rounded-xl border border-voice-purple/20 backdrop-blur-sm flex flex-col h-full">
-              <h3 className="text-2xl font-semibold mb-8 text-gradient">What to Expect</h3>
+            <div className="bg-voice-dark/30 p-8 rounded-xl border border-voice-purple/20 backdrop-blur-sm flex flex-col h-full justify-between">
+              <div>
+                <h3 className="text-2xl font-semibold mb-8 bg-gradient-to-r from-voice-purple-light to-white bg-clip-text text-transparent">What to Expect</h3>
+                
+                <div className="space-y-8">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
+                      <Check size={20} className="text-voice-purple-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-voice-cream text-xl">Book a Time Slot</h4>
+                      <p className="text-voice-cream/80 mt-2 text-lg">Select a convenient time from the calendar on the left</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
+                      <Check size={20} className="text-voice-purple-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-voice-cream text-xl">Confirmation Email</h4>
+                      <p className="text-voice-cream/80 mt-2 text-lg">You'll receive details about the demo and how to prepare</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
+                      <Check size={20} className="text-voice-purple-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-voice-cream text-xl">30-Minute Demo Call</h4>
+                      <p className="text-voice-cream/80 mt-2 text-lg">We'll showcase our AI voice agents tailored for your business</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
+                      <Check size={20} className="text-voice-purple-light" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-voice-cream text-xl">Follow-Up Plan</h4>
+                      <p className="text-voice-cream/80 mt-2 text-lg">Within 24 hours, receive a custom implementation proposal</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
-              <div className="space-y-8 flex-grow flex flex-col justify-between">
-                <div className="flex items-start gap-4">
-                  <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
-                    <Check size={20} className="text-voice-purple-light" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-voice-cream text-xl">Book a Time Slot</h4>
-                    <p className="text-voice-cream/80 mt-2 text-lg">Select a convenient time from the calendar on the left</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
-                    <Check size={20} className="text-voice-purple-light" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-voice-cream text-xl">Confirmation Email</h4>
-                    <p className="text-voice-cream/80 mt-2 text-lg">You'll receive details about the demo and how to prepare</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
-                    <Check size={20} className="text-voice-purple-light" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-voice-cream text-xl">30-Minute Demo Call</h4>
-                    <p className="text-voice-cream/80 mt-2 text-lg">We'll showcase our AI voice agents tailored for your business</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="bg-voice-purple/20 p-3 rounded-full mt-1">
-                    <Check size={20} className="text-voice-purple-light" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-voice-cream text-xl">Follow-Up Plan</h4>
-                    <p className="text-voice-cream/80 mt-2 text-lg">Within 24 hours, receive a custom implementation proposal</p>
-                  </div>
-                </div>
-                
-                <div className="mt-auto pt-8">
-                  <div className="p-4 bg-voice-purple/10 rounded-lg border border-voice-purple/30">
-                    <p className="text-voice-cream/90 text-center font-medium">
-                      Join over 2,400+ businesses already using VoiceWaveAI
-                    </p>
-                  </div>
+              <div className="mt-8">
+                <div className="p-6 bg-gradient-to-r from-voice-purple/20 to-voice-purple-light/20 rounded-lg border border-voice-purple/30 backdrop-blur-sm shadow-lg">
+                  <p className="text-voice-cream text-center font-medium text-lg">
+                    Join over 2,400+ businesses already using VoiceWaveAI
+                  </p>
                 </div>
               </div>
             </div>
