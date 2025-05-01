@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -5,8 +6,11 @@ import StatsSection from "@/components/StatsSection";
 import InteractiveDemoSection from "@/components/InteractiveDemoSection";
 import IntegrationSection from "@/components/IntegrationSection";
 import CTASection from "@/components/CTASection";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Index = () => {
+  const isMobile = useIsMobile();
+  
   // Add smooth scroll behavior
   useEffect(() => {
     // Handle anchor link clicks for smooth scrolling
@@ -19,8 +23,8 @@ const Index = () => {
         e.preventDefault();
         const element = document.querySelector(href);
         if (element) {
-          // Add offset to account for fixed navbar
-          const offset = 100;
+          // Add offset to account for fixed navbar (larger on mobile)
+          const offset = isMobile ? 120 : 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -37,7 +41,7 @@ const Index = () => {
     return () => {
       document.removeEventListener('click', handleAnchorClick);
     };
-  }, []);
+  }, [isMobile]);
   
   // Scroll to section on page load if hash is present in URL
   useEffect(() => {
@@ -48,7 +52,7 @@ const Index = () => {
       if (element) {
         setTimeout(() => {
           // Add offset to account for fixed navbar
-          const offset = 100;
+          const offset = isMobile ? 120 : 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -56,10 +60,10 @@ const Index = () => {
             top: offsetPosition,
             behavior: 'smooth'
           });
-        }, 100);
+        }, 300); // Increased timeout to ensure page is fully loaded
       }
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen bg-voice-dark text-voice-cream overflow-x-hidden">
