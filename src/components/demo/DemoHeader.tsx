@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 const DemoHeader = () => {
   return (
     <motion.div
+      id="demo-section"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

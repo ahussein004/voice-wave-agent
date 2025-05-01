@@ -21,7 +21,7 @@ const Index = () => {
         const element = document.querySelector(href);
         if (element) {
           // Add offset to account for fixed navbar
-          const offset = 80;
+          const offset = 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -49,7 +49,7 @@ const Index = () => {
       if (element) {
         setTimeout(() => {
           // Add offset to account for fixed navbar
-          const offset = 80;
+          const offset = 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -66,9 +66,11 @@ const Index = () => {
     <div className="min-h-screen bg-voice-dark text-voice-cream overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <StatsSection />
+      <div id="features">
+        <StatsSection />
+        <IntegrationSection />
+      </div>
       <InteractiveDemoSection />
-      <IntegrationSection />
       <CTASection />
     </div>
   );
