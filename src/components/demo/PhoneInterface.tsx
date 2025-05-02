@@ -17,6 +17,50 @@ interface PhoneInterfaceProps {
   audioUrl?: string;
 }
 
+// Define feature popups that will be shown during demo playback
+const featurePopups = [
+  {
+    id: 1,
+    title: "Emotional Intelligence",
+    description: "Detects customer emotions and adapts conversation style",
+    icon: "🧠",
+    delay: 15,
+    duration: 5
+  },
+  {
+    id: 2,
+    title: "Natural Understanding",
+    description: "Comprehends complex requests and provides accurate responses",
+    icon: "🗣️",
+    delay: 35, 
+    duration: 5
+  },
+  {
+    id: 3,
+    title: "24/7 Availability",
+    description: "Never misses a call, ensures round-the-clock service",
+    icon: "⏰",
+    delay: 65,
+    duration: 5
+  },
+  {
+    id: 4,
+    title: "Task Delegation",
+    description: "Seamlessly transfers complex issues to human agents",
+    icon: "👥",
+    delay: 95,
+    duration: 5
+  },
+  {
+    id: 5,
+    title: "SMS & Notifications",
+    description: "Sends confirmation texts & appointment reminders",
+    icon: "📱",
+    delay: 125,
+    duration: 5
+  }
+];
+
 const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   isPlaying,
   togglePlay,
@@ -27,6 +71,17 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   // Total duration in seconds (conversation length)
   const totalDuration = 180;
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [activePopup, setActivePopup] = useState<number | null>(null);
+  
+  // Load saved state from localStorage
+  useEffect(() => {
+    const savedElapsedTime = localStorage.getItem(`elapsedTime-${activeIndustry}`);
+    if (savedElapsedTime) {
+      setElapsedTime(parseInt(savedElapsedTime, 10));
+    } else {
+      setElapsedTime(0);
+    }
+  }, [activeIndustry]);
   
   // Manage elapsed time when conversation is playing
   useEffect(() => {
@@ -35,12 +90,16 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     if (isPlaying) {
       interval = setInterval(() => {
         setElapsedTime(prev => {
-          if (prev >= totalDuration) {
+          const newTime = prev >= totalDuration ? 0 : prev + 1;
+          // Save progress to localStorage
+          localStorage.setItem(`elapsedTime-${activeIndustry}`, newTime.toString());
+          
+          if (newTime >= totalDuration) {
             if (interval) clearInterval(interval);
             togglePlay(); // Stop playing when reaching the end
             return 0;
           }
-          return prev + 1;
+          return newTime;
         });
       }, 1000);
     }
@@ -48,16 +107,35 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isPlaying, togglePlay, totalDuration]);
+  }, [isPlaying, togglePlay, totalDuration, activeIndustry]);
   
-  // Reset elapsed time when switching industries
+  // Feature popup management
   useEffect(() => {
-    setElapsedTime(0);
-  }, [activeIndustry]);
+    if (!isPlaying) {
+      setActivePopup(null);
+      return;
+    }
+    
+    // Check for popups based on elapsed time
+    const checkPopups = () => {
+      const popup = featurePopups.find(
+        p => elapsedTime >= p.delay && elapsedTime < p.delay + p.duration
+      );
+      setActivePopup(popup ? popup.id : null);
+    };
+    
+    const popupInterval = setInterval(checkPopups, 1000);
+    checkPopups(); // Check immediately
+    
+    return () => clearInterval(popupInterval);
+  }, [elapsedTime, isPlaying]);
   
   const messages = getConversationMessages(activeIndustry);
   const industryTitle = getIndustryTitle(activeIndustry);
   const ctaText = getCtaText(activeIndustry);
+  
+  // Find current popup to display
+  const currentPopup = featurePopups.find(p => p.id === activePopup);
   
   console.log("PhoneInterface rendering:", { isPlaying, audioUrl, activeIndustry });
   
@@ -77,7 +155,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             elapsedTime={elapsedTime}
           />
 
-          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
+          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4 relative">
             {!isPlaying && (
               <motion.div 
                 initial={{ opacity: 0 }}
@@ -89,6 +167,25 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             )}
             
             {isPlaying && <ConversationMessages messages={messages} />}
+            
+            {/* Feature Popup */}
+            {currentPopup && isPlaying && (
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="absolute bottom-2 left-0 right-0 mx-auto w-[90%] bg-voice-purple/90 text-white p-3 rounded-lg shadow-lg backdrop-blur-sm border border-white/20"
+                style={{ zIndex: 50 }}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{currentPopup.icon}</span>
+                  <div>
+                    <h4 className="font-bold text-white">{currentPopup.title}</h4>
+                    <p className="text-xs text-white/90">{currentPopup.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </div>
 
           {isPlaying && (

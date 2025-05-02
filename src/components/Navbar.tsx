@@ -35,7 +35,9 @@ const Navbar = () => {
     <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white"}`}>
       <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-6">
         <div className="flex items-center">
-          <h1 className="font-bold text-2xl md:text-3xl"><span className="text-gradient">VoiceWave</span><span className="text-voice-purple">AI</span></h1>
+          <a href="/" className="inline-block">
+            <h1 className="font-bold text-2xl md:text-3xl"><span className="text-gradient">VoiceWave</span><span className="text-voice-purple">AI</span></h1>
+          </a>
         </div>
         
         {/* Desktop Navigation */}

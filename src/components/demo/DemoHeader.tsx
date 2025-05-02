@@ -10,7 +10,7 @@ const DemoHeader = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 px-4"
+      className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 px-4 pt-20 sm:pt-24"
     >
       <div className="inline-block px-4 py-1 rounded-full bg-white/10 border border-voice-purple/20 text-sm mb-6 text-voice-purple-light">
         Industry-Specific Solutions
@@ -30,9 +30,10 @@ const DemoHeader = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="inline-block px-4 sm:px-5 py-2 sm:py-3 rounded-lg bg-white/10 border border-voice-purple/30 text-sm sm:text-base font-medium shadow-lg"
+        className="inline-block px-5 py-3 rounded-lg bg-white/10 border border-voice-purple/30 text-base font-medium shadow-lg"
       >
-        Select an industry below to explore our solutions
+        <span className="block">Select an industry below to explore our AI voice solutions</span>
+        <span className="text-sm text-voice-cream/70 mt-1 block">Complete with smart features like emotion detection and SMS notifications</span>
       </motion.div>
     </motion.div>
   );

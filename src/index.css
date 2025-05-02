@@ -44,15 +44,32 @@
   body {
     @apply bg-voice-dark text-voice-cream antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 120px; /* Ensures anchors aren't hidden behind fixed elements */
   }
   
   /* Improve text readability */
   p, h1, h2, h3, h4, h5, h6, span, a, button, li {
     @apply tracking-normal;
+  }
+  
+  /* Ensure all interactive elements have proper tap targets on mobile */
+  a, button {
+    @apply min-h-[36px] sm:min-h-[40px] focus:outline-none focus-visible:ring-2 focus-visible:ring-voice-purple;
+  }
+  
+  /* Improve text contrast */
+  p {
+    @apply text-voice-cream/90;
+  }
+  
+  /* Better visibility for headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-pretty font-medium;
   }
 }
 
@@ -81,6 +98,26 @@
   /* Add padding to the bottom of sections to prevent cut-off */
   .safe-bottom {
     @apply pb-12 md:pb-16;
+  }
+  
+  /* Ensure no horizontal scrolling on mobile */
+  .no-horizontal-scroll {
+    @apply max-w-full overflow-x-hidden;
+  }
+  
+  /* Make sure content is readable on small screens */
+  .mobile-readable {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  /* Proper spacing for mobile layouts */
+  .mobile-spacing {
+    @apply px-4 sm:px-6 md:px-8;
+  }
+  
+  /* Accessible focus states for better usability */
+  .focus-visible-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-voice-purple focus-visible:ring-offset-2;
   }
 }
 
@@ -134,6 +171,19 @@
 /* Ensure we can see the playing state clearly */
 .wave-bar.paused {
   animation-play-state: paused;
+}
+
+/* Feature Popup Animation */
+@keyframes popup-slide {
+  0% { transform: translateY(20px); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+
+.feature-popup {
+  animation: popup-slide 5s ease-in-out;
+  will-change: transform, opacity;
 }
 
 /* Keep the rest of the existing CSS */
@@ -198,4 +248,17 @@ button:active:not(:disabled) {
 /* Fix for Navbar background */
 .bg-slate-50 {
   background-color: transparent !important;
+}
+
+/* Media queries for better mobile support */
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 100px; /* Smaller offset on mobile */
+  }
+  
+  /* Improve tap targets on mobile */
+  a, button, .clickable {
+    min-height: 44px;
+    padding: 0.5rem;
+  }
 }

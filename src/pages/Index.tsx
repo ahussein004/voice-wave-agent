@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
@@ -10,6 +10,51 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const Index = () => {
   const isMobile = useIsMobile();
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  
+  // Save and restore last scroll position
+  useEffect(() => {
+    // Restore scroll position
+    const savedScrollPosition = localStorage.getItem("scrollPosition");
+    const savedTimestamp = localStorage.getItem("scrollTimestamp");
+    
+    // Only restore if saved recently (within 30 minutes)
+    if (savedScrollPosition && savedTimestamp) {
+      const now = Date.now();
+      const savedTime = parseInt(savedTimestamp, 10);
+      const thirtyMinutesInMs = 30 * 60 * 1000;
+      
+      if (now - savedTime < thirtyMinutesInMs) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: parseInt(savedScrollPosition, 10),
+            behavior: "auto"
+          });
+        }, 300);
+      }
+    }
+    
+    // Save scroll position periodically
+    const saveScrollInterval = setInterval(() => {
+      const currentPosition = window.pageYOffset || document.documentElement.scrollTop;
+      localStorage.setItem("scrollPosition", currentPosition.toString());
+      localStorage.setItem("scrollTimestamp", Date.now().toString());
+    }, 2000);
+    
+    // Save scroll on page unload
+    const handleBeforeUnload = () => {
+      const currentPosition = window.pageYOffset || document.documentElement.scrollTop;
+      localStorage.setItem("scrollPosition", currentPosition.toString());
+      localStorage.setItem("scrollTimestamp", Date.now().toString());
+    };
+    
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    
+    return () => {
+      clearInterval(saveScrollInterval);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
   
   // Add smooth scroll behavior with improved offset calculation
   useEffect(() => {
@@ -28,6 +73,10 @@ const Index = () => {
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
+          // Save current position before jumping to have context
+          setLastScrollPosition(window.pageYOffset || document.documentElement.scrollTop);
+          localStorage.setItem("lastSection", href);
+
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
@@ -45,9 +94,14 @@ const Index = () => {
   
   // Scroll to section on page load if hash is present in URL with improved offset
   useEffect(() => {
-    if (window.location.hash) {
-      const hash = window.location.hash;
-      const element = document.querySelector(hash);
+    // First check localStorage for last visited section
+    const lastSection = localStorage.getItem("lastSection");
+    
+    // Then check URL hash (prioritize URL hash over localStorage)
+    const targetHash = window.location.hash || lastSection;
+    
+    if (targetHash) {
+      const element = document.querySelector(targetHash);
       
       if (element) {
         setTimeout(() => {
