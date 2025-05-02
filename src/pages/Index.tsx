@@ -14,12 +14,14 @@ const Index = () => {
   
   // Improved scroll handling with fix for auto-scrolling to bottom
   useEffect(() => {
+    // Force scroll to top on initial page load or refresh
+    window.scrollTo(0, 0);
+    
     // Check if this is an initial page load
     const isInitialLoad = !sessionStorage.getItem("hasVisited");
     
     if (isInitialLoad) {
-      // Force scroll to top on initial load
-      window.scrollTo(0, 0);
+      // Mark as visited now
       sessionStorage.setItem("hasVisited", "true");
       // Clear any saved scroll positions that might cause jumping
       localStorage.removeItem("scrollPosition");
@@ -55,7 +57,6 @@ const Index = () => {
       // Reset the logo click marker if it exists
       if (isLogoClick) {
         sessionStorage.removeItem("isLogoClick");
-        window.scrollTo(0, 0);
         return;
       }
       

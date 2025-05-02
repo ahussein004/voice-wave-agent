@@ -35,6 +35,8 @@ const Navbar = () => {
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     sessionStorage.setItem("isLogoClick", "true");
+    localStorage.removeItem("scrollPosition");
+    localStorage.removeItem("scrollTimestamp");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
