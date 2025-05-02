@@ -11,7 +11,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const Index = () => {
   const isMobile = useIsMobile();
   
-  // Add smooth scroll behavior
+  // Add smooth scroll behavior with improved offset calculation
   useEffect(() => {
     // Handle anchor link clicks for smooth scrolling
     const handleAnchorClick = (e: MouseEvent) => {
@@ -23,8 +23,8 @@ const Index = () => {
         e.preventDefault();
         const element = document.querySelector(href);
         if (element) {
-          // Add offset to account for fixed navbar (larger on mobile)
-          const offset = isMobile ? 120 : 100;
+          // Improved offset calculation to prevent text cutoff
+          const offset = isMobile ? 140 : 120;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -43,7 +43,7 @@ const Index = () => {
     };
   }, [isMobile]);
   
-  // Scroll to section on page load if hash is present in URL
+  // Scroll to section on page load if hash is present in URL with improved offset
   useEffect(() => {
     if (window.location.hash) {
       const hash = window.location.hash;
@@ -51,8 +51,8 @@ const Index = () => {
       
       if (element) {
         setTimeout(() => {
-          // Add offset to account for fixed navbar
-          const offset = isMobile ? 120 : 100;
+          // Improved offset to prevent content cutoff
+          const offset = isMobile ? 140 : 120;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -60,7 +60,7 @@ const Index = () => {
             top: offsetPosition,
             behavior: 'smooth'
           });
-        }, 300); // Increased timeout to ensure page is fully loaded
+        }, 400); // Increased timeout to ensure page is fully loaded
       }
     }
   }, [isMobile]);

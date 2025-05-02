@@ -43,10 +43,16 @@
   
   body {
     @apply bg-voice-dark text-voice-cream antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   html {
     @apply scroll-smooth;
+  }
+  
+  /* Improve text readability */
+  p, h1, h2, h3, h4, h5, h6, span, a, button, li {
+    @apply tracking-normal;
   }
 }
 
@@ -58,9 +64,23 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
   .glow {
     filter: drop-shadow(0 0 10px rgba(155, 135, 245, 0.5));
+  }
+  
+  /* Improve content visibility at page section boundaries */
+  .section-spacing {
+    @apply py-16 md:py-24;
+  }
+  
+  /* Add padding to the bottom of sections to prevent cut-off */
+  .safe-bottom {
+    @apply pb-12 md:pb-16;
   }
 }
 

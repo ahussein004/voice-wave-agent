@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu - Enhanced with smooth transitions */}
+      {/* Mobile Navigation Menu with improved visibility and spacing */}
       <div 
         className={`md:hidden bg-white border-t border-voice-purple/10 overflow-hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
@@ -80,7 +80,7 @@ const Navbar = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className="text-base text-voice-purple hover:text-voice-purple-light transition-colors py-2 font-medium" 
+                className="text-base text-voice-purple hover:text-voice-purple-light transition-colors py-3 font-medium" 
                 onClick={handleMobileLinkClick}
               >
                 {link.name}
@@ -91,7 +91,7 @@ const Navbar = () => {
               className="mt-2 sm:hidden"
               onClick={handleMobileLinkClick}
             >
-              <Button className="w-full bg-voice-purple hover:bg-voice-purple-dark text-white font-medium">
+              <Button className="w-full bg-voice-purple hover:bg-voice-purple-dark text-white font-medium py-6">
                 Book Demo
               </Button>
             </a>
