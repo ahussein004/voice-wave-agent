@@ -12,10 +12,12 @@ const Index = () => {
   const isMobile = useIsMobile();
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
   
-  // Save and restore last scroll position with improved behavior
+  // Improved scroll handling with fix for auto-scrolling to bottom
   useEffect(() => {
-    // Only restore scroll if there's a specific hash in the URL
-    // This prevents auto-scrolling on fresh page loads
+    // Explicitly scroll to top on initial load
+    window.scrollTo(0, 0);
+    
+    // Only handle hash navigation after ensuring we're at the top
     const targetHash = window.location.hash;
     
     if (targetHash) {
@@ -35,10 +37,11 @@ const Index = () => {
         }
       }, 400);
     } else {
-      // If no hash in URL, check if coming back from a different page
-      const returnVisit = sessionStorage.getItem("returnVisit");
-      if (returnVisit === "true") {
-        // Restore scroll position only for return visits
+      // Only restore scroll for explicit user navigation between pages
+      // NOT on initial page load or refresh
+      const isNavigationReturn = sessionStorage.getItem("isNavigating") === "true";
+      
+      if (isNavigationReturn) {
         const savedScrollPosition = localStorage.getItem("scrollPosition");
         const savedTimestamp = localStorage.getItem("scrollTimestamp");
         
@@ -56,18 +59,31 @@ const Index = () => {
             }, 300);
           }
         }
-      } else {
-        // First visit, scroll to top and set flag for future visits
-        window.scrollTo(0, 0);
-        sessionStorage.setItem("returnVisit", "true");
+        
+        // Reset the navigation flag after handling it
+        sessionStorage.setItem("isNavigating", "false");
       }
     }
+    
+    // Set navigation flag when links are clicked
+    const handleLinkClick = () => {
+      sessionStorage.setItem("isNavigating", "true");
+    };
+    
+    // Attach to all internal links
+    document.querySelectorAll('a[href^="/"]').forEach(link => {
+      link.addEventListener('click', handleLinkClick);
+    });
     
     // Save scroll position periodically
     const saveScrollInterval = setInterval(() => {
       const currentPosition = window.pageYOffset || document.documentElement.scrollTop;
-      localStorage.setItem("scrollPosition", currentPosition.toString());
-      localStorage.setItem("scrollTimestamp", Date.now().toString());
+      
+      // Only save non-zero scroll positions
+      if (currentPosition > 0) {
+        localStorage.setItem("scrollPosition", currentPosition.toString());
+        localStorage.setItem("scrollTimestamp", Date.now().toString());
+      }
     }, 2000);
     
     // Save scroll on page unload
@@ -82,6 +98,9 @@ const Index = () => {
     return () => {
       clearInterval(saveScrollInterval);
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.querySelectorAll('a[href^="/"]').forEach(link => {
+        link.removeEventListener('click', handleLinkClick);
+      });
     };
   }, [isMobile]);
   

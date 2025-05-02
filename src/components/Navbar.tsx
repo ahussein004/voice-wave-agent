@@ -31,11 +31,21 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Mark internal navigation for scroll restoration
+  const handleInternalNavigation = () => {
+    sessionStorage.setItem("isNavigating", "true");
+  };
+
   return (
     <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white"}`}>
       <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-6">
         <div className="flex items-center">
-          <a href="/" className="inline-block" aria-label="Home">
+          <a 
+            href="/" 
+            className="inline-block" 
+            aria-label="Home"
+            onClick={handleInternalNavigation}
+          >
             <h1 className="font-bold text-2xl md:text-3xl"><span className="text-gradient">VoiceWave</span><span className="text-voice-purple">AI</span></h1>
           </a>
         </div>
@@ -65,7 +75,11 @@ const Navbar = () => {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
-          <a href="#cta-section" className="hidden sm:inline-block">
+          <a 
+            href="#cta-section" 
+            className="hidden sm:inline-block"
+            onClick={handleInternalNavigation}
+          >
             <Button className="bg-voice-purple hover:bg-voice-purple-dark text-white font-medium text-base">Book Demo</Button>
           </a>
         </div>
@@ -86,7 +100,10 @@ const Navbar = () => {
                 key={link.name} 
                 href={link.href} 
                 className="text-base text-voice-purple hover:text-voice-purple-light transition-colors py-3 font-medium focus-visible-ring" 
-                onClick={handleMobileLinkClick}
+                onClick={() => {
+                  handleMobileLinkClick();
+                  handleInternalNavigation();
+                }}
                 aria-label={link.name}
               >
                 {link.name}
@@ -95,7 +112,10 @@ const Navbar = () => {
             <a 
               href="#cta-section" 
               className="mt-2 sm:hidden"
-              onClick={handleMobileLinkClick}
+              onClick={() => {
+                handleMobileLinkClick();
+                handleInternalNavigation();
+              }}
               aria-label="Book Demo"
             >
               <Button className="w-full bg-voice-purple hover:bg-voice-purple-dark text-white font-medium py-6">
