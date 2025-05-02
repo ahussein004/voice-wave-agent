@@ -13,16 +13,16 @@ const DemoHeader = () => {
       className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 px-4"
     >
       <div className="inline-block px-4 py-1 rounded-full bg-white/10 border border-voice-purple/20 text-sm mb-6 text-voice-purple-light">
-        Industry-Specific Solutions
+        Advanced Voice AI Technology
       </div>
       
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-voice-purple-light to-voice-cream bg-clip-text text-transparent leading-tight">
-        Experience Your AI Voice Agent In Action
+        Experience Our Emotionally Intelligent AI Voice Agent
       </h2>
       
       <p className="text-lg sm:text-xl text-voice-cream/90 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-        See how our AI handles real-world scenarios, converts inquiries into bookings, 
-        and delivers exceptional customer service with our interactive demos below.
+        Watch how our AI understands emotional cues, handles complex situations, and seamlessly 
+        transitions between automated responses and human support when needed.
       </p>
       
       <motion.div 
