@@ -31,6 +31,13 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Handle logo click to always go to top of page
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    sessionStorage.setItem("isLogoClick", "true");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   // Mark internal navigation for scroll restoration
   const handleInternalNavigation = () => {
     sessionStorage.setItem("isNavigating", "true");
@@ -44,7 +51,7 @@ const Navbar = () => {
             href="/" 
             className="inline-block" 
             aria-label="Home"
-            onClick={handleInternalNavigation}
+            onClick={handleLogoClick}
           >
             <h1 className="font-bold text-2xl md:text-3xl"><span className="text-gradient">VoiceWave</span><span className="text-voice-purple">AI</span></h1>
           </a>

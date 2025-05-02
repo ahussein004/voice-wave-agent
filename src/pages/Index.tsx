@@ -14,10 +14,20 @@ const Index = () => {
   
   // Improved scroll handling with fix for auto-scrolling to bottom
   useEffect(() => {
-    // Explicitly scroll to top on initial load
-    window.scrollTo(0, 0);
+    // Check if this is an initial page load
+    const isInitialLoad = !sessionStorage.getItem("hasVisited");
     
-    // Only handle hash navigation after ensuring we're at the top
+    if (isInitialLoad) {
+      // Force scroll to top on initial load
+      window.scrollTo(0, 0);
+      sessionStorage.setItem("hasVisited", "true");
+      // Clear any saved scroll positions that might cause jumping
+      localStorage.removeItem("scrollPosition");
+      localStorage.removeItem("scrollTimestamp");
+      return;
+    }
+    
+    // Handle hash navigation after ensuring we're at the top
     const targetHash = window.location.hash;
     
     if (targetHash) {
@@ -38,8 +48,16 @@ const Index = () => {
       }, 400);
     } else {
       // Only restore scroll for explicit user navigation between pages
-      // NOT on initial page load or refresh
+      // NOT on initial page load, refresh, or logo click
       const isNavigationReturn = sessionStorage.getItem("isNavigating") === "true";
+      const isLogoClick = sessionStorage.getItem("isLogoClick") === "true";
+      
+      // Reset the logo click marker if it exists
+      if (isLogoClick) {
+        sessionStorage.removeItem("isLogoClick");
+        window.scrollTo(0, 0);
+        return;
+      }
       
       if (isNavigationReturn) {
         const savedScrollPosition = localStorage.getItem("scrollPosition");
