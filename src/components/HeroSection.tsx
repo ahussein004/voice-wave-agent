@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from "./ui/button";
 import { Headphones, ArrowRight, PhoneCall } from "lucide-react";
@@ -206,18 +205,6 @@ const HeroSection = () => {
             </div>
           </div>
         </motion.div>
-      </div>
-      
-      {/* Badge for 24/7 support with improved styling */}
-      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 bg-voice-purple/30 backdrop-blur-sm py-2 px-4 sm:py-3 sm:px-6 rounded-full flex items-center border border-voice-purple/40 animate-pulse-slow shadow-lg">
-        <motion.span 
-          animate={{ opacity: [0.7, 1, 0.7], scale: [0.98, 1, 0.98] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-xs sm:text-sm font-medium text-voice-cream flex items-center"
-        >
-          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full mr-1.5 sm:mr-2"></span>
-          24/7 Multilingual Support
-        </motion.span>
       </div>
     </section>
   );
