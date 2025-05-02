@@ -7,9 +7,7 @@ import PlayButton from "./PlayButton";
 import PauseButton from "./PauseButton";
 import ConversationMessages from "./ConversationMessages";
 import PhoneHeader from "./PhoneHeader";
-import FeaturePopup from "./FeaturePopup";
 import { getConversationMessages, getIndustryTitle, getCtaText } from "@/utils/messageProvider";
-import { Brain, MessageSquare, HeartPulse, Clock, SendHorizontal } from "lucide-react";
 
 interface PhoneInterfaceProps {
   isPlaying: boolean;
@@ -29,47 +27,6 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   // Total duration in seconds (conversation length)
   const totalDuration = 180;
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [activePopupIndex, setActivePopupIndex] = useState<number | null>(null);
-  
-  // Define feature pop-ups with timing for when they should appear
-  const featurePopups = [
-    { 
-      time: 5, 
-      duration: 8,
-      message: "Detects and responds to emotional cues in real-time",
-      icon: <HeartPulse size={16} />
-    },
-    { 
-      time: 15, 
-      duration: 8,
-      message: "Uses voice tone analysis to provide compassionate responses",
-      icon: <Brain size={16} />
-    },
-    { 
-      time: 35, 
-      duration: 8,
-      message: "Handles complex situations with natural conversation flow",
-      icon: <MessageSquare size={16} />
-    },
-    { 
-      time: 55, 
-      duration: 8,
-      message: "Available 24/7 without breaks or burnout",
-      icon: <Clock size={16} />
-    },
-    { 
-      time: 70, 
-      duration: 8,
-      message: "Seamlessly hands off to human staff when needed",
-      icon: <SendHorizontal size={16} />
-    },
-    { 
-      time: 85, 
-      duration: 8,
-      message: "Sends SMS confirmations and follow-up messages automatically",
-      icon: <MessageSquare size={16} />
-    }
-  ];
   
   // Manage elapsed time when conversation is playing
   useEffect(() => {
@@ -78,25 +35,14 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
     if (isPlaying) {
       interval = setInterval(() => {
         setElapsedTime(prev => {
-          const newTime = prev + 1;
-          
-          // Check if we should display any feature pop-up
-          const popupToShow = featurePopups.findIndex(
-            popup => newTime >= popup.time && newTime < popup.time + popup.duration
-          );
-          
-          setActivePopupIndex(popupToShow !== -1 ? popupToShow : null);
-          
           if (prev >= totalDuration) {
             if (interval) clearInterval(interval);
             togglePlay(); // Stop playing when reaching the end
             return 0;
           }
-          return newTime;
+          return prev + 1;
         });
       }, 1000);
-    } else {
-      setActivePopupIndex(null);
     }
     
     return () => {
@@ -107,7 +53,6 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
   // Reset elapsed time when switching industries
   useEffect(() => {
     setElapsedTime(0);
-    setActivePopupIndex(null);
   }, [activeIndustry]);
   
   const messages = getConversationMessages(activeIndustry);
@@ -124,7 +69,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
       className="relative h-full flex flex-col"
     >
       <div className="bg-gray-900/50 backdrop-blur-xl rounded-xl p-6 shadow-lg h-full flex flex-col">
-        <div className="p-4 flex-1 flex flex-col relative">
+        <div className="p-4 flex-1 flex flex-col">
           <PhoneHeader 
             title={industryTitle}
             titleClassName={getIndustryHeadlineText(activeIndustry)}
@@ -132,7 +77,7 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             elapsedTime={elapsedTime}
           />
 
-          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4 relative">
+          <div className="flex-1 overflow-y-auto mb-4 text-left text-sm space-y-4">
             {!isPlaying && (
               <motion.div 
                 initial={{ opacity: 0 }}
@@ -144,15 +89,6 @@ const PhoneInterface: React.FC<PhoneInterfaceProps> = ({
             )}
             
             {isPlaying && <ConversationMessages messages={messages} />}
-            
-            {/* Feature pop-ups display */}
-            {isPlaying && activePopupIndex !== null && (
-              <FeaturePopup 
-                message={featurePopups[activePopupIndex].message}
-                icon={featurePopups[activePopupIndex].icon}
-                isVisible={true}
-              />
-            )}
           </div>
 
           {isPlaying && (
