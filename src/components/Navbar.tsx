@@ -56,7 +56,7 @@ const Navbar = () => {
             onClick={handleLogoClick}
           >
             <img 
-              src="/lovable-uploads/6d65645e-3cf7-4434-8d34-51281adda4d1.png" 
+              src="/lovable-uploads/3ecba068-9dac-495c-80c4-c1702aacc9a1.png" 
               alt="VoiceSora Logo" 
               className="h-8 w-auto"
             />
