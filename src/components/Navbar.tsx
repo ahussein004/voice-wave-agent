@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <a href="/" className="inline-flex items-center gap-2" aria-label="Home" onClick={handleLogoClick}>
             <img src="/lovable-uploads/3ecba068-9dac-495c-80c4-c1702aacc9a1.png" alt="VoiceSora Logo" className="h-8 w-auto" />
-            <h1 className="font-bold text-2xl md:text-3xl text-purple-600"><span className="text-gradient">Voice</span><span className="text-voice-purple">Sora</span></h1>
+            <h1 className="font-bold text-2xl md:text-3xl text-purple-500"><span className="text-gradient">Voice</span><span className="text-voice-purple">Sora</span></h1>
           </a>
         </div>
         
