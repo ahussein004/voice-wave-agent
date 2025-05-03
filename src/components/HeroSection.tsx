@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from "./ui/button";
 import { Headphones, ArrowRight, PhoneCall } from "lucide-react";
@@ -159,7 +160,7 @@ const HeroSection = () => {
                   {/* Call interface with enhanced visuals */}
                   <div className="flex-1 flex flex-col items-center justify-center">
                     <span className="text-xs sm:text-sm text-voice-cream/70">AI Voice Agent - Active Call</span>
-                    <h3 className="font-bold text-lg sm:text-xl mb-2 text-voice-cream">VoiceWave AI</h3>
+                    <h3 className="font-bold text-lg sm:text-xl mb-2 text-voice-cream">VoiceSora AI</h3>
                     
                     {/* Improved animated voice waves */}
                     <div className="my-4 sm:my-6 flex items-end justify-center h-12 sm:h-16 space-x-1">
