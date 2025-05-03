@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useIndustryUI } from "@/hooks/use-industry-ui";
 import DemoHeader from "./demo/DemoHeader";
 import DemoIndustrySelector from "./demo/DemoIndustrySelector";
@@ -63,13 +63,42 @@ const InteractiveDemoSection = () => {
   };
 
   return (
-    <section 
+    <motion.section 
       className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-700 ${getSectionBackgroundColor()}`} 
       id="demo-section"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8 }}
     >
       <div className="absolute inset-0 bg-gradient-radial from-voice-purple/5 via-transparent to-transparent opacity-30" />
       <div className="absolute inset-0 bg-[url('/bg-dots.png')] opacity-10" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-voice-dark/50" />
+      
+      {/* Add animated particles in the background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 md:w-2 md:h-2 rounded-full bg-indigo-500/30"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -400],
+              x: [0, Math.random() * 100 - 50],
+              opacity: [0, 0.7, 0],
+              scale: [0, 1.5, 0]
+            }}
+            transition={{
+              duration: Math.random() * 10 + 15,
+              repeat: Infinity,
+              delay: Math.random() * 10,
+            }}
+          />
+        ))}
+      </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <DemoHeader />
@@ -84,35 +113,61 @@ const InteractiveDemoSection = () => {
 
         {/* Industry Demos */}
         <div className="min-h-[700px] flex flex-col">
-          {activeIndustry === "restaurant" && (
-            <RestaurantDemo 
-              isPlaying={isPlaying}
-              togglePlay={togglePlay}
-              getIndustryColor={getIndustryColor}
-              getHeadlineGradient={getHeadlineGradient}
-              audioUrl={audioUrls.restaurant}
-            />
-          )}
+          <AnimatePresence mode="wait">
+            {activeIndustry === "restaurant" && (
+              <motion.div
+                key="restaurant"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <RestaurantDemo 
+                  isPlaying={isPlaying}
+                  togglePlay={togglePlay}
+                  getIndustryColor={getIndustryColor}
+                  getHeadlineGradient={getHeadlineGradient}
+                  audioUrl={audioUrls.restaurant}
+                />
+              </motion.div>
+            )}
 
-          {activeIndustry === "car" && (
-            <CarDemo 
-              isPlaying={isPlaying}
-              togglePlay={togglePlay}
-              getIndustryColor={getIndustryColor}
-              getHeadlineGradient={getHeadlineGradient}
-              audioUrl={audioUrls.car}
-            />
-          )}
+            {activeIndustry === "car" && (
+              <motion.div
+                key="car"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <CarDemo 
+                  isPlaying={isPlaying}
+                  togglePlay={togglePlay}
+                  getIndustryColor={getIndustryColor}
+                  getHeadlineGradient={getHeadlineGradient}
+                  audioUrl={audioUrls.car}
+                />
+              </motion.div>
+            )}
 
-          {activeIndustry === "medical" && (
-            <MedicalDemo 
-              isPlaying={isPlaying}
-              togglePlay={togglePlay}
-              getIndustryColor={getIndustryColor}
-              getHeadlineGradient={getHeadlineGradient}
-              audioUrl={audioUrls.medical}
-            />
-          )}
+            {activeIndustry === "medical" && (
+              <motion.div
+                key="medical"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <MedicalDemo 
+                  isPlaying={isPlaying}
+                  togglePlay={togglePlay}
+                  getIndustryColor={getIndustryColor}
+                  getHeadlineGradient={getHeadlineGradient}
+                  audioUrl={audioUrls.medical}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <DemoNavigation 
@@ -120,7 +175,7 @@ const InteractiveDemoSection = () => {
           handleNextIndustry={handleNextIndustry}
         />
       </div>
-    </section>
+    </motion.section>
   );
 };
 

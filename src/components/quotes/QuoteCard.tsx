@@ -27,7 +27,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
       className="relative group h-full"
     >
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-voice-purple/10 to-blue-500/10 rounded-xl blur-lg"
+        className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 to-purple-500/10 rounded-xl blur-lg"
         animate={{
           opacity: [0.5, 0.8, 0.5],
           scale: [1, 1.02, 1],
@@ -38,13 +38,13 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
           repeatType: "reverse",
         }}
       />
-      <div className="relative flex flex-col h-full gap-6 p-8 rounded-xl backdrop-blur-sm border border-voice-purple/10 group-hover:border-voice-purple/30 transition-all duration-500 shadow-lg">
+      <div className="relative flex flex-col h-full gap-6 p-8 rounded-xl backdrop-blur-sm border border-indigo-500/10 group-hover:border-indigo-500/30 transition-all duration-500 shadow-lg">
         <div className="flex items-center gap-6">
-          <div className="flex-shrink-0 p-3 bg-voice-purple/10 rounded-lg group-hover:bg-voice-purple/20 transition-all duration-300">
-            <MessageSquareQuote className="w-8 h-8 text-voice-purple-light group-hover:text-voice-purple group-hover:rotate-12 transition-all duration-300" />
+          <div className="flex-shrink-0 p-3 bg-indigo-600/10 rounded-lg group-hover:bg-indigo-600/20 transition-all duration-300">
+            <MessageSquareQuote className="w-8 h-8 text-indigo-400 group-hover:text-indigo-300 group-hover:rotate-12 transition-all duration-300" />
           </div>
           {isTextLogo ? (
-            <span className="text-2xl font-bold text-voice-cream/90 group-hover:text-white transition-colors duration-300">
+            <span className="text-2xl font-bold text-gray-100/90 group-hover:text-white transition-colors duration-300">
               {quote.logo}
             </span>
           ) : (
@@ -62,7 +62,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
           transition={{ delay: 0.3 }}
         >
           <motion.blockquote 
-            className="text-xl text-voice-cream leading-relaxed font-light group-hover:text-white transition-colors duration-300"
+            className="text-xl text-gray-200 leading-relaxed font-light group-hover:text-white transition-colors duration-300"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -74,13 +74,13 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="flex items-center gap-3 pt-4 border-t border-voice-purple/10 group-hover:border-voice-purple/30 transition-all duration-300"
+            className="flex items-center gap-3 pt-4 border-t border-indigo-500/10 group-hover:border-indigo-500/30 transition-all duration-300"
           >
             <div>
-              <div className="font-medium text-lg text-voice-purple-light group-hover:text-voice-purple transition-colors duration-300">
+              <div className="font-medium text-lg text-indigo-400 group-hover:text-indigo-300 transition-colors duration-300">
                 {quote.author}
               </div>
-              <div className="text-voice-cream/70 group-hover:text-voice-cream/90 transition-colors duration-300">
+              <div className="text-gray-300/70 group-hover:text-gray-300/90 transition-colors duration-300">
                 {quote.role}, {quote.company}
               </div>
             </div>

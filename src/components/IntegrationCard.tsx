@@ -23,28 +23,40 @@ const IntegrationCard = ({ feature, index }: IntegrationCardProps) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className={cn(
-        "relative p-6 rounded-xl bg-gradient-to-br border border-voice-purple/20",
-        "hover:border-voice-purple/40 transition-all duration-300",
+        "relative p-6 rounded-xl bg-gradient-to-br border",
+        "hover:border-indigo-500/40 transition-all duration-300",
         "group cursor-pointer h-full",
+        "from-gray-900/80 to-gray-800/80 border-indigo-500/20",
         feature.color
       )}>
-        <div className="absolute inset-0 bg-voice-dark/40 rounded-xl backdrop-blur-sm z-0" />
+        <div className="absolute inset-0 bg-gray-900/40 rounded-xl backdrop-blur-sm z-0" />
         
         <div className="relative z-10">
-          <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-full bg-voice-purple/20 border border-voice-purple/30 group-hover:scale-110 transition-transform duration-300">
-            <feature.icon className="w-6 h-6 text-voice-purple" />
+          <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-full bg-indigo-600/20 border border-indigo-500/30 group-hover:scale-110 transition-transform duration-300">
+            <feature.icon className="w-6 h-6 text-indigo-400" />
           </div>
           
-          <h3 className="text-xl font-semibold mb-2 text-voice-cream group-hover:text-gradient transition-all duration-300">
+          <h3 className="text-xl font-semibold mb-2 text-gray-100 group-hover:bg-gradient-to-r group-hover:from-indigo-400 group-hover:to-purple-400 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
             {feature.title}
           </h3>
           
-          <p className="text-voice-cream/70 text-sm leading-relaxed">
+          <p className="text-gray-300 text-sm leading-relaxed">
             {feature.description}
           </p>
         </div>
 
-        <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-voice-purple/5 blur-xl pointer-events-none" />
+        <motion.div 
+          className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-indigo-600/5 blur-xl pointer-events-none" 
+          animate={{
+            opacity: [0, 0.5, 0],
+            scale: [0.9, 1.02, 0.9],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
       </div>
     </motion.div>
   );
