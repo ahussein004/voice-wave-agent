@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
@@ -52,9 +51,37 @@ const Navbar = () => {
     }
   };
 
-  // Mark internal navigation for scroll restoration
-  const handleInternalNavigation = () => {
+  // Improved internal navigation for scroll restoration and smooth scrolling
+  const handleInternalNavigation = (hash: string) => {
     sessionStorage.setItem("isNavigating", "true");
+    
+    // If we're already on the homepage, handle smooth scrolling manually
+    if (location.pathname === '/') {
+      const element = document.querySelector(hash);
+      if (element) {
+        // Close mobile menu if open
+        if (isMobileMenuOpen) {
+          setIsMobileMenuOpen(false);
+        }
+        
+        // Calculate scroll position with offset
+        const offset = window.innerWidth <= 768 ? 140 : 120;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+        
+        // Smooth scroll
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        
+        // Update URL without reload
+        window.history.pushState(null, '', hash);
+        
+        return true; // Indicate we handled it
+      }
+    }
+    return false; // Not handled
   };
   
   // Check if the link is an internal page link
@@ -98,7 +125,7 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation with improved anchor link handling */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map(link => (
             isInternalLink(link.href) ? (
@@ -115,7 +142,11 @@ const Navbar = () => {
                   stiffness: 400,
                   damping: 17
                 }}
-                onClick={handleInternalNavigation}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const hash = link.href.substring(1); // Remove the leading /
+                  handleInternalNavigation(hash);
+                }}
               >
                 {link.name}
               </motion.a>
@@ -172,7 +203,14 @@ const Navbar = () => {
               duration: 0.5
             }}
           >
-            <a href="/#cta-section" className="hidden sm:inline-block" onClick={handleInternalNavigation}>
+            <a 
+              href="/#cta-section" 
+              className="hidden sm:inline-block" 
+              onClick={(e) => {
+                e.preventDefault();
+                handleInternalNavigation("#cta-section");
+              }}
+            >
               <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-medium text-base shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 border-0">
                 Book Demo
               </Button>
@@ -181,7 +219,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu with improved accessibility and styling */}
+      {/* Mobile Navigation Menu with improved anchor link handling */}
       <div 
         className={`md:hidden bg-gradient-to-b from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-lg overflow-hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen ? "max-h-64 opacity-100 border-t border-indigo-500/10" : "max-h-0 opacity-0"
@@ -197,9 +235,11 @@ const Navbar = () => {
                   key={link.name} 
                   href={link.href} 
                   className="text-base text-white/80 hover:text-white transition-colors py-3 font-medium focus-visible-ring border-b border-indigo-500/10 pb-3" 
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const hash = link.href.substring(1); // Remove the leading /
                     handleMobileLinkClick();
-                    handleInternalNavigation();
+                    handleInternalNavigation(hash);
                   }} 
                   aria-label={link.name} 
                   whileHover={{
@@ -240,9 +280,10 @@ const Navbar = () => {
             <motion.a 
               href="/#cta-section" 
               className="mt-2 sm:hidden" 
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 handleMobileLinkClick();
-                handleInternalNavigation();
+                handleInternalNavigation("#cta-section");
               }} 
               aria-label="Book Demo" 
               whileHover={{
