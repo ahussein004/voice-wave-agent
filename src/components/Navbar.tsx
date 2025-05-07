@@ -21,7 +21,7 @@ const Navbar = () => {
   const navLinks = [
     {
       name: "Features",
-      href: "/features"
+      href: "/#demo-section"
     }, 
     {
       name: "Industries",
